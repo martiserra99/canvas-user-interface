@@ -7,3 +7,7 @@ export const fromMapToIterator = function (map) {
     },
   };
 };
+
+export const clone = function (data) {
+  return JSON.parse(JSON.stringify(data));
+};
