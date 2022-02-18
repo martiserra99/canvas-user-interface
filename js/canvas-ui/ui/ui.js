@@ -52,17 +52,32 @@ export class UI {
     this.drawable.onEndUpdateUI();
   }
 
-  _clearCanvas() {
-    const coords = this._getCoords();
-    const size = this._getMaxSize();
-    this._ctx.clearRect(coords.x, coords.y, size.width, size.height);
-  }
-
   _getMaxSize() {
     return { width: this._width, height: this._height };
   }
 
   _getCoords() {
     return { x: 0, y: 0 };
+  }
+
+  end() {
+    this._stopAnimation();
+    this._removeDrawable();
+  }
+
+  _stopAnimation() {
+    cancelAnimationFrame(this._animationId);
+    delete this._animationId;
+    this._clearCanvas();
+  }
+
+  _removeDrawable() {
+    delete this.drawable;
+  }
+
+  _clearCanvas() {
+    const coords = this._getCoords();
+    const size = this._getMaxSize();
+    this._ctx.clearRect(coords.x, coords.y, size.width, size.height);
   }
 }
