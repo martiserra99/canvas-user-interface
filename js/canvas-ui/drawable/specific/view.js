@@ -5,8 +5,8 @@ export class View extends Drawable {
     super(id, "view", type);
   }
 
-  onSetSize(maxSize) {
-    super.onSetSize(maxSize);
+  onMeasure(maxSize) {
+    super.onMeasure(maxSize);
     this._setSize(maxSize);
   }
 
@@ -14,8 +14,8 @@ export class View extends Drawable {
     this.size = this._lifecycle.get("onGetSize")(maxSize);
   }
 
-  onSetCoords(coords) {
-    super.onSetCoords(coords);
+  onLocate(coords) {
+    super.onLocate(coords);
     this._setCoords(coords);
   }
 

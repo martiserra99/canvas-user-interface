@@ -85,12 +85,12 @@ export class Drawable {
     this._lifecycle.get("onStartUpdateUI")();
   }
 
-  onSetSize(maxSize) {
-    this._lifecycle.get("onSetSize")(maxSize);
+  onMeasure(maxSize) {
+    this._lifecycle.get("onMeasure")(maxSize);
   }
 
-  onSetCoords(coords) {
-    this._lifecycle.get("onSetCoords")(coords);
+  onLocate(coords) {
+    this._lifecycle.get("onLocate")(coords);
   }
 
   onDraw(ctx) {

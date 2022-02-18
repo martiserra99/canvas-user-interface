@@ -18,14 +18,14 @@ export class Layout extends Drawable {
     for (const child of this.childs) child.onStartUpdateUI();
   }
 
-  onSetSize(maxSize) {
-    super.onSetSize(maxSize);
+  onMeasure(maxSize) {
+    super.onMeasure(maxSize);
     this._setChildsSizes(maxSize);
     this._setSize(maxSize);
   }
 
   _setChildsSizes(maxSize) {
-    const childs = this._sortChildsToSetSizes(maxSize);
+    const childs = this._sortChildsToMeasures(maxSize);
     const childsWithSizes = [];
     for (const child of childs) {
       const childMaxSize = this._getChildMaxSize(
@@ -33,13 +33,13 @@ export class Layout extends Drawable {
         child,
         childsWithSizes
       );
-      child.onSetSize(childMaxSize);
+      child.onMeasure(childMaxSize);
       childsWithSizes.push(child);
     }
   }
 
-  _sortChildsToSetSizes(maxSize) {
-    return this._lifecycle.get("onSortChildsToSetSizes")(maxSize);
+  _sortChildsToMeasures(maxSize) {
+    return this._lifecycle.get("onSortChildsToMeasures")(maxSize);
   }
 
   _getChildMaxSize(maxSize, child, childsWithSizes) {
@@ -54,24 +54,24 @@ export class Layout extends Drawable {
     this.size = this._lifecycle.get("onGetSize")(maxSize);
   }
 
-  onSetCoords(coords) {
-    super.onSetCoords(coords);
+  onLocate(coords) {
+    super.onLocate(coords);
     this._setChildsCoords(coords);
     this._setCoords(coords);
   }
 
   _setChildsCoords(coords) {
-    const childs = this._sortChildsToSetCoords(coords);
+    const childs = this._sortChildsToLocate(coords);
     const childsWithCoords = [];
     for (const child of childs) {
       const childCoords = this._getChildCoords(coords, child, childsWithCoords);
-      child.onSetCoords(childCoords);
+      child.onLocate(childCoords);
       childsWithCoords.push(child);
     }
   }
 
-  _sortChildsToSetCoords(coords) {
-    return this._lifecycle.get("onSortChildsToSetCoords")(coords);
+  _sortChildsToLocate(coords) {
+    return this._lifecycle.get("onSortChildsToLocate")(coords);
   }
 
   _getChildCoords(coords, child, childsWithCoords) {
