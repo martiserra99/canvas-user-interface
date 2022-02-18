@@ -1,4 +1,4 @@
-import { clone } from "../../utils/utils.js";
+import { clone, removeFromArray } from "../../utils/utils.js";
 
 export class Drawable {
   constructor(id, drawable, type) {
@@ -58,6 +58,21 @@ export class Drawable {
   removeFromUI() {
     delete this.uiParent?.drawable;
     delete this.uiParent;
+    this._resetPlacementData();
+  }
+
+  insertToLayout(layoutParent) {
+    this.removeFromUI();
+    this.removeFromLayout();
+    layoutParent.childs.push(this);
+    this.layoutParent = layoutParent;
+    this.layoutParams = new LayoutParams(this);
+  }
+
+  removeFromLayout() {
+    if (this.layoutParent) removeFromArray(this.layoutParent.childs, this);
+    delete this.layoutParent;
+    delete this.layoutParams;
     this._resetPlacementData();
   }
 
