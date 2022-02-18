@@ -25,4 +25,44 @@ export class UI {
     this._resizeListener = this._setCanvasSize.bind(this);
     window.addEventListener("resize", this._resizeListener);
   }
+
+  start(drawable) {
+    this._insertDrawable(drawable);
+    this._startAnimation();
+  }
+
+  _insertDrawable(drawable) {
+    drawable.insertToUI(this);
+  }
+
+  _startAnimation() {
+    const animate = () => {
+      this._animationId = requestAnimationFrame(animate);
+      this._updateUI();
+    };
+    animate();
+  }
+
+  _updateUI() {
+    this._clearCanvas();
+    this.drawable.onStartUpdateUI();
+    this.drawable.onSetSize(this._getMaxSize());
+    this.drawable.onSetCoords(this._getCoords());
+    this.drawable.onDraw(this._ctx);
+    this.drawable.onEndUpdateUI();
+  }
+
+  _clearCanvas() {
+    const coords = this._getCoords();
+    const size = this._getMaxSize();
+    this._ctx.clearRect(coords.x, coords.y, size.width, size.height);
+  }
+
+  _getMaxSize() {
+    return { width: this._width, height: this._height };
+  }
+
+  _getCoords() {
+    return { x: 0, y: 0 };
+  }
 }
