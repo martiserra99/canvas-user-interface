@@ -27,8 +27,10 @@ export class UI {
   }
 
   start(drawable) {
+    if (this._started) this.end();
     this._insertDrawable(drawable);
     this._startAnimation();
+    this._started = true;
   }
 
   _insertDrawable(drawable) {
@@ -61,8 +63,10 @@ export class UI {
   }
 
   end() {
+    if (!this._started) return;
     this._stopAnimation();
     this._removeDrawable();
+    delete this._started;
   }
 
   _stopAnimation() {
