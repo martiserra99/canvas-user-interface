@@ -13,9 +13,9 @@ export class Layout extends Drawable {
       this.childLayoutParams.set(key, value);
   }
 
-  onStartUpdateUI() {
-    super.onStartUpdateUI();
-    for (const child of this.childs) child.onStartUpdateUI();
+  onStartUpdate() {
+    super.onStartUpdate();
+    for (const child of this.childs) child.onStartUpdate();
   }
 
   onMeasure(maxSize) {
@@ -105,8 +105,8 @@ export class Layout extends Drawable {
     return this._lifecycle.get("onSortChildsToDraw")(ctx);
   }
 
-  onEndUpdateUI() {
-    super.onEndUpdateUI();
-    for (const child of this.childs) child.onEndUpdateUI();
+  onEndUpdate() {
+    super.onEndUpdate();
+    for (const child of this.childs) child.onEndUpdate();
   }
 }

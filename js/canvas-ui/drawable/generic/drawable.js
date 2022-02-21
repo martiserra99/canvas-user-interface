@@ -81,8 +81,8 @@ export class Drawable {
     this.coords = { x: 0, y: 0 };
   }
 
-  onStartUpdateUI() {
-    this._lifecycle.get("onStartUpdateUI")();
+  onStartUpdate() {
+    this._lifecycle.get("onStartUpdate")();
   }
 
   onMeasure(maxSize) {
@@ -97,7 +97,7 @@ export class Drawable {
     this._lifecycle.get("onDraw")(ctx);
   }
 
-  onEndUpdateUI() {
-    this._lifecycle.get("onEndUpdateUI")();
+  onEndUpdate() {
+    this._lifecycle.get("onEndUpdate")();
   }
 }

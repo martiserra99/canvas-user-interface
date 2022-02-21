@@ -29,11 +29,11 @@ export class DrawableLifecycle {
 
   _setFunctions() {
     this._lifecycle.set("onCreate", () => {});
-    this._lifecycle.set("onStartUpdateUI", () => {});
+    this._lifecycle.set("onStartUpdate", () => {});
     this._lifecycle.set("onMeasure", () => {});
     this._lifecycle.set("onLocate", () => {});
     this._lifecycle.set("onDraw", () => {});
-    this._lifecycle.set("onEndUpdateUI", () => {});
+    this._lifecycle.set("onEndUpdate", () => {});
   }
 
   [Symbol.iterator]() {

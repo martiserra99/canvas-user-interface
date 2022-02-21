@@ -47,11 +47,11 @@ export class UI {
 
   _updateUI() {
     this._clearCanvas();
-    this.drawable.onStartUpdateUI();
+    this.drawable.onStartUpdate();
     this.drawable.onMeasure(this._getMaxSize());
     this.drawable.onLocate(this._getCoords());
     this.drawable.onDraw(this._ctx);
-    this.drawable.onEndUpdateUI();
+    this.drawable.onEndUpdate();
   }
 
   _getMaxSize() {

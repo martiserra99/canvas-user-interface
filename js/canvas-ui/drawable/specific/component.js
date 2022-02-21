@@ -10,10 +10,10 @@ export class Component extends Drawable {
     this._drawable = this._lifecycle.get("onGetDrawable")();
   }
 
-  onStartUpdateUI() {
-    super.onStartUpdateUI();
+  onStartUpdate() {
+    super.onStartUpdate();
     this._updateDrawable();
-    this._drawable.onStartUpdateUI();
+    this._drawable.onStartUpdate();
   }
 
   _updateDrawable() {
@@ -37,8 +37,8 @@ export class Component extends Drawable {
     this._drawable.onDraw(ctx);
   }
 
-  onEndUpdateUI() {
-    super.onEndUpdateUI();
-    this._drawable.onEndUpdateUI();
+  onEndUpdate() {
+    super.onEndUpdate();
+    this._drawable.onEndUpdate();
   }
 }
