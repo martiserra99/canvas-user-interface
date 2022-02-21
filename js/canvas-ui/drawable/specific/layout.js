@@ -109,4 +109,13 @@ export class Layout extends Drawable {
     super.onEndUpdate();
     for (const child of this.childs) child.onEndUpdate();
   }
+
+  insert(child) {
+    child.insertToLayout(this);
+  }
+
+  remove(child) {
+    if (!this.childs.includes(child)) return;
+    child.removeFromLayout();
+  }
 }
