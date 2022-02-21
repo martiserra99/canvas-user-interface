@@ -51,6 +51,7 @@ export class Drawable {
 
   insertToUI(uiParent) {
     this.removeFromUI();
+    this.removeFromLayout();
     uiParent.drawable = this;
     this.uiParent = uiParent;
   }
