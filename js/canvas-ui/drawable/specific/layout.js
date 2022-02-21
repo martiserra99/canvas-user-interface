@@ -118,4 +118,14 @@ export class Layout extends Drawable {
     if (!this.childs.includes(child)) return;
     child.removeFromLayout();
   }
+
+  find(id, direct = false) {
+    const childs = [...this.childs];
+    while (childs.length > 0) {
+      const child = childs.shift();
+      if (child.id === id) return child;
+      if (child.drawable === "layout" && !direct) childs.push(...child.childs);
+    }
+    return null;
+  }
 }
