@@ -41,4 +41,11 @@ export class Component extends Drawable {
     super.onEndUpdate();
     this._drawable.onEndUpdate();
   }
+
+  find(id) {
+    if (this._drawable.id === id) return this._drawable;
+    return this._drawable.drawable === "layout"
+      ? this._drawable.find(id)
+      : null;
+  }
 }
