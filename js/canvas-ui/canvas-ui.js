@@ -4,10 +4,12 @@ import { UI } from "./ui/ui.js";
 // Types
 import { ViewType } from "./type/specific/view.js";
 import { LayoutType } from "./type/specific/layout.js";
+import { ComponentType } from "./type/specific/component.js";
 
 // Drawables
 import { View } from "./drawable/specific/view.js";
 import { Layout } from "./drawable/specific/layout.js";
+import { Component } from "./drawable/specific/component.js";
 
 export const canvasUI = {
   ui: {
@@ -43,6 +45,21 @@ export const canvasUI = {
     new(type) {
       const type = this._types.get(type);
       return new Layout(id, type);
+    },
+  },
+
+  component: {
+    _types: new Map(),
+
+    type(name) {
+      const type = new ComponentType(name);
+      this._types.set(name, type);
+      return type;
+    },
+
+    new(type) {
+      const type = this._types.get(type);
+      return new Component(id, type);
     },
   },
 };
