@@ -4,3 +4,14 @@ export const computeLength = function (desiredLength, maxLength, autoLength) {
   if (result < 0) result = 0;
   return result;
 };
+
+export const computeSize = function (desiredSize, maxSize, computeSize) {
+  return {
+    width: computeLength(desiredSize.width, maxSize.width, computeSize?.width),
+    height: computeLength(
+      desiredSize.height,
+      maxSize.height,
+      computeSize?.height
+    ),
+  };
+};
