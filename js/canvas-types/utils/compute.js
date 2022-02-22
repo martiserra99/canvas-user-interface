@@ -28,3 +28,9 @@ export const computeAvailableSize = function (desiredSize, maxSize) {
     height: computeAvailableLength(desiredSize.height, maxSize.height),
   };
 };
+
+export const computeTextSize = function (text, font) {
+  const ctx = document.createElement("canvas").getContext("2d");
+  ctx.font = `${font.size}px ${font.family}`;
+  return { width: ctx.measureText(text).width, height: font.size };
+};
