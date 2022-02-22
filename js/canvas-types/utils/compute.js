@@ -5,6 +5,12 @@ export const computeLength = function (desiredLength, maxLength, autoLength) {
   return result;
 };
 
+export const computeAvailableLength = function (desiredLength, maxLength) {
+  if (desiredLength === null) return maxLength;
+  if (desiredLength < maxLength) return desiredLength;
+  return maxLength;
+};
+
 export const computeSize = function (desiredSize, maxSize, computeSize) {
   return {
     width: computeLength(desiredSize.width, maxSize.width, computeSize?.width),
