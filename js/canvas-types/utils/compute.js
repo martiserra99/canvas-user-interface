@@ -21,3 +21,10 @@ export const computeSize = function (desiredSize, maxSize, computeSize) {
     ),
   };
 };
+
+export const computeAvailableSize = function (desiredSize, maxSize) {
+  return {
+    width: computeAvailableLength(desiredSize.width, maxSize.width),
+    height: computeAvailableLength(desiredSize.height, maxSize.height),
+  };
+};
