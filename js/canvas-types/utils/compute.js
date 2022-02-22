@@ -34,3 +34,20 @@ export const computeTextSize = function (text, font) {
   ctx.font = `${font.size}px ${font.family}`;
   return { width: ctx.measureText(text).width, height: font.size };
 };
+
+export const computeCoordToAlign = function (align, coords, length, margin) {
+  if (align === "start") return coords.start + margin.start;
+  if (align === "middle")
+    return (
+      coords.start +
+      (coords.end - coords.start) / 2 -
+      (length + margin.start + margin.end) / 2 +
+      margin.start
+    );
+  return (
+    coords.start +
+    (coords.end - coords.start) -
+    (length + margin.start + margin.end) +
+    margin.start
+  );
+};
