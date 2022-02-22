@@ -1,5 +1,7 @@
-import { newViewText } from "./type/view/text/text.js";
+import { newViews } from "./type/view/view.js";
+import { newLayouts } from "./type/layout/layout.js";
+import { newComponents } from "./type/component/component.js";
 
-export const newDrawableTypes = function () {
-  newViewText();
-};
+newViews();
+newLayouts();
+newComponents();
