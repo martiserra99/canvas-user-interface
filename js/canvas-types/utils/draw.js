@@ -99,3 +99,22 @@ const drawBottomLeftCornerPath = function (ctx, coords, size, corner) {
     ctx.arcTo(start.x - corner.size, start.y, end.x, end.y, corner.size);
   else ctx.lineTo(end.x, end.y);
 };
+
+export const drawText = function (
+  ctx,
+  clipCoords,
+  clipSize,
+  textCoords,
+  text,
+  font
+) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(clipCoords.x, clipCoords.y, clipSize.width, clipSize.height);
+  ctx.clip();
+  ctx.font = `${font.weight} ${font.size}px ${font.family}`;
+  ctx.fillStyle = font.color;
+  ctx.textBaseline = "top";
+  ctx.fillText(text, textCoords.x, textCoords.y);
+  ctx.restore();
+};
