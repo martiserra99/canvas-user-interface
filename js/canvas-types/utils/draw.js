@@ -118,3 +118,9 @@ export const drawText = function (
   ctx.fillText(text, textCoords.x, textCoords.y);
   ctx.restore();
 };
+
+export const drawImage = function (ctx, coords, size, image) {
+  const { x, y } = coords;
+  const { width, height } = size;
+  ctx.drawImage(image, x, y, width, height);
+};
