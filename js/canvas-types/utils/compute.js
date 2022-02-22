@@ -11,6 +11,12 @@ export const computeAvailableLength = function (desiredLength, maxLength) {
   return maxLength;
 };
 
+export const computeDesiredLength = function (length, maxLength) {
+  if (length === "auto") return null;
+  const { type, value } = length;
+  return type === "px" ? value : maxLength * (value / 100);
+};
+
 export const computeSize = function (desiredSize, maxSize, computeSize) {
   return {
     width: computeLength(desiredSize.width, maxSize.width, computeSize?.width),
