@@ -27,7 +27,7 @@ export const canvasUI = {
       return type;
     },
 
-    new(name) {
+    new(id, name) {
       const type = this._types.get(name);
       return new View(id, type);
     },
@@ -42,7 +42,7 @@ export const canvasUI = {
       return type;
     },
 
-    new(name) {
+    new(id, name) {
       const type = this._types.get(name);
       return new Layout(id, type);
     },
@@ -57,7 +57,7 @@ export const canvasUI = {
       return type;
     },
 
-    new(name) {
+    new(id, name) {
       const type = this._types.get(name);
       return new Component(id, type);
     },
