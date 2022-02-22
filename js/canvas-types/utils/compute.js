@@ -35,6 +35,13 @@ export const computeAvailableSize = function (desiredSize, maxSize) {
   };
 };
 
+export const computeDesiredSize = function (size, maxSize) {
+  return {
+    width: computeDesiredLength(size.width, maxSize.width),
+    height: computeDesiredLength(size.height, maxSize.height),
+  };
+};
+
 export const computeTextSize = function (text, font) {
   const ctx = document.createElement("canvas").getContext("2d");
   ctx.font = `${font.size}px ${font.family}`;
