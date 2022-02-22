@@ -1,1 +1,5 @@
-export const newLayouts = function () {};
+import { newLayoutFrame } from "./frame/frame.js";
+
+export const newLayouts = function () {
+  newLayoutFrame();
+};
