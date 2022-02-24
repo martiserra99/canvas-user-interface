@@ -1,6 +1,6 @@
-import { Drawable } from "../generic/drawable.js";
+import { Element } from "../generic/element.js";
 
-export class View extends Drawable {
+export class View extends Element {
   constructor(id, type) {
     super(id, "view", type);
   }

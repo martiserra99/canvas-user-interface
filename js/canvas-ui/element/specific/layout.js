@@ -1,6 +1,6 @@
-import { Drawable } from "../generic/drawable.js";
+import { Element } from "../generic/element.js";
 
-export class Layout extends Drawable {
+export class Layout extends Element {
   constructor(id, type) {
     super(id, "layout", type);
     this.childs = [];
@@ -124,7 +124,7 @@ export class Layout extends Drawable {
     while (childs.length > 0) {
       const child = childs.shift();
       if (child.id === id) return child;
-      if (child.drawable === "layout" && !direct) childs.push(...child.childs);
+      if (child.element === "layout" && !direct) childs.push(...child.childs);
     }
     return null;
   }

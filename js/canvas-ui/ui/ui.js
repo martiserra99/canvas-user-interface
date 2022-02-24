@@ -26,15 +26,15 @@ export class UI {
     window.addEventListener("resize", this._resizeListener);
   }
 
-  start(drawable) {
+  start(element) {
     if (this._started) this.end();
-    this._insertDrawable(drawable);
+    this._insertElement(element);
     this._startAnimation();
     this._started = true;
   }
 
-  _insertDrawable(drawable) {
-    drawable.insertToUI(this);
+  _insertElement(element) {
+    element.insertToUI(this);
   }
 
   _startAnimation() {
@@ -47,11 +47,11 @@ export class UI {
 
   _updateUI() {
     this._clearCanvas();
-    this.drawable.onStartUpdate();
-    this.drawable.onMeasure(this._getMaxSize());
-    this.drawable.onLocate(this._getCoords());
-    this.drawable.onDraw(this._ctx);
-    this.drawable.onEndUpdate();
+    this.element.onStartUpdate();
+    this.element.onMeasure(this._getMaxSize());
+    this.element.onLocate(this._getCoords());
+    this.element.onDraw(this._ctx);
+    this.element.onEndUpdate();
   }
 
   _getMaxSize() {
@@ -65,7 +65,7 @@ export class UI {
   end() {
     if (!this._started) return;
     this._stopAnimation();
-    this._removeDrawable();
+    this._removeElement();
     delete this._started;
   }
 
@@ -75,8 +75,8 @@ export class UI {
     this._clearCanvas();
   }
 
-  _removeDrawable() {
-    delete this.drawable;
+  _removeElement() {
+    delete this.element;
   }
 
   _clearCanvas() {

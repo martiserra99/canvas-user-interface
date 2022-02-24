@@ -1,12 +1,12 @@
-import { DrawableType, DrawableLifecycle } from "../generic/drawable.js";
+import { ElementType, ElementLifecycle } from "../generic/element.js";
 
-export class ViewType extends DrawableType {
+export class ViewType extends ElementType {
   _getLifecycle() {
     return new ViewLifecycle();
   }
 }
 
-class ViewLifecycle extends DrawableLifecycle {
+class ViewLifecycle extends ElementLifecycle {
   _setFunctions() {
     super._setFunctions();
     this._lifecycle.set("onGetSize", () => ({ width: 0, height: 0 }));

@@ -1,7 +1,7 @@
-import { DrawableType, DrawableLifecycle } from "../generic/drawable.js";
+import { ElementType, ElementLifecycle } from "../generic/element.js";
 import { fromMapToIterator } from "../../utils/utils.js";
 
-export class LayoutType extends DrawableType {
+export class LayoutType extends ElementType {
   constructor(data) {
     super(data);
     this.childLayoutParams = new ChildLayoutParams();
@@ -12,7 +12,7 @@ export class LayoutType extends DrawableType {
   }
 }
 
-class LayoutLifecycle extends DrawableLifecycle {
+class LayoutLifecycle extends ElementLifecycle {
   _setFunctions() {
     super._setFunctions();
     this._lifecycle.set("onSortChildsToMeasures", (layout) => layout.childs);

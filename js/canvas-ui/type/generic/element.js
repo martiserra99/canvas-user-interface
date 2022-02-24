@@ -1,6 +1,6 @@
 import { fromMapToIterator } from "../../utils/utils.js";
 
-export class DrawableType {
+export class ElementType {
   constructor(name) {
     this.name = name;
     this.properties = new Map();
@@ -9,7 +9,7 @@ export class DrawableType {
   }
 
   _getLifecycle() {
-    return new DrawableLifecycle();
+    return new ElementLifecycle();
   }
 
   set(name, value) {
@@ -21,7 +21,7 @@ export class DrawableType {
   }
 }
 
-export class DrawableLifecycle {
+export class ElementLifecycle {
   constructor() {
     this._lifecycle = new Map();
     this._setFunctions();

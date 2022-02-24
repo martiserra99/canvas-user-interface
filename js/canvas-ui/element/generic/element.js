@@ -1,9 +1,9 @@
 import { clone, removeFromArray } from "../../utils/utils.js";
 
-export class Drawable {
-  constructor(id, drawable, type) {
+export class Element {
+  constructor(id, element, type) {
     this.id = id;
-    this.drawable = drawable;
+    this.element = element;
     this.type = type.name;
     this.size = { width: 0, height: 0 };
     this.coords = { x: 0, y: 0 };
@@ -52,12 +52,12 @@ export class Drawable {
   insertToUI(uiParent) {
     this.removeFromUI();
     this.removeFromLayout();
-    uiParent.drawable = this;
+    uiParent.element = this;
     this.uiParent = uiParent;
   }
 
   removeFromUI() {
-    delete this.uiParent?.drawable;
+    delete this.uiParent?.element;
     delete this.uiParent;
     this._resetPlacementData();
   }
@@ -104,9 +104,9 @@ export class Drawable {
 }
 
 class LayoutParams {
-  constructor(drawable) {
-    this._drawable = drawable;
-    this._layoutParent = drawable.layoutParent;
+  constructor(element) {
+    this._element = element;
+    this._layoutParent = element.layoutParent;
     this._layoutParams = new Map();
     this._setLayoutParams();
   }

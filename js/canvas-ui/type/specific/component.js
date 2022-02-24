@@ -1,15 +1,15 @@
-import { DrawableType, DrawableLifecycle } from "../generic/drawable.js";
+import { ElementType, ElementLifecycle } from "../generic/element.js";
 
-export class ComponentType extends DrawableType {
+export class ComponentType extends ElementType {
   _getLifecycle() {
     return new ComponentLifecycle();
   }
 }
 
-class ComponentLifecycle extends DrawableLifecycle {
+class ComponentLifecycle extends ElementLifecycle {
   _setFunctions() {
     super._setFunctions();
-    this._lifecycle.set("onGetDrawable", () => {});
-    this._lifecycle.set("onUpdateDrawable", () => {});
+    this._lifecycle.set("onGetElement", () => {});
+    this._lifecycle.set("onUpdateElement", () => {});
   }
 }
