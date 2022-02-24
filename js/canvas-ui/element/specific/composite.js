@@ -1,8 +1,8 @@
 import { Element } from "../generic/element.js";
 
-export class Component extends Element {
+export class Composite extends Element {
   constructor(id, type) {
-    super(id, "component", type);
+    super(id, "composite", type);
     this._setElement();
   }
 

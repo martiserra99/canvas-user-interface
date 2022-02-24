@@ -1,12 +1,12 @@
 import { ElementType, ElementLifecycle } from "../generic/element.js";
 
-export class ComponentType extends ElementType {
+export class CompositeType extends ElementType {
   _getLifecycle() {
-    return new ComponentLifecycle();
+    return new CompositeLifecycle();
   }
 }
 
-class ComponentLifecycle extends ElementLifecycle {
+class CompositeLifecycle extends ElementLifecycle {
   _setFunctions() {
     super._setFunctions();
     this._lifecycle.set("onGetElement", () => {});

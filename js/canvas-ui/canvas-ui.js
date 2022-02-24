@@ -4,12 +4,12 @@ import { UI } from "./ui/ui.js";
 // Types
 import { ViewType } from "./type/specific/view.js";
 import { LayoutType } from "./type/specific/layout.js";
-import { ComponentType } from "./type/specific/component.js";
+import { CompositeType } from "./type/specific/composite.js";
 
 // Elements
 import { View } from "./element/specific/view.js";
 import { Layout } from "./element/specific/layout.js";
-import { Component } from "./element/specific/component.js";
+import { Composite } from "./element/specific/composite.js";
 
 export const canvasUI = {
   ui: {
@@ -48,18 +48,18 @@ export const canvasUI = {
     },
   },
 
-  component: {
+  composite: {
     _types: new Map(),
 
     type(name) {
-      const type = new ComponentType(name);
+      const type = new CompositeType(name);
       this._types.set(name, type);
       return type;
     },
 
     new(id, name) {
       const type = this._types.get(name);
-      return new Component(id, type);
+      return new Composite(id, type);
     },
   },
 };
