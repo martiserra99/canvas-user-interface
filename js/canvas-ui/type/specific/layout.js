@@ -15,7 +15,7 @@ export class LayoutType extends ElementType {
 class LayoutLifecycle extends ElementLifecycle {
   _setFunctions() {
     super._setFunctions();
-    this._lifecycle.set("onSortChildsToMeasures", (layout) => layout.childs);
+    this._lifecycle.set("onSortChildsToMeasure", (layout) => layout.childs);
     this._lifecycle.set("onGetChildMaxSize", () => ({ width: 0, height: 0 }));
     this._lifecycle.set("onGetSize", () => ({ width: 0, height: 0 }));
     this._lifecycle.set("onSortChildsToLocate", (layout) => layout.childs);

@@ -39,7 +39,7 @@ export class Layout extends Element {
   }
 
   _sortChildsToMeasures(maxSize) {
-    return this._lifecycle.get("onSortChildsToMeasures")(maxSize);
+    return this._lifecycle.get("onSortChildsToMeasure")(maxSize);
   }
 
   _getChildMaxSize(maxSize, child, childsWithSizes) {
