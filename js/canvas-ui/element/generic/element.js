@@ -1,4 +1,8 @@
-import { clone, removeFromArray } from "../../utils/utils.js";
+import {
+  clone,
+  fromMapToIterator,
+  removeFromArray,
+} from "../../utils/utils.js";
 
 export class Element {
   constructor(id, element, type) {
@@ -15,6 +19,8 @@ export class Element {
     this._setFunctions(type);
     this._setLifecycle(type);
     this.custom = new Custom(this);
+    this.events = new Events(type.events);
+    this.listeners = new Listeners(this.events);
     this._lifecycle.get("onCreate")();
   }
 
@@ -125,6 +131,44 @@ class Custom {
 
   call(name, ...params) {
     return this._functions.get(name)(...params);
+  }
+}
+
+class Events {
+  constructor(events) {
+    this._events = new Map();
+    this._setEvents(events);
+  }
+
+  _setEvents(events) {
+    for (const [name, { onCheck, callbacks }] of events)
+      this._events.set(name, {
+        onCheck,
+        state: new Map(),
+        callbacks: [...callbacks],
+      });
+  }
+
+  [Symbol.iterator]() {
+    return fromMapToIterator(this._events);
+  }
+
+  get(name) {
+    return this._events.get(name);
+  }
+}
+
+class Listeners {
+  constructor(events) {
+    this._events = events;
+  }
+
+  add(name, value) {
+    this._events.get(name).callbacks.push(value);
+  }
+
+  remove(name, callback) {
+    return removeFromArray(this._events.get(name).callbacks, callback);
   }
 }
 
