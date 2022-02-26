@@ -6,6 +6,8 @@ export class ElementType {
     this.properties = new Map();
     this.functions = new Map();
     this.lifecycle = this._getLifecycle();
+    this.events = new Events();
+    this.listeners = new Listeners(this.events);
   }
 
   _getLifecycle() {
@@ -43,5 +45,33 @@ export class ElementLifecycle {
   set(name, value) {
     if (!this._lifecycle.has(name)) return;
     this._lifecycle.set(name, value);
+  }
+}
+
+class Events {
+  constructor() {
+    this._events = new Map();
+  }
+
+  [Symbol.iterator]() {
+    return fromMapToIterator(this._events);
+  }
+
+  set(name, onCheck) {
+    this._events.set(name, { onCheck, callbacks: [] });
+  }
+
+  get(name) {
+    return this._events.get(name);
+  }
+}
+
+class Listeners {
+  constructor(events) {
+    this._events = events;
+  }
+
+  add(name, value) {
+    this._events.get(name).callbacks.push(value);
   }
 }
