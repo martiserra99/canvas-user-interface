@@ -108,6 +108,14 @@ export class Element {
   onEnd() {
     this._lifecycle.get("onEnd")();
   }
+
+  signal(signal) {
+    for (const [_, { onCheck, state, callbacks }] of this.events) {
+      const { check, event } = onCheck(this, signal, state);
+      if (!check) continue;
+      for (const callback of callbacks) callback(this, event);
+    }
+  }
 }
 
 class Custom {
