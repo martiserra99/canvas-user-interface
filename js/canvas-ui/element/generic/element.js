@@ -82,8 +82,8 @@ export class Element {
     this.coords = { x: 0, y: 0 };
   }
 
-  onStartUpdate() {
-    this._lifecycle.get("onStartUpdate")();
+  onStart() {
+    this._lifecycle.get("onStart")();
   }
 
   onMeasure(maxSize) {
@@ -98,8 +98,8 @@ export class Element {
     this._lifecycle.get("onDraw")(ctx);
   }
 
-  onEndUpdate() {
-    this._lifecycle.get("onEndUpdate")();
+  onEnd() {
+    this._lifecycle.get("onEnd")();
   }
 }
 

@@ -29,11 +29,11 @@ export class ElementLifecycle {
 
   _setFunctions() {
     this._lifecycle.set("onCreate", () => {});
-    this._lifecycle.set("onStartUpdate", () => {});
+    this._lifecycle.set("onStart", () => {});
     this._lifecycle.set("onMeasure", () => {});
     this._lifecycle.set("onLocate", () => {});
     this._lifecycle.set("onDraw", () => {});
-    this._lifecycle.set("onEndUpdate", () => {});
+    this._lifecycle.set("onEnd", () => {});
   }
 
   [Symbol.iterator]() {

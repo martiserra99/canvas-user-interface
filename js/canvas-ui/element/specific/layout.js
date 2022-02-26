@@ -13,9 +13,9 @@ export class Layout extends Element {
       this.childLayoutParams.set(key, value);
   }
 
-  onStartUpdate() {
-    super.onStartUpdate();
-    for (const child of this.childs) child.onStartUpdate();
+  onStart() {
+    super.onStart();
+    for (const child of this.childs) child.onStart();
   }
 
   onMeasure(maxSize) {
@@ -105,9 +105,9 @@ export class Layout extends Element {
     return this._lifecycle.get("onSortChildsToDraw")(ctx);
   }
 
-  onEndUpdate() {
-    super.onEndUpdate();
-    for (const child of this.childs) child.onEndUpdate();
+  onEnd() {
+    super.onEnd();
+    for (const child of this.childs) child.onEnd();
   }
 
   insert(child) {

@@ -10,10 +10,10 @@ export class Composite extends Element {
     this._element = this._lifecycle.get("onGetElement")();
   }
 
-  onStartUpdate() {
-    super.onStartUpdate();
+  onStart() {
+    super.onStart();
     this._updateElement();
-    this._element.onStartUpdate();
+    this._element.onStart();
   }
 
   _updateElement() {
@@ -37,9 +37,9 @@ export class Composite extends Element {
     this._element.onDraw(ctx);
   }
 
-  onEndUpdate() {
-    super.onEndUpdate();
-    this._element.onEndUpdate();
+  onEnd() {
+    super.onEnd();
+    this._element.onEnd();
   }
 
   find(id) {
