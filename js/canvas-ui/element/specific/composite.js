@@ -33,9 +33,4 @@ export class Composite extends Element {
     super.onEnd();
     this.element.onEnd();
   }
-
-  find(id) {
-    if (this.element.id === id) return this.element;
-    return this.element.element === "layout" ? this.element.find(id) : null;
-  }
 }
