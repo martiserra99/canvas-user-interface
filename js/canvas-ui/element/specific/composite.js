@@ -8,7 +8,7 @@ export class Composite extends Element {
 
   onStart() {
     super.onStart();
-    this._lifecycle.get("onUpdateElement")();
+    this._lifecycle.get("onUpdateElement")(this._element);
     this._element.onStart();
   }
 
