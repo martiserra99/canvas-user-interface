@@ -19,7 +19,7 @@ export const newCompositeTextArea = function () {
   });
   textArea.set("align", {
     vertical: "middle",
-    horizontal: "left",
+    horizontal: "middle",
   });
   textArea.set("margin", {
     top: 0,
