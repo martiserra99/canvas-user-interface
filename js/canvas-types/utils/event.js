@@ -13,7 +13,7 @@ export const addMouseUpAnywhereEvent = function (element) {
 };
 
 export const addMouseMoveAnywhereEvent = function (element) {
-  element.events.set("mousemove", function (element, signal, state) {
+  element.events.set("mousemove-anywhere", function (element, signal, state) {
     if (signal.type !== "mousemove") return { check: false };
     return { check: true, event: signal.data };
   });
