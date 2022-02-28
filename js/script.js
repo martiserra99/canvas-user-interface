@@ -4,17 +4,25 @@ const ui = canvasUI.ui.new("#ui");
 
 const frame = canvasUI.layout.new("frame", "frame");
 
-const image = canvasUI.view.new("image", "image");
+const imageArea = canvasUI.composite.new("image-area", "image-area");
 
-image.set("size", { width: 300, height: 300 });
+imageArea.set("size", {
+  width: { unit: "px", value: 300 },
+  height: { unit: "px", value: 300 },
+});
+imageArea.set("background", "#689");
+imageArea.set("corner", { type: "round", size: 10 });
 
-image.set(
-  "src",
+imageArea.set(
+  "imageSrc",
   "https://images.unsplash.com/photo-1574259392081-dbe3c19cd15e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1704&q=80"
 );
 
-frame.insert(image);
+frame.insert(imageArea);
 
-image.layoutParams.set("gravity", { horizontal: "middle", vertical: "middle" });
+imageArea.layoutParams.set("gravity", {
+  horizontal: "middle",
+  vertical: "middle",
+});
 
 ui.start(frame);
