@@ -13,8 +13,8 @@ export const computeAvailableLength = function (desiredLength, maxLength) {
 
 export const computeDesiredLength = function (length, maxLength) {
   if (length === "auto") return null;
-  const { type, value } = length;
-  return type === "px" ? value : maxLength * (value / 100);
+  const { unit, value } = length;
+  return unit === "px" ? value : maxLength * (value / 100);
 };
 
 export const computeSize = function (desiredSize, maxSize, computeSize) {
