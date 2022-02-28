@@ -1,40 +1,40 @@
 export const addMouseDownAnywhereEvent = function (element) {
-  element.events.set("mouseDownAnywhere", function (element, signal, state) {
+  element.events.set("mousedown-anywhere", function (element, signal, state) {
     if (signal.type !== "mousedown") return { check: false };
     return { check: true, event: signal.data };
   });
 };
 
 export const addMouseUpAnywhereEvent = function (element) {
-  element.events.set("mouseUpAnywhere", function (element, signal, state) {
+  element.events.set("mouseup-anywhere", function (element, signal, state) {
     if (signal.type !== "mouseup") return { check: false };
     return { check: true, event: signal.data };
   });
 };
 
 export const addMouseMoveAnywhereEvent = function (element) {
-  element.events.set("mouseMove", function (element, signal, state) {
+  element.events.set("mousemove", function (element, signal, state) {
     if (signal.type !== "mousemove") return { check: false };
     return { check: true, event: signal.data };
   });
 };
 
 export const addKeyDownEvent = function (element) {
-  element.events.set("keyDown", function (element, signal, state) {
+  element.events.set("keydown", function (element, signal, state) {
     if (signal.type !== "keydown") return { check: false };
     return { check: true, event: signal.data };
   });
 };
 
 export const addKeyUpEvent = function (element) {
-  element.events.set("keyUp", function (element, signal, state) {
+  element.events.set("keyup", function (element, signal, state) {
     if (signal.type !== "keyup") return { check: false };
     return { check: true, event: signal.data };
   });
 };
 
 export const addMouseDownEvent = function (element, inElement) {
-  element.events.set("mouseDown", function (element, signal, state) {
+  element.events.set("mousedown", function (element, signal, state) {
     if (signal.type !== "mousedown") return { check: false };
     const coords = signal.data.coords;
     if (!inElement(element, coords)) return { check: false };
@@ -43,7 +43,7 @@ export const addMouseDownEvent = function (element, inElement) {
 };
 
 export const addMouseUpEvent = function (element, inElement) {
-  element.events.set("mouseUp", function (element, signal, state) {
+  element.events.set("mouseup", function (element, signal, state) {
     if (signal.type !== "mouseup") return { check: false };
     const coords = signal.data.coords;
     if (!inElement(element, coords)) return { check: false };
@@ -52,7 +52,7 @@ export const addMouseUpEvent = function (element, inElement) {
 };
 
 export const addMouseMoveEvent = function (element, inElement) {
-  element.events.set("mouseMove", function (element, signal, state) {
+  element.events.set("mousemove", function (element, signal, state) {
     if (signal.type !== "mousemove") return { check: false };
     const coords = signal.data.coords;
     if (!inElement(element, coords)) return { check: false };
@@ -61,7 +61,7 @@ export const addMouseMoveEvent = function (element, inElement) {
 };
 
 export const addMouseEnterEvent = function (element, inElement) {
-  element.events.set("mouseEnter", function (element, signal, state) {
+  element.events.set("mouseenter", function (element, signal, state) {
     if (signal.type === "mouseleave") state.set("wasOut", true);
     if (signal.type !== "mousemove") return { check: false };
     const coords = signal.data.coords;
@@ -74,7 +74,7 @@ export const addMouseEnterEvent = function (element, inElement) {
 };
 
 export const addMouseLeaveEvent = function (element, inElement) {
-  element.events.set("mouseLeave", function (element, signal, state) {
+  element.events.set("mouseleave", function (element, signal, state) {
     if (signal.type === "mouseleave") {
       state.set("wasIn", false);
       return { check: true, event: signal.data };
@@ -89,8 +89,8 @@ export const addMouseLeaveEvent = function (element, inElement) {
   });
 };
 
-export const addMouseClickEvent = function (element, inElement) {
-  element.events.set("mouseClick", function (element, signal, state) {
+export const addClickEvent = function (element, inElement) {
+  element.events.set("click", function (element, signal, state) {
     if (signal.type !== "mousedown" && signal.type !== "mouseup")
       return { check: false };
     const coords = signal.data.coords;
@@ -114,7 +114,7 @@ export const addMouseEvents = function (type, inElement) {
   addMouseMoveEvent(type, inElement);
   addMouseEnterEvent(type, inElement);
   addMouseLeaveEvent(type, inElement);
-  addMouseClickEvent(type, inElement);
+  addClickEvent(type, inElement);
 };
 
 export const addKeyEvents = function (type) {
