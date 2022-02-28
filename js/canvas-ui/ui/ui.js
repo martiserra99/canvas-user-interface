@@ -30,6 +30,7 @@ export class UI {
     if (this._started) this.end();
     this._insertElement(element);
     this._startAnimation();
+    this._setupSignals();
     this._started = true;
   }
 
@@ -62,11 +63,83 @@ export class UI {
     return { x: 0, y: 0 };
   }
 
+  _setupSignals() {
+    this._setupMouseSignals();
+    this._setupKeySignals();
+  }
+
+  _setupMouseSignals() {
+    this._mouseSignals = [];
+    const types = this._getMouseSignalTypes();
+    for (const type of types) {
+      const callback = function (event) {
+        const data = this._getMouseSignalData(event);
+        const propagate = true;
+        this.drawable.signal({ type, data, propagate });
+      }.bind(this);
+      this._mouseSignals.push({ type, callback });
+      this._canvas.addEventListener(type, callback);
+    }
+  }
+
+  _getMouseSignalTypes() {
+    return ["mousedown", "mouseup", "mousemove", "mouseenter", "mouseleave"];
+  }
+
+  _getMouseSignalData(event) {
+    const x = event.clientX;
+    const y = event.clientY;
+    const coords = { x, y };
+    return { coords };
+  }
+
+  _setupKeySignals() {
+    this._keySignals = [];
+    const types = this._getKeySignalTypes();
+    for (const type of types) {
+      const callback = function (event) {
+        if (event.repeat) return;
+        const data = this._getKeySignalData(event);
+        const propagate = true;
+        this.drawable.signal({ type, data, propagate });
+      }.bind(this);
+      this._keySignals.push({ type, callback });
+      window.addEventListener(type, callback);
+    }
+  }
+
+  _getKeySignalTypes() {
+    return ["keydown", "keyup"];
+  }
+
+  _getKeySignalData(event) {
+    const key = event.key;
+    return { key };
+  }
+
   end() {
     if (!this._started) return;
+    this._removeSignals();
     this._stopAnimation();
     this._removeElement();
     delete this._started;
+  }
+
+  _removeSignals() {
+    this._removeMouseSignals();
+    this._removeKeySignals();
+  }
+
+  _removeMouseSignals() {
+    for (const { type, callback } of this._mouseSignals)
+      this._canvas.removeEventListener(type, callback);
+    delete this._mouseSignals;
+  }
+
+  _removeKeySignals() {
+    for (const { type, callback } of this._keySignals)
+      window.removeEventListener(type, callback);
+    delete this._keySignals;
   }
 
   _stopAnimation() {
