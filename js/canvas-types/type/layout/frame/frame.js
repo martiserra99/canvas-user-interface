@@ -9,7 +9,7 @@ import { onDrawItself } from "./lifecycle/on-draw-itself.js";
 import { onSortChildsToDraw } from "./lifecycle/on-sort-childs-to-draw.js";
 
 export const newLayoutFrame = function () {
-  const frame = canvasUI.layout.type("frame");
+  const frame = canvasUI.layout.newType("frame");
 
   frame.set("size", {
     width: { type: "%", value: 100 },

@@ -21,7 +21,7 @@ export const canvasUI = {
   view: {
     _types: new Map(),
 
-    type(name) {
+    newType(name) {
       const type = new ViewType(name);
       this._types.set(name, type);
       return type;
@@ -36,7 +36,7 @@ export const canvasUI = {
   layout: {
     _types: new Map(),
 
-    type(name) {
+    newType(name) {
       const type = new LayoutType(name);
       this._types.set(name, type);
       return type;
@@ -51,7 +51,7 @@ export const canvasUI = {
   composite: {
     _types: new Map(),
 
-    type(name) {
+    newType(name) {
       const type = new CompositeType(name);
       this._types.set(name, type);
       return type;

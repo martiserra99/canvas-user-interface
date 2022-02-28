@@ -6,7 +6,7 @@ import { onLocate } from "./lifecycle/on-locate.js";
 import { onDrawItself } from "./lifecycle/on-draw-itself.js";
 
 export const newViewText = function () {
-  const text = canvasUI.view.type("text");
+  const text = canvasUI.view.newType("text");
 
   text.set("text", "Text");
   text.set("font", {
