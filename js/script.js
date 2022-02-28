@@ -3,24 +3,20 @@ import { canvasUI } from "./canvas-ui/canvas-ui.js";
 const ui = canvasUI.ui.new("#ui");
 
 const frame = canvasUI.layout.new("frame", "frame");
-frame.get("size").width.type = "%";
-frame.get("size").width.value = 50;
-frame.set("background", "#dfa");
-frame.set("border", { color: "#132987", size: 10 });
-frame.set("corner", { type: "round", size: 100 });
 
-const text = canvasUI.view.new("text", "text");
+const textArea = canvasUI.composite.new("text-area", "text-area");
 
-frame.insert(text);
+textArea.set("size", {
+  width: { unit: "px", value: 200 },
+  height: { unit: "px", value: 100 },
+});
+textArea.set("background", "#000");
+textArea.get("font").color = "#fff";
+textArea.set("align", { horizontal: "middle", vertical: "middle" });
 
-text.layoutParams.get("gravity").horizontal = "middle";
-text.layoutParams.get("gravity").vertical = "middle";
+frame.insert(textArea);
 
-const text2 = canvasUI.view.new("text2", "text");
-
-frame.insert(text2);
-
-text2.layoutParams.get("gravity").horizontal = "right";
-text2.layoutParams.get("gravity").vertical = "bottom";
+textArea.layoutParams.get("gravity").horizontal = "middle";
+textArea.layoutParams.get("gravity").vertical = "middle";
 
 ui.start(frame);
