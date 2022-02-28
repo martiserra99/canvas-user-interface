@@ -23,7 +23,7 @@ export const newLayoutFrame = function () {
     horizontal: "left",
     vertical: "top",
   });
-  frame.childLayoutParams.set("zIndex", 0);
+  frame.childLayoutParams.set("z-index", 0);
   frame.childLayoutParams.set("margin", {
     top: 0,
     right: 0,
