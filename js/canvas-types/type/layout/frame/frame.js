@@ -12,8 +12,8 @@ export const newLayoutFrame = function () {
   const frame = canvasUI.layout.newType("frame");
 
   frame.set("size", {
-    width: { type: "%", value: 100 },
-    height: { type: "%", value: 100 },
+    width: { unit: "%", value: 100 },
+    height: { unit: "%", value: 100 },
   });
   frame.set("background", "rgba(0,0,0,0)");
   frame.set("border", { color: "#000", size: 0 });
