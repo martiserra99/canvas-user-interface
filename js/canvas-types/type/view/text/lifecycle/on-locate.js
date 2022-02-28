@@ -21,14 +21,7 @@ const getTextX = function (view, inner, coords) {
 
   const textLength = inner.get("textSize").width;
 
-  const textMargin = { start: 0, end: 0 };
-
-  return compute.computeCoordToAlign(
-    textAlign,
-    textCoords,
-    textLength,
-    textMargin
-  );
+  return compute.computeCoordToAlign(textAlign, textCoords, textLength);
 };
 
 const getTextY = function (view, inner, coords) {
@@ -43,12 +36,5 @@ const getTextY = function (view, inner, coords) {
 
   const textLength = inner.get("textSize").height;
 
-  const textMargin = { start: 0, end: 0 };
-
-  return compute.computeCoordToAlign(
-    textAlign,
-    textCoords,
-    textLength,
-    textMargin
-  );
+  return compute.computeCoordToAlign(textAlign, textCoords, textLength);
 };

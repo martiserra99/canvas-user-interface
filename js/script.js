@@ -4,19 +4,12 @@ const ui = canvasUI.ui.new("#ui");
 
 const frame = canvasUI.layout.new("frame", "frame");
 
-const textArea = canvasUI.composite.new("text-area", "text-area");
+const text = canvasUI.view.new("text", "text");
+text.set("text", "Hello!");
+text.get("font").size = 32;
 
-textArea.set("size", {
-  width: { unit: "px", value: 200 },
-  height: { unit: "px", value: 100 },
-});
-textArea.set("background", "#000");
-textArea.get("font").color = "#fff";
-textArea.set("align", { horizontal: "middle", vertical: "middle" });
+frame.insert(text);
 
-frame.insert(textArea);
-
-textArea.layoutParams.get("gravity").horizontal = "middle";
-textArea.layoutParams.get("gravity").vertical = "middle";
+text.layoutParams.set("gravity", { horizontal: "middle", vertical: "middle" });
 
 ui.start(frame);

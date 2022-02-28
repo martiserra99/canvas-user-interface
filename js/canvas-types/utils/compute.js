@@ -48,7 +48,12 @@ export const computeTextSize = function (text, font) {
   return { width: ctx.measureText(text).width, height: font.size };
 };
 
-export const computeCoordToAlign = function (align, coords, length, margin) {
+export const computeCoordToAlign = function (
+  align,
+  coords,
+  length,
+  margin = { start: 0, end: 0 }
+) {
   if (align === "start") return coords.start + margin.start;
   if (align === "middle")
     return (
