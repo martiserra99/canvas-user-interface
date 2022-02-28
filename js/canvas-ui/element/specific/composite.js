@@ -33,4 +33,9 @@ export class Composite extends Element {
     super.onEnd();
     this._element.onEnd();
   }
+
+  signal(signal) {
+    super.signal(signal);
+    if (signal.propagate) this._element.signal(signal);
+  }
 }

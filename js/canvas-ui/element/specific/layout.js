@@ -110,6 +110,11 @@ export class Layout extends Element {
     for (const child of this.childs) child.onEnd();
   }
 
+  signal(signal) {
+    super.signal(signal);
+    if (signal.propagate) for (const child of this.childs) child.signal(signal);
+  }
+
   insert(child) {
     child.insertToLayout(this);
   }
