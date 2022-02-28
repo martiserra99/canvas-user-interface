@@ -7,7 +7,6 @@ export class ElementType {
     this.functions = new Map();
     this.lifecycle = this._getLifecycle();
     this.events = new Events();
-    this.listeners = new Listeners(this.events);
   }
 
   _getLifecycle() {
@@ -63,15 +62,5 @@ class Events {
 
   get(name) {
     return this._events.get(name);
-  }
-}
-
-class Listeners {
-  constructor(events) {
-    this._events = events;
-  }
-
-  add(name, value) {
-    this._events.get(name).callbacks.push(value);
   }
 }
