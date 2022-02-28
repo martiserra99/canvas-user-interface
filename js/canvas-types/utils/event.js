@@ -176,15 +176,12 @@ export const inRectangle = function (coords, rectCoords, rectSize, rectCorner) {
 };
 
 const inRect = function (coords, rectCoords, rectSize) {
-  if (
-    coords.x < rectCoords.x ||
-    coords.y < rectCoords.y ||
-    coords.x > rectCoords.x + rectSize.width ||
-    coords.y > rectCoords.y + rectSize.height
-  )
-    return false;
-
-  return true;
+  return (
+    coords.x >= rectCoords.x &&
+    coords.y >= rectCoords.y &&
+    coords.x <= rectCoords.x + rectSize.width &&
+    coords.y <= rectCoords.y + rectSize.height
+  );
 };
 
 const inTopLeftRect = function (coords, rectCoords, rectSize, rectCorner) {
