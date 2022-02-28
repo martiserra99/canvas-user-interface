@@ -75,7 +75,7 @@ export class UI {
       const callback = function (event) {
         const data = this._getMouseSignalData(event);
         const propagate = true;
-        this.drawable.signal({ type, data, propagate });
+        this.element.signal({ type, data, propagate });
       }.bind(this);
       this._mouseSignals.push({ type, callback });
       this._canvas.addEventListener(type, callback);
@@ -101,7 +101,7 @@ export class UI {
         if (event.repeat) return;
         const data = this._getKeySignalData(event);
         const propagate = true;
-        this.drawable.signal({ type, data, propagate });
+        this.element.signal({ type, data, propagate });
       }.bind(this);
       this._keySignals.push({ type, callback });
       window.addEventListener(type, callback);
