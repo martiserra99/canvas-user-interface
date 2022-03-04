@@ -40,7 +40,7 @@ export const newLayoutLinear = function () {
     onMeasure(layout, inner, maxSize);
   });
 
-  linear.lifecycle.set("onSortChildsToSetSizes", function (layout, inner) {
+  linear.lifecycle.set("onSortChildsToMeasure", function (layout, inner) {
     return inner.get("sortedChilds");
   });
 
@@ -55,7 +55,7 @@ export const newLayoutLinear = function () {
     return onGetSize(layout, inner, maxSize);
   });
 
-  linear.lifecycle.set("onSortChildsToSetCoords", function (layout, inner) {
+  linear.lifecycle.set("onSortChildsToLocate", function (layout, inner) {
     return inner.get("sortedChilds");
   });
 
