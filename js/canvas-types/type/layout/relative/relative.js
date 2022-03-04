@@ -5,6 +5,7 @@ import { onMeasure } from "./lifecycle/on-measure.js";
 import { onGetChildMaxSize } from "./lifecycle/on-get-child-max-size.js";
 import { onGetChildCoords } from "./lifecycle/on-get-child-coords.js";
 import { onDrawItself } from "./lifecycle/on-draw-itself.js";
+import { onSortChildsToDraw } from "./lifecycle/on-sort-childs-to-draw.js";
 
 export const newLayoutRelative = function () {
   const relative = canvasUI.layout.newType("relative");
@@ -24,6 +25,7 @@ export const newLayoutRelative = function () {
     left: null,
   });
   relative.childLayoutParams.set("bias", { vertical: 50, horizontal: 50 });
+  relative.childLayoutParams.set("z-index", 0);
   relative.childLayoutParams.set("margin", {
     top: 0,
     right: 0,
@@ -39,7 +41,7 @@ export const newLayoutRelative = function () {
     onMeasure(layout, inner, maxSize);
   });
 
-  relative.lifecycle.set("onSortChildsToSetSizes", function (layout, inner) {
+  relative.lifecycle.set("onSortChildsToMeasure", function (layout, inner) {
     return inner.get("sortedChilds");
   });
 
@@ -54,7 +56,7 @@ export const newLayoutRelative = function () {
     return inner.get("size");
   });
 
-  relative.lifecycle.set("onSortChildsToSetCoords", function (layout, inner) {
+  relative.lifecycle.set("onSortChildsToLocate", function (layout, inner) {
     return inner.get("sortedChilds");
   });
 
@@ -67,5 +69,9 @@ export const newLayoutRelative = function () {
 
   relative.lifecycle.set("onDrawItself", function (layout, inner, ctx) {
     onDrawItself(layout, inner, ctx);
+  });
+
+  relative.lifecycle.set("onSortChildsToDraw", function (layout, inner) {
+    return onSortChildsToDraw(layout, inner);
   });
 };
