@@ -4,14 +4,14 @@ const ui = canvasUI.ui.new("#ui");
 
 const relative = canvasUI.layout.new("relative", "relative");
 
-const squares = canvasUI.layout.new("squares", "squares");
+const gridSquares = canvasUI.layout.new("gridSquares", "grid-squares");
 
-squares.set("background", "white");
-squares.set("lines", { outside: true, size: 1, color: "black" });
+gridSquares.set("background", "white");
+gridSquares.set("lines", { outside: true, size: 1, color: "black" });
 
-relative.insert(squares);
+relative.insert(gridSquares);
 
-squares.layoutParams.set("attachTo", {
+gridSquares.layoutParams.set("attachTo", {
   top: "parent",
   right: "parent",
   bottom: "parent",
@@ -27,7 +27,7 @@ textArea.set("size", {
 textArea.set("background", "black");
 textArea.get("font").color = "white";
 
-squares.insert(textArea);
+gridSquares.insert(textArea);
 
 textArea.layoutParams.set("position", { row: 1, column: 1 });
 
@@ -40,7 +40,7 @@ textArea2.set("size", {
 textArea2.set("background", "#7fa000");
 textArea2.get("font").color = "white";
 
-squares.insert(textArea2);
+gridSquares.insert(textArea2);
 
 textArea2.layoutParams.set("position", { row: 2, column: 2 });
 textArea2.layoutParams.set("z-index", 1);
