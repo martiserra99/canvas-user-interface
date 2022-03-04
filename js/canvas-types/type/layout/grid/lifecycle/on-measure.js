@@ -50,8 +50,8 @@ const getPositionsSplittedByUnit = function (positions) {
   const lengthsPx = [],
     lengthsFr = [];
   let index = 0;
-  for (const { count, unit, length } of positions) {
-    const length = length > 0 ? length : 0;
+  for (const { count, unit, length: value } of positions) {
+    const length = value > 0 ? value : 0;
     if (unit === "px")
       for (let i = 0; i < count; i++) lengthsPx.push([index + i, length]);
     else for (let i = 0; i < count; i++) lengthsFr.push([index + i, length]);

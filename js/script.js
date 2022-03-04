@@ -4,17 +4,32 @@ const ui = canvasUI.ui.new("#ui");
 
 const frame = canvasUI.layout.new("frame", "frame");
 
-const linear1 = canvasUI.layout.new("linear", "linear");
-linear1.set("size", {
-  width: { unit: "%", value: 100 },
-  height: { unit: "px", value: 200 },
+const grid1 = canvasUI.layout.new("grid", "grid");
+grid1.set("size", {
+  width: { unit: "%", value: 75 },
+  height: { unit: "px", value: 500 },
 });
-linear1.set("direction", "horizontal");
-linear1.set("gap", 20);
-linear1.set("gravityContent", "start");
-linear1.set("background", "#FF9292");
+grid1.set("dimensions", {
+  columns: [
+    { count: 1, unit: "fr", length: 1 },
+    { count: 1, unit: "fr", length: 2 },
+  ],
+  rows: [
+    { count: 2, unit: "fr", length: 1 },
+    { count: 1, unit: "px", length: 150 },
+  ],
+});
+grid1.set("gap", {
+  horizontal: 20,
+  vertical: 50,
+});
+grid1.set("alignItems", {
+  vertical: "middle",
+  horizontal: "right",
+});
+grid1.set("background", "#543789");
 
-frame.insert(linear1);
+frame.insert(grid1);
 
 const frame1 = canvasUI.layout.new("frame", "frame");
 frame1.set("size", {
@@ -23,30 +38,16 @@ frame1.set("size", {
 });
 frame1.set("background", "#BAABDA");
 
-linear1.insert(frame1);
+grid1.insert(frame1);
 
 const frame2 = canvasUI.layout.new("frame", "frame");
 frame2.set("size", {
   width: { unit: "px", value: 100 },
   height: { unit: "px", value: 100 },
 });
-frame2.set("background", "#643217");
+frame2.set("background", "#BAABDA");
 
-linear1.insert(frame2);
-frame2.layoutParams.set("alignSelf", "start");
-
-const linear2 = canvasUI.layout.new("linear", "linear");
-linear2.set("size", {
-  width: { unit: "px", value: 1200 },
-  height: { unit: "%", value: 30 },
-});
-linear2.set("direction", "reverse-horizontal");
-linear2.set("gap", 20);
-linear2.set("gravityContent", "end");
-linear2.set("background", "#D77FA1");
-
-frame.insert(linear2);
-linear2.layoutParams.get("margin").top = 200;
+grid1.insert(frame2);
 
 const frame3 = canvasUI.layout.new("frame", "frame");
 frame3.set("size", {
@@ -55,29 +56,41 @@ frame3.set("size", {
 });
 frame3.set("background", "#BAABDA");
 
-linear2.insert(frame3);
+grid1.insert(frame3);
+frame3.layoutParams.set("alignSelf", {
+  vertical: "middle",
+  horizontal: "middle",
+});
 
 const frame4 = canvasUI.layout.new("frame", "frame");
 frame4.set("size", {
   width: { unit: "px", value: 100 },
   height: { unit: "px", value: 100 },
 });
-frame4.set("background", "#643217");
+frame4.set("background", "#BAABDA");
 
-linear2.insert(frame4);
-frame4.layoutParams.set("alignSelf", "end");
+grid1.insert(frame4);
+frame4.layoutParams.set("alignSelf", {
+  vertical: "top",
+  horizontal: "left",
+});
 
-const linear3 = canvasUI.layout.new("linear", "linear");
-linear3.set("size", {
+const grid2 = canvasUI.layout.new("grid", "grid");
+grid2.set("size", {
   width: "auto",
   height: "auto",
 });
-linear3.set("direction", "vertical");
-linear3.set("gap", 20);
-linear3.set("background", "#432982");
+grid2.set("dimensions", {
+  columns: [{ count: 1, unit: "px", length: 200 }],
+  rows: [{ count: 1, unit: "px", length: 200 }],
+});
+grid2.set("background", "#437");
 
-frame.insert(linear3);
-linear3.layoutParams.get("margin").top = 400;
+frame.insert(grid2);
+grid2.layoutParams.set("gravity", {
+  horizontal: "right",
+  vertical: "top",
+});
 
 const frame5 = canvasUI.layout.new("frame", "frame");
 frame5.set("size", {
@@ -86,16 +99,7 @@ frame5.set("size", {
 });
 frame5.set("background", "#BAABDA");
 
-linear3.insert(frame5);
-frame5.layoutParams.set("margin", { top: 50, left: 50, right: 20, bottom: 20 });
-
-const frame6 = canvasUI.layout.new("frame", "frame");
-frame6.set("size", {
-  width: { unit: "px", value: 100 },
-  height: { unit: "px", value: 100 },
-});
-frame6.set("background", "#BAABDA");
-
-linear3.insert(frame6);
+grid2.insert(frame5);
+frame5.layoutParams.get("margin").right = 50;
 
 ui.start(frame);
