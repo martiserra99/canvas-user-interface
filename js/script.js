@@ -2,47 +2,45 @@ import { canvasUI } from "./canvas-ui/canvas-ui.js";
 
 const ui = canvasUI.ui.new("#ui");
 
-const relative = canvasUI.layout.new("relative", "relative");
+const root = canvasUI.layout.new("root", "frame");
 
-const gridSquares = canvasUI.layout.new("gridSquares", "grid-squares");
+const sudokuFrame = canvasUI.layout.new("sudoku-frame", "frame");
 
-gridSquares.set("background", "white");
-gridSquares.set("lines", { outside: true, size: 1, color: "black" });
+sudokuFrame.set("size", { width: "auto", height: "auto" });
 
-relative.insert(gridSquares);
+const sudokuGrid1 = canvasUI.layout.new("grid-squares-1", "grid-squares");
+sudokuGrid1.set("dimensions", { rows: 9, columns: 9 });
+sudokuGrid1.get("squares").size = 50;
 
-gridSquares.layoutParams.set("attachTo", {
-  top: "parent",
-  right: "parent",
-  bottom: "parent",
-  left: "parent",
+const sudokuGrid2 = canvasUI.layout.new("grid-squares-2", "grid-squares");
+sudokuGrid2.set("dimensions", { rows: 3, columns: 3 });
+sudokuGrid2.get("squares").size = 150;
+sudokuGrid2.get("lines").size = 3;
+sudokuGrid2.get("lines").outside = true;
+
+sudokuFrame.insert(sudokuGrid1);
+
+sudokuGrid1.insert(sudokuGrid2);
+
+root.insert(sudokuFrame);
+sudokuFrame.layoutParams.set("gravity", {
+  horizontal: "middle",
+  vertical: "middle",
 });
 
 const textArea = canvasUI.composite.new("text-area-1", "text-area");
 
 textArea.set("size", {
-  width: { unit: "%", value: 100 },
-  height: { unit: "%", value: 100 },
+  width: { unit: "px", value: 50 },
+  height: { unit: "px", value: 50 },
 });
-textArea.set("background", "black");
-textArea.get("font").color = "white";
 
-gridSquares.insert(textArea);
+textArea.set("text", 5);
 
-textArea.layoutParams.set("position", { row: 1, column: 1 });
+textArea.get("font").size = 30;
 
-const textArea2 = canvasUI.composite.new("text-area-1", "text-area");
+sudokuGrid1.insert(textArea);
 
-textArea2.set("size", {
-  width: { unit: "%", value: 100 },
-  height: { unit: "%", value: 100 },
-});
-textArea2.set("background", "#7fa000");
-textArea2.get("font").color = "white";
+textArea.layoutParams.set("position", { row: 8, column: 8 });
 
-gridSquares.insert(textArea2);
-
-textArea2.layoutParams.set("position", { row: 2, column: 2 });
-textArea2.layoutParams.set("z-index", 1);
-
-ui.start(relative);
+ui.start(root);
