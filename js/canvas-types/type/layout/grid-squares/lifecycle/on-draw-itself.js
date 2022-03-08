@@ -17,7 +17,7 @@ const drawArea = function (layout, ctx) {
   };
   const corner = { type: "cut", size: 0 };
 
-  draw.drawRectangle(ctx, coords, size, background, border, corner);
+  draw.drawArea(ctx, coords, size, background, border, corner);
 };
 
 const drawLines = function (layout, inner, ctx) {

@@ -6,5 +6,5 @@ export const onDrawItself = function (layout, inner, ctx) {
   const background = layout.get("background");
   const border = layout.get("border");
   const corner = layout.get("corner");
-  draw.drawRectangle(ctx, coords, size, background, border, corner);
+  draw.drawArea(ctx, coords, size, background, border, corner);
 };

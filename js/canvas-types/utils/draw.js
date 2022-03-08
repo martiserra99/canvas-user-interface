@@ -1,4 +1,4 @@
-export const drawRectangle = function (
+export const drawArea = function (
   ctx,
   coords,
   size,
@@ -24,13 +24,13 @@ export const drawRectangle = function (
   ctx.fillStyle = background;
   ctx.strokeStyle = border.color;
   ctx.lineWidth = border.size;
-  drawRectanglePath(ctx, rectangleCoords, rectangleSize, rectangleCorner);
+  drawAreaPath(ctx, rectangleCoords, rectangleSize, rectangleCorner);
   ctx.fill();
   if (border.size > 0) ctx.stroke();
   ctx.restore();
 };
 
-const drawRectanglePath = function (ctx, coords, size, corner) {
+const drawAreaPath = function (ctx, coords, size, corner) {
   ctx.moveTo(coords.x, coords.y + size.height - corner.size);
   drawLeftEdgePath(ctx, coords, size, corner);
   drawTopLeftCornerPath(ctx, coords, size, corner);
