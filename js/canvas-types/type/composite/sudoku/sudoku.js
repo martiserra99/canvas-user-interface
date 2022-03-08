@@ -3,7 +3,7 @@ import { canvasUI } from "../../../../canvas-ui/canvas-ui.js";
 import { onGetElement } from "./lifecycle/on-get-element.js";
 import { onUpdateElement } from "./lifecycle/on-update-element.js";
 
-import * as event from "../../../utils/event.js";
+import { addAllEvents } from "./events/events.js";
 
 export const newCompositeSudoku = function () {
   const sudoku = canvasUI.composite.newType("sudoku");
@@ -21,21 +21,5 @@ export const newCompositeSudoku = function () {
     onUpdateElement(component, inner, element);
   });
 
-  event.addAllEvents(sudoku, {
-    areCoordsInElement: (element, coords) =>
-      event.areCoordsInRectangle(element, coords),
-    getMouseEvent: (element, signal, state) => {
-      const coords = {
-        x: signal.data.coords.x - element.coords.x,
-        y: signal.data.coords.y - element.coords.y,
-      };
-      const cell = event.getCellFromCoords(
-        element.size,
-        { rows: 9, columns: 9 },
-        coords
-      );
-      return { coords, cell };
-    },
-    getKeyEvent: (element, signal, state) => signal.data,
-  });
+  addAllEvents(sudoku);
 };
