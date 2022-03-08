@@ -8,6 +8,8 @@ import { onLocate } from "./lifecycle/on-locate.js";
 import { onGetChildCoords } from "./lifecycle/on-get-child-coords.js";
 import { onDrawItself } from "./lifecycle/on-draw-itself.js";
 
+import * as event from "../../../utils/event.js";
+
 export const newLayoutLinear = function () {
   const linear = canvasUI.layout.newType("linear");
 
@@ -72,5 +74,12 @@ export const newLayoutLinear = function () {
 
   linear.lifecycle.set("onDrawItself", function (linear, inner, ctx) {
     onDrawItself(linear, inner, ctx);
+  });
+
+  event.addAllEvents(linear, {
+    areCoordsInElement: (element, coords) =>
+      event.areCoordsInArea(element, coords),
+    getMouseEvent: (element, signal, state) => signal.data,
+    getKeyEvent: (element, signal, state) => signal.data,
   });
 };

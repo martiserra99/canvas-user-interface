@@ -6,6 +6,8 @@ import { onGetChildCoords } from "./lifecycle/on-get-child-coords.js";
 import { onDrawItself } from "./lifecycle/on-draw-itself.js";
 import { onSortChildsToDraw } from "./lifecycle/on-sort-childs-to-draw.js";
 
+import * as event from "../../../utils/event.js";
+
 export const newLayoutGridSquares = function () {
   const gridSquares = canvasUI.layout.newType("grid-squares");
 
@@ -45,5 +47,12 @@ export const newLayoutGridSquares = function () {
 
   gridSquares.lifecycle.set("onSortChildsToDraw", function (layout, inner) {
     return onSortChildsToDraw(layout, inner);
+  });
+
+  event.addAllEvents(gridSquares, {
+    areCoordsInElement: (element, coords) =>
+      event.areCoordsInRectangle(element, coords),
+    getMouseEvent: (element, signal, state) => signal.data,
+    getKeyEvent: (element, signal, state) => signal.data,
   });
 };

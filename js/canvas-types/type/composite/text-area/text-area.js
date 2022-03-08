@@ -3,6 +3,8 @@ import { canvasUI } from "../../../../canvas-ui/canvas-ui.js";
 import { onGetElement } from "./lifecycle/on-get-element.js";
 import { onUpdateElement } from "./lifecycle/on-update-element.js";
 
+import * as event from "../../../utils/event.js";
+
 export const newCompositeTextArea = function () {
   const textArea = canvasUI.composite.newType("text-area");
 
@@ -38,4 +40,11 @@ export const newCompositeTextArea = function () {
       onUpdateElement(component, inner, element);
     }
   );
+
+  event.addAllEvents(textArea, {
+    areCoordsInElement: (element, coords) =>
+      event.areCoordsInArea(element, coords),
+    getMouseEvent: (element, signal, state) => signal.data,
+    getKeyEvent: (element, signal, state) => signal.data,
+  });
 };

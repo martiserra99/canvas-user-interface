@@ -8,6 +8,8 @@ import { onLocate } from "./lifecycle/on-locate.js";
 import { onGetChildCoords } from "./lifecycle/on-get-child-coords.js";
 import { onDrawItself } from "./lifecycle/on-draw-itself.js";
 
+import * as event from "../../../utils/event.js";
+
 export const newLayoutGrid = function () {
   const grid = canvasUI.layout.newType("grid");
 
@@ -71,5 +73,12 @@ export const newLayoutGrid = function () {
 
   grid.lifecycle.set("onDrawItself", function (layout, inner, ctx) {
     onDrawItself(layout, inner, ctx);
+  });
+
+  event.addAllEvents(grid, {
+    areCoordsInElement: (element, coords) =>
+      event.areCoordsInArea(element, coords),
+    getMouseEvent: (element, signal, state) => signal.data,
+    getKeyEvent: (element, signal, state) => signal.data,
   });
 };

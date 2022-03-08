@@ -37,4 +37,11 @@ export const newViewText = function () {
   text.lifecycle.set("onDrawItself", function (view, inner, ctx) {
     onDrawItself(view, inner, ctx);
   });
+
+  event.addAllEvents(text, {
+    areCoordsInElement: (element, coords) =>
+      event.areCoordsInRectangle(element, coords),
+    getMouseEvent: (element, signal, state) => signal.data,
+    getKeyEvent: (element, signal, state) => signal.data,
+  });
 };
