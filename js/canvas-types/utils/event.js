@@ -179,6 +179,12 @@ export const areCoordsInRectangle = function (element, coords) {
   return inRectangle(coords, element.coords, element.size);
 };
 
+export const getCellFromCoords = function (size, dimensions, coords) {
+  const column = Math.floor(coords.x / (size.width / dimensions.columns));
+  const row = Math.floor(coords.y / (size.height / dimensions.rows));
+  return { row, column };
+};
+
 const inRectangle = function (coords, rectCoords, rectSize) {
   return (
     coords.x >= rectCoords.x &&

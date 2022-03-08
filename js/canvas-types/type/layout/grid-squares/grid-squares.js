@@ -52,7 +52,18 @@ export const newLayoutGridSquares = function () {
   event.addAllEvents(gridSquares, {
     areCoordsInElement: (element, coords) =>
       event.areCoordsInRectangle(element, coords),
-    getMouseEvent: (element, signal, state) => signal.data,
+    getMouseEvent: (element, signal, state) => {
+      const coords = {
+        x: signal.data.coords.x - element.coords.x,
+        y: signal.data.coords.y - element.coords.y,
+      };
+      const cell = event.getCellFromCoords(
+        element.size,
+        element.get("dimensions"),
+        coords
+      );
+      return { coords, cell };
+    },
     getKeyEvent: (element, signal, state) => signal.data,
   });
 };

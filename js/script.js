@@ -17,3 +17,7 @@ sudoku.layoutParams.set("gravity", {
 });
 
 ui.start(root);
+
+sudoku.listeners.add("click", function (element, event) {
+  console.log(event.cell);
+});
