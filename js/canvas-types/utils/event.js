@@ -130,28 +130,22 @@ export const addAllEvents = function (type, config) {
   addKeyEvents(type, config);
 };
 
-export const areCoordsInArea = function (
-  coords,
-  rectCoords,
-  rectSize,
-  rectCorner
-) {
-  if (!rectCorner) return inRectangle(coords, rectCoords, rectSize);
+export const areCoordsInArea = function (element, coords) {
+  if (!inRectangle(coords, element.coords, element.size)) return false;
 
-  if (!inRectangle(coords, rectCoords, rectSize)) return false;
+  let cornerSize = element.get("corner").size;
+  if (element.get("corner").size > element.size.width / 2)
+    cornerSize = element.size.width / 2;
+  if (element.get("corner").size > element.size.height / 2)
+    cornerSize = element.size.height / 2;
+  const corner = { type: element.get("corner").type, size: cornerSize };
 
-  let rectCornerSize = rectCorner.size;
-  if (rectCorner.size > rectSize.width / 2) rectCornerSize = rectSize.width / 2;
-  if (rectCorner.size > rectSize.height / 2)
-    rectCornerSize = rectSize.height / 2;
-  rectCorner = { type: rectCorner.type, size: rectCornerSize };
-
-  const verticalRectX = rectCoords.x + rectCorner.size;
-  const verticalRectY = rectCoords.y;
+  const verticalRectX = element.coords.x + corner.size;
+  const verticalRectY = element.coords.y;
   const verticalRectCoords = { x: verticalRectX, y: verticalRectY };
 
-  const verticalRectWidth = rectSize.width - rectCorner.size * 2;
-  const verticalRectHeight = rectSize.height;
+  const verticalRectWidth = element.size.width - corner.size * 2;
+  const verticalRectHeight = element.size.height;
   const verticalRectSize = {
     width: verticalRectWidth,
     height: verticalRectHeight,
@@ -159,12 +153,12 @@ export const areCoordsInArea = function (
 
   if (inRectangle(coords, verticalRectCoords, verticalRectSize)) return true;
 
-  const horizontalRectX = rectCoords.x;
-  const horizontalRectY = rectCoords.y + rectCorner.size;
+  const horizontalRectX = element.coords.x;
+  const horizontalRectY = element.coords.y + corner.size;
   const horizontalRectCoords = { x: horizontalRectX, y: horizontalRectY };
 
-  const horizontalRectWidth = rectSize.width;
-  const horizontalRectHeight = rectSize.height - rectCorner.size * 2;
+  const horizontalRectWidth = element.size.width;
+  const horizontalRectHeight = element.size.height - corner.size * 2;
   const horizontalRectSize = {
     width: horizontalRectWidth,
     height: horizontalRectHeight,
@@ -173,15 +167,16 @@ export const areCoordsInArea = function (
   if (inRectangle(coords, horizontalRectCoords, horizontalRectSize))
     return true;
 
-  if (
-    inTopLeftRect(coords, rectCoords, rectSize, rectCorner) ||
-    inTopRightRect(coords, rectCoords, rectSize, rectCorner) ||
-    inBottomRightRect(coords, rectCoords, rectSize, rectCorner) ||
-    inBottomLeftRect(coords, rectCoords, rectSize, rectCorner)
-  )
-    return true;
+  return (
+    inTopLeftRect(coords, element.coords, element.size, corner) ||
+    inTopRightRect(coords, element.coords, element.size, corner) ||
+    inBottomRightRect(coords, element.coords, element.size, corner) ||
+    inBottomLeftRect(coords, element.coords, element.size, corner)
+  );
+};
 
-  return false;
+export const areCoordsInRectangle = function (element, coords) {
+  return inRectangle(coords, element.coords, element.size);
 };
 
 const inRectangle = function (coords, rectCoords, rectSize) {

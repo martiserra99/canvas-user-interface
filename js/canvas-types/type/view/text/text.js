@@ -5,6 +5,8 @@ import { onGetSize } from "./lifecycle/on-get-size.js";
 import { onLocate } from "./lifecycle/on-locate.js";
 import { onDrawItself } from "./lifecycle/on-draw-itself.js";
 
+import * as event from "../../../utils/event.js";
+
 export const newViewText = function () {
   const text = canvasUI.view.newType("text");
 
