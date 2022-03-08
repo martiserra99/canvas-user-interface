@@ -13,16 +13,30 @@ export const onUpdateElement = function (composite, inner, element) {
   const textSize = composite.get("text").size;
   const textColor = composite.get("text").color;
 
+  const cells = inner.get("cells");
+
   for (let row = 0; row < 9; row++) {
     for (let column = 0; column < 9; column++) {
-      const textArea = element.find(`text-area-${column},${row}`);
+      const cell = cells.get({ column, row });
+      const { defined, number, fixed, textArea } = cell;
       textArea.set("size", {
         width: { unit: "px", value: cellSize },
         height: { unit: "px", value: cellSize },
       });
-      textArea.set("text", "");
       textArea.get("font").size = textSize;
       textArea.get("font").color = textColor;
+      textArea.get("border").size = 0;
+
+      if (defined) {
+        textArea.set("text", `${number}`);
+        textArea.get("font").weight = fixed ? 700 : 400;
+      } else {
+        textArea.set("text", "");
+        textArea.get("font").weight = 400;
+      }
     }
   }
+
+  const selected = inner.get("selected");
+  if (selected) cells.get(selected).textArea.get("border").size = 3;
 };

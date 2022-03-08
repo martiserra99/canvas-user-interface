@@ -13,15 +13,20 @@ export const onGetElement = function (composite, inner) {
   gridTop.get("lines").size = 3;
   grid.insert(gridTop);
 
-  for (let row = 0; row < 9; row++) {
-    for (let column = 0; column < 9; column++) {
+  const cells = inner.get("cells");
+
+  for (let column = 0; column < 9; column++) {
+    for (let row = 0; row < 9; row++) {
       const textArea = canvasUI.composite.new(
         `text-area-${column},${row}`,
         "text-area"
       );
       textArea.set("text", "");
+      textArea.get("border").color = composite.get("lines").color;
       grid.insert(textArea);
       textArea.layoutParams.set("position", { row, column });
+
+      cells.get({ row, column }).textArea = textArea;
     }
   }
 

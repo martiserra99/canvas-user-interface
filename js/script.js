@@ -17,3 +17,22 @@ sudoku.layoutParams.set("gravity", {
 });
 
 ui.start(root);
+
+root.listeners.add("click", function (root, event) {
+  sudoku.call("unselectPosition");
+});
+
+sudoku.listeners.add("click", function (sudoku, event) {
+  const cell = event.cell;
+  sudoku.call("selectPosition", cell);
+});
+
+sudoku.listeners.add("number-pressed", function (sudoku, event) {
+  const selected = sudoku.call("getSelectedPosition");
+  sudoku.call("setNumber", selected, event.num, true);
+});
+
+sudoku.listeners.add("backspace-pressed", function (sudoku, event) {
+  const selected = sudoku.call("getSelectedPosition");
+  sudoku.call("delNumber", selected);
+});
