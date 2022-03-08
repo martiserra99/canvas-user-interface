@@ -30,6 +30,10 @@ export const addFunctions = function (sudoku) {
     return inner.get("cells").get(position).number;
   });
 
+  sudoku.fun("isDefined", function (sudoku, inner, position) {
+    return inner.get("cells").get(position).defined;
+  });
+
   sudoku.fun("isFixed", function (sudoku, inner, position) {
     return inner.get("cells").get(position).fixed;
   });
