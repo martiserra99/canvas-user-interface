@@ -12,12 +12,15 @@ export const addFunctions = function (sudoku) {
     return inner.get("selected");
   });
 
-  sudoku.fun("setNumber", function (sudoku, inner, position, number, fixed) {
-    const cell = inner.get("cells").get(position);
-    cell.defined = true;
-    cell.number = number;
-    cell.fixed = fixed;
-  });
+  sudoku.fun(
+    "setNumber",
+    function (sudoku, inner, position, number, fixed = false) {
+      const cell = inner.get("cells").get(position);
+      cell.defined = true;
+      cell.number = number;
+      cell.fixed = fixed;
+    }
+  );
 
   sudoku.fun("delNumber", function (sudoku, inner, position) {
     const cell = inner.get("cells").get(position);
