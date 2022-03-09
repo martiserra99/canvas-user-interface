@@ -44,7 +44,7 @@ export const computeDesiredSize = function (size, maxSize) {
 
 export const computeTextSize = function (text, font) {
   const ctx = document.createElement("canvas").getContext("2d");
-  ctx.font = `${font.size}px ${font.family}`;
+  ctx.font = `${font.weight} ${font.size}px ${font.family}`;
   return { width: ctx.measureText(text).width, height: font.size };
 };
 
