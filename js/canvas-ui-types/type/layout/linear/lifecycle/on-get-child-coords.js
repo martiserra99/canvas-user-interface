@@ -24,7 +24,7 @@ const getChildX = function (layout, inner, child, childsWithCoords) {
 
       const length = inner.get("contentSize").width;
 
-      const align = layout.get("gravityContent");
+      const align = layout.get("alignContent");
       const left = child.layoutParams.get("margin").left;
 
       if (align === "start") return locate.alignStart(coords, length) + left;
@@ -72,7 +72,7 @@ const getChildY = function (layout, inner, child, childsWithCoords) {
 
       const length = inner.get("contentSize").height;
 
-      const align = layout.get("gravityContent");
+      const align = layout.get("alignContent");
       const top = child.layoutParams.get("margin").top;
 
       if (align === "start") return locate.alignStart(coords, length) + top;

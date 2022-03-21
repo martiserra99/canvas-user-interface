@@ -19,7 +19,7 @@ export const newLayoutFrame = function () {
   frame.set("border", { color: "#000", size: 0 });
   frame.set("corner", { type: "cut", size: 0 });
 
-  frame.childLayoutParams.set("gravity", {
+  frame.childLayoutParams.set("align", {
     horizontal: "left",
     vertical: "top",
   });

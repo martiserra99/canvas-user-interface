@@ -6,6 +6,6 @@ export const onUpdateElement = function (composite, inner, element) {
   const image = element.find("image");
   image.set("size", composite.get("imageSize"));
   image.set("src", composite.get("imageSrc"));
-  image.layoutParams.set("gravity", composite.get("align"));
+  image.layoutParams.set("align", composite.get("align"));
   image.layoutParams.set("margin", composite.get("margin"));
 };

@@ -20,7 +20,7 @@ export const newLayoutGrid = function () {
     rows: [{ count: 1, unit: "fr", length: 1 }],
   });
   grid.set("gap", { vertical: 0, horizontal: 0 });
-  grid.set("gravityContent", { vertical: "middle", horizontal: "middle" });
+  grid.set("alignContent", { vertical: "middle", horizontal: "middle" });
   grid.set("alignItems", { vertical: "middle", horizontal: "middle" });
   grid.set("background", "rgba(0,0,0,0)");
   grid.set("border", { color: "#000", size: 0 });

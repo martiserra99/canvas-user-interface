@@ -16,7 +16,7 @@ export const newLayoutLinear = function () {
     height: { unit: "%", value: 100 },
   });
   linear.set("direction", "horizontal");
-  linear.set("gravityContent", "middle");
+  linear.set("alignContent", "middle");
   linear.set("alignItems", "middle");
   linear.set("gap", 0);
   linear.set("background", "rgba(0,0,0,0)");

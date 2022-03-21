@@ -25,7 +25,7 @@ const getContentX = function (layout, inner) {
 
   const length = inner.get("contentSize").width;
 
-  const align = layout.get("gravityContent").horizontal;
+  const align = layout.get("alignContent").horizontal;
 
   if (align === "left") return locate.alignStart(coords, length);
   else if (align === "middle") return locate.alignMiddle(coords, length);
@@ -39,7 +39,7 @@ const getContentY = function (layout, inner) {
 
   const length = inner.get("contentSize").height;
 
-  const align = layout.get("gravityContent").vertical;
+  const align = layout.get("alignContent").vertical;
 
   if (align === "top") return locate.alignStart(coords, length);
   else if (align === "middle") return locate.alignMiddle(coords, length);

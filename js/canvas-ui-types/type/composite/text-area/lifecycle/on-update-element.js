@@ -7,6 +7,6 @@ export const onUpdateElement = function (composite, inner, element) {
   text.set("text", composite.get("text"));
   text.set("font", composite.get("font"));
   text.set("align", composite.get("align"));
-  text.layoutParams.set("gravity", composite.get("align"));
+  text.layoutParams.set("align", composite.get("align"));
   text.layoutParams.set("margin", composite.get("margin"));
 };

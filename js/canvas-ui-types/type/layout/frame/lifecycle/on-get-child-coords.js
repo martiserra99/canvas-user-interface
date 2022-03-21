@@ -20,7 +20,7 @@ const getChildX = function (inner, child) {
   const marginEnd = child.layoutParams.get("margin").right;
   const margin = { start: marginStart, end: marginEnd };
 
-  const align = child.layoutParams.get("gravity").horizontal;
+  const align = child.layoutParams.get("align").horizontal;
 
   if (align === "left") return locate.alignStart(coords, length, margin);
   else if (align === "middle")
@@ -39,7 +39,7 @@ const getChildY = function (inner, child) {
   const marginEnd = child.layoutParams.get("margin").bottom;
   const margin = { start: marginStart, end: marginEnd };
 
-  const align = child.layoutParams.get("gravity").vertical;
+  const align = child.layoutParams.get("align").vertical;
 
   if (align === "top") return locate.alignStart(coords, length, margin);
   else if (align === "middle")
