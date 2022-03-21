@@ -1,24 +1,3 @@
-export const addMouseDownAnywhereEvent = function (type, config) {
-  type.events.set("mousedown-anywhere", function (element, signal, state) {
-    if (signal.type !== "mousedown") return { check: false };
-    return { check: true, event: config.getMouseEvent(element, signal, state) };
-  });
-};
-
-export const addMouseUpAnywhereEvent = function (type, config) {
-  type.events.set("mouseup-anywhere", function (element, signal, state) {
-    if (signal.type !== "mouseup") return { check: false };
-    return { check: true, event: config.getMouseEvent(element, signal, state) };
-  });
-};
-
-export const addMouseMoveAnywhereEvent = function (type, config) {
-  type.events.set("mousemove-anywhere", function (element, signal, state) {
-    if (signal.type !== "mousemove") return { check: false };
-    return { check: true, event: config.getMouseEvent(element, signal, state) };
-  });
-};
-
 export const addKeyDownEvent = function (type, config) {
   type.events.set("keydown", function (element, signal, state) {
     if (signal.type !== "keydown") return { check: false };
@@ -109,9 +88,6 @@ export const addClickEvent = function (type, config) {
 };
 
 export const addMouseEvents = function (type, config) {
-  addMouseDownAnywhereEvent(type, config);
-  addMouseUpAnywhereEvent(type, config);
-  addMouseMoveAnywhereEvent(type, config);
   addMouseDownEvent(type, config);
   addMouseUpEvent(type, config);
   addMouseMoveEvent(type, config);
