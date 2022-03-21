@@ -1,8 +1,7 @@
 import { canvasUI } from "../../../../canvas-ui/canvas-ui.js";
 
-import * as compute from "../../../utils/compute.js";
-import * as draw from "../../../utils/draw.js";
-import * as event from "../../../utils/event.js";
+import { measure } from "../../../utils/measure.js";
+import { draw } from "../../../utils/draw.js";
 
 export const newViewImage = function () {
   const image = canvasUI.view.newType("image");
@@ -20,17 +19,10 @@ export const newViewImage = function () {
   });
 
   image.lifecycle.set("onGetSize", function (view, inner, maxSize) {
-    return compute.computeSize(view.get("size"), maxSize);
+    return measure.size(view.get("size"), maxSize);
   });
 
   image.lifecycle.set("onDrawItself", function (view, inner, ctx) {
-    draw.drawImage(ctx, view.coords, view.size, inner.get("img"));
-  });
-
-  event.addAllEvents(image, {
-    areCoordsInElement: (element, coords) =>
-      event.areCoordsInRectangle(element, coords),
-    getMouseEvent: (element, signal, state) => signal.data,
-    getKeyEvent: (element, signal, state) => signal.data,
+    draw.image(ctx, view.coords, view.size, inner.get("img"));
   });
 };

@@ -1,4 +1,4 @@
-import * as compute from "../../../../utils/compute.js";
+import { locate } from "../../../../utils/locate.js";
 
 export const onLocate = function (layout, inner, coords) {
   inner.set("coordsNoBorder", getCoordsNoBorder(layout, coords));
@@ -19,37 +19,31 @@ const getContentCoords = (layout, inner) => ({
 });
 
 const getContentX = function (layout, inner) {
-  const horizontal = layout.get("gravityContent").horizontal;
-  let align = "start";
-  if (horizontal === "middle") align = "middle";
-  else if (horizontal === "right") align = "end";
-
   const startCoord = inner.get("coordsNoBorder").x;
   const endCoord = startCoord + inner.get("sizeNoBorder").width;
   const coords = { start: startCoord, end: endCoord };
 
   const length = inner.get("contentSize").width;
 
-  const margin = { start: 0, end: 0 };
+  const align = layout.get("gravityContent").horizontal;
 
-  return compute.computeCoordToAlign(align, coords, length, margin);
+  if (align === "left") return locate.alignStart(coords, length);
+  else if (align === "middle") return locate.alignMiddle(coords, length);
+  else return locate.alignEnd(coords, length);
 };
 
 const getContentY = function (layout, inner) {
-  const vertical = layout.get("gravityContent").vertical;
-  let align = "start";
-  if (vertical === "middle") align = "middle";
-  else if (vertical === "bottom") align = "end";
-
   const startCoord = inner.get("coordsNoBorder").y;
   const endCoord = startCoord + inner.get("sizeNoBorder").height;
   const coords = { start: startCoord, end: endCoord };
 
   const length = inner.get("contentSize").height;
 
-  const margin = { start: 0, end: 0 };
+  const align = layout.get("gravityContent").vertical;
 
-  return compute.computeCoordToAlign(align, coords, length, margin);
+  if (align === "top") return locate.alignStart(coords, length);
+  else if (align === "middle") return locate.alignMiddle(coords, length);
+  else return locate.alignEnd(coords, length);
 };
 
 const getColumnCoords = (layout, inner) =>

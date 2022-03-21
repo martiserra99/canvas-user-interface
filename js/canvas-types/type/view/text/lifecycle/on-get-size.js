@@ -1,5 +1,5 @@
-import * as compute from "../../../../utils/compute.js";
+import { measure } from "../../../../utils/measure.js";
 
 export const onGetSize = function (view, inner, maxSize) {
-  return compute.computeSize(inner.get("textSize"), maxSize);
+  return measure.size(inner.get("textSize"), maxSize);
 };

@@ -3,8 +3,6 @@ import { canvasUI } from "../../../../canvas-ui/canvas-ui.js";
 import { onGetElement } from "./lifecycle/on-get-element.js";
 import { onUpdateElement } from "./lifecycle/on-update-element.js";
 
-import * as event from "../../../utils/event.js";
-
 export const newCompositeImageArea = function () {
   const imageArea = canvasUI.composite.newType("image-area");
 
@@ -35,11 +33,4 @@ export const newCompositeImageArea = function () {
       onUpdateElement(composite, inner, element);
     }
   );
-
-  event.addAllEvents(imageArea, {
-    areCoordsInElement: (element, coords) =>
-      event.areCoordsInArea(element, coords),
-    getMouseEvent: (element, signal, state) => signal.data,
-    getKeyEvent: (element, signal, state) => signal.data,
-  });
 };

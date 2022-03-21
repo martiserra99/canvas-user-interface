@@ -1,4 +1,4 @@
-import * as compute from "../../../../utils/compute.js";
+import { measure } from "../../../../utils/measure.js";
 
 export const onGetSize = function (layout, inner, maxSize) {
   inner.set("size", getSize(layout, inner, maxSize));
@@ -12,7 +12,7 @@ const getSize = function (layout, inner, maxSize) {
     height: () =>
       childsMaxExtendedHeight(layout) + layout.get("border").size * 2,
   };
-  return compute.computeSize(inner.get("desiredSize"), maxSize, computeSize);
+  return measure.size(inner.get("desiredSize"), maxSize, computeSize);
 };
 
 const childsMaxExtendedWidth = function (layout) {

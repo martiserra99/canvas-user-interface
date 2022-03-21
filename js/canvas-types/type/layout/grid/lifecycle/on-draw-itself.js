@@ -1,4 +1,4 @@
-import * as draw from "../../../../utils/draw.js";
+import { draw } from "../../../../utils/draw.js";
 
 export const onDrawItself = function (layout, inner, ctx) {
   const coords = layout.coords;
@@ -6,5 +6,5 @@ export const onDrawItself = function (layout, inner, ctx) {
   const background = layout.get("background");
   const border = layout.get("border");
   const corner = layout.get("corner");
-  draw.drawArea(ctx, coords, size, background, border, corner);
+  draw.area(ctx, coords, size, background, border, corner);
 };

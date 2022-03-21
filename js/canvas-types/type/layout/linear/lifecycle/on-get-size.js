@@ -1,4 +1,4 @@
-import * as compute from "../../../../utils/compute.js";
+import { measure } from "../../../../utils/measure.js";
 
 export const onGetSize = function (layout, inner, maxSize) {
   inner.set("contentSize", getContentSize(layout, inner));
@@ -66,7 +66,7 @@ const getSize = function (layout, inner, maxSize) {
     height: () =>
       inner.get("contentSize").height + layout.get("border").size * 2,
   };
-  return compute.computeSize(inner.get("desiredSize"), maxSize, computeSize);
+  return measure.size(inner.get("desiredSize"), maxSize, computeSize);
 };
 
 const getSizeNoBorder = (layout, inner) => ({

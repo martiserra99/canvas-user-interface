@@ -1,4 +1,4 @@
-import * as compute from "../../../../utils/compute.js";
+import { measure } from "../../../../utils/measure.js";
 
 export const onMeasure = function (layout, inner, maxSize) {
   inner.set("desiredSize", getDesiredSize(layout, maxSize));
@@ -7,10 +7,10 @@ export const onMeasure = function (layout, inner, maxSize) {
 };
 
 const getDesiredSize = (layout, maxSize) =>
-  compute.computeDesiredSize(layout.get("size"), maxSize);
+  measure.desiredSize(layout.get("size"), maxSize);
 
 const getAvailableSize = (inner, maxSize) =>
-  compute.computeAvailableSize(inner.get("desiredSize"), maxSize);
+  measure.availableSize(inner.get("desiredSize"), maxSize);
 
 const getAvailableSizeNoBorder = (layout, inner) => ({
   width: inner.get("availableSize").width - layout.get("border").size * 2,

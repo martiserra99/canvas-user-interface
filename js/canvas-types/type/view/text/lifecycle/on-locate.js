@@ -1,4 +1,4 @@
-import * as compute from "../../../../utils/compute.js";
+import { locate } from "../../../../utils/locate.js";
 
 export const onLocate = function (view, inner, coords) {
   inner.set("textCoords", getTextCoords(view, inner, coords));
@@ -10,31 +10,31 @@ const getTextCoords = (view, inner, coords) => ({
 });
 
 const getTextX = function (view, inner, coords) {
-  const horizontal = view.get("align").horizontal;
-  let textAlign = "start";
-  if (horizontal === "middle") textAlign = "middle";
-  else if (horizontal === "right") textAlign = "end";
-
   const startCoord = coords.x;
   const endCoord = startCoord + view.size.width;
   const textCoords = { start: startCoord, end: endCoord };
 
   const textLength = inner.get("textSize").width;
 
-  return compute.computeCoordToAlign(textAlign, textCoords, textLength);
+  const align = view.get("align").horizontal;
+
+  if (align === "left") return locate.alignStart(textCoords, textLength);
+  else if (align === "middle")
+    return locate.alignMiddle(textCoords, textLength);
+  else return locate.alignEnd(textCoords, textLength);
 };
 
 const getTextY = function (view, inner, coords) {
-  const vertical = view.get("align").vertical;
-  let textAlign = "start";
-  if (vertical === "middle") textAlign = "middle";
-  else if (vertical === "bottom") textAlign = "end";
-
   const startCoord = coords.y;
   const endCoord = startCoord + view.size.height;
   const textCoords = { start: startCoord, end: endCoord };
 
   const textLength = inner.get("textSize").height;
 
-  return compute.computeCoordToAlign(textAlign, textCoords, textLength);
+  const align = view.get("align").vertical;
+
+  if (align === "top") return locate.alignStart(textCoords, textLength);
+  else if (align === "middle")
+    return locate.alignMiddle(textCoords, textLength);
+  else return locate.alignEnd(textCoords, textLength);
 };

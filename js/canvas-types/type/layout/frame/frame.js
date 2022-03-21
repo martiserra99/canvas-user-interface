@@ -8,8 +8,6 @@ import { onGetChildCoords } from "./lifecycle/on-get-child-coords.js";
 import { onDrawItself } from "./lifecycle/on-draw-itself.js";
 import { onSortChildsToDraw } from "./lifecycle/on-sort-childs-to-draw.js";
 
-import * as event from "../../../utils/event.js";
-
 export const newLayoutFrame = function () {
   const frame = canvasUI.layout.newType("frame");
 
@@ -65,12 +63,5 @@ export const newLayoutFrame = function () {
 
   frame.lifecycle.set("onSortChildsToDraw", function (layout, inner) {
     return onSortChildsToDraw(layout, inner);
-  });
-
-  event.addAllEvents(frame, {
-    areCoordsInElement: (element, coords) =>
-      event.areCoordsInArea(element, coords),
-    getMouseEvent: (element, signal, state) => signal.data,
-    getKeyEvent: (element, signal, state) => signal.data,
   });
 };

@@ -1,7 +1,7 @@
-import * as draw from "../../../../utils/draw.js";
+import { draw } from "../../../../utils/draw.js";
 
 export const onDrawItself = function (view, inner, ctx) {
-  draw.drawText(
+  draw.text(
     ctx,
     view.coords,
     view.size,

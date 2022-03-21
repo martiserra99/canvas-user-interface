@@ -1,4 +1,4 @@
-import * as compute from "../../../../utils/compute.js";
+import { measure } from "../../../../utils/measure.js";
 
 export const onGetSize = function (layout, inner, maxSize) {
   inner.set("size", getSize(inner, maxSize));
@@ -7,7 +7,7 @@ export const onGetSize = function (layout, inner, maxSize) {
 };
 
 const getSize = (inner, maxSize) =>
-  compute.computeSize(inner.get("desiredSize"), maxSize, {
+  measure.size(inner.get("desiredSize"), maxSize, {
     width: () => inner.get("contentSize").width,
     height: () => inner.get("contentSize").height,
   });

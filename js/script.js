@@ -2,37 +2,19 @@ import { canvasUI } from "./canvas-ui/canvas-ui.js";
 
 const ui = canvasUI.ui.new("#ui");
 
-const root = canvasUI.layout.new("root", "frame");
+const root = canvasUI.layout.new("root", "grid");
 
-const sudoku = canvasUI.composite.new("sudoku", "sudoku");
-
-sudoku.set("size", 450);
-sudoku.get("text").size = 30;
-
-root.insert(sudoku);
-
-sudoku.layoutParams.set("gravity", {
-  horizontal: "middle",
-  vertical: "middle",
+root.set("dimensions", {
+  columns: [{ count: 2, unit: "px", length: 200 }],
+  rows: [{ count: 2, unit: "px", length: 200 }],
 });
+
+const text1 = canvasUI.view.new("text-1", "text");
+const text2 = canvasUI.view.new("text-2", "text");
+
+root.insert(text1);
+root.insert(text2);
+
+text1.layoutParams.set("position", { row: 1, column: 1 });
 
 ui.start(root);
-
-root.listeners.add("click", function (root, event) {
-  sudoku.call("unselectPosition");
-});
-
-sudoku.listeners.add("click", function (sudoku, event) {
-  const cell = event.cell;
-  sudoku.call("selectPosition", cell);
-});
-
-sudoku.listeners.add("number-pressed", function (sudoku, event) {
-  const selected = sudoku.call("getSelectedPosition");
-  sudoku.call("setNumber", selected, event.num, true);
-});
-
-sudoku.listeners.add("backspace-pressed", function (sudoku, event) {
-  const selected = sudoku.call("getSelectedPosition");
-  sudoku.call("delNumber", selected);
-});
