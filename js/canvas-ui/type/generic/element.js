@@ -1,4 +1,3 @@
-import { fromMapToIterator } from "../../utils/utils.js";
 import { Events } from "./events.js";
 
 export class ElementType {
@@ -39,7 +38,7 @@ export class ElementLifecycle {
   }
 
   [Symbol.iterator]() {
-    return fromMapToIterator(this._lifecycle);
+    return this._lifecycle[Symbol.iterator]();
   }
 
   set(name, value) {

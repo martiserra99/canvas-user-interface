@@ -1,5 +1,4 @@
 import { ElementType, ElementLifecycle } from "../generic/element.js";
-import { fromMapToIterator } from "../../utils/utils.js";
 
 export class LayoutType extends ElementType {
   constructor(data) {
@@ -31,7 +30,7 @@ class ChildLayoutParams {
   }
 
   [Symbol.iterator]() {
-    return fromMapToIterator(this._childLayoutParams);
+    return this._childLayoutParams[Symbol.iterator]();
   }
 
   set(name, value) {

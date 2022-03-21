@@ -1,8 +1,4 @@
-import {
-  clone,
-  fromMapToIterator,
-  removeFromArray,
-} from "../../utils/utils.js";
+import { clone, removeFromArray } from "../../utils/utils.js";
 
 export class Element {
   constructor(id, element, type) {
@@ -158,7 +154,7 @@ class Events {
   }
 
   [Symbol.iterator]() {
-    return fromMapToIterator(this._events);
+    return this._events[Symbol.iterator]();
   }
 
   get(name) {
