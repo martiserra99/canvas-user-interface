@@ -44,14 +44,9 @@ const addChildsPositionDefined = function (
       position: child.layoutParams.get("position"),
       span: child.layoutParams.get("span"),
     };
-    const canAdd = canAddChild(
-      numColumns,
-      numRows,
-      childPositions,
-      childPosition
-    );
-    if (canAdd) childPositions.set(child, childPosition);
-    else childPositions.set(child, null);
+    const isValid = isPositionValid(numColumns, numRows, childPosition);
+    if (isValid) childPositions.set(child, childPosition);
+    else childPositions.set(child, getDefaultPosition(numRows, numColumns));
   }
 };
 
@@ -72,14 +67,14 @@ const addChildsPositionAuto = function (
         const position = { column, row };
         const childPosition = { position, span };
 
-        const canAdd = canAddChild(
+        const isEmpty = isPositionEmpty(
           numColumns,
           numRows,
           childPositions,
           childPosition
         );
 
-        if (canAdd) {
+        if (isEmpty) {
           childPositions.set(child, childPosition);
           added = true;
         }
@@ -88,26 +83,32 @@ const addChildsPositionAuto = function (
       row++;
     }
 
-    if (!added) childPositions.set(child, null);
+    if (!added)
+      childPositions.set(child, getDefaultPosition(numRows, numColumns));
   }
 };
 
-const canAddChild = function (
+const isPositionEmpty = function (
   numColumns,
   numRows,
   childPositions,
-  newChildPosition
+  position
 ) {
-  const newChildEdges = getChildEdges(newChildPosition);
-  if (!areChildEdgesValid(numColumns, numRows, newChildEdges)) return false;
+  const edges = getEdges(position);
+  if (!areEdgesValid(numColumns, numRows, edges)) return false;
   return [...childPositions.values()].every((childPosition) => {
     if (childPosition === null) return true;
-    const childEdges = getChildEdges(childPosition);
-    return !areChildEdgesColliding(childEdges, newChildEdges);
+    const childEdges = getEdges(childPosition);
+    return !areEdgesColliding(childEdges, edges);
   });
 };
 
-const getChildEdges = function (childPosition) {
+const isPositionValid = function (numColumns, numRows, position) {
+  const edges = getEdges(position);
+  return areEdgesValid(numColumns, numRows, edges);
+};
+
+const getEdges = function (childPosition) {
   const { position, span } = childPosition;
   const left = position.column;
   const right = position.column + span.columns - 1;
@@ -116,14 +117,24 @@ const getChildEdges = function (childPosition) {
   return { left, right, top, bottom };
 };
 
-const areChildEdgesValid = (numColumns, numRows, childEdges) =>
+const areEdgesValid = (numColumns, numRows, childEdges) =>
   childEdges.left >= 0 &&
   childEdges.top >= 0 &&
   childEdges.right < numColumns &&
   childEdges.bottom < numRows;
 
-const areChildEdgesColliding = (firstChildEdges, secondChildEdges) =>
+const areEdgesColliding = (firstChildEdges, secondChildEdges) =>
   firstChildEdges.right >= secondChildEdges.left &&
   firstChildEdges.left <= secondChildEdges.right &&
   firstChildEdges.bottom >= secondChildEdges.top &&
   firstChildEdges.top <= secondChildEdges.bottom;
+
+const getDefaultPosition = function (numRows, numColumns) {
+  const position = {
+    position: { row: 0, column: 0 },
+    span: { rows: 1, columns: 1 },
+  };
+  const valid = isPositionValid(numRows, numColumns, position);
+  if (valid) return position;
+  return null;
+};
