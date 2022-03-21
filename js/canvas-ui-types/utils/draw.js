@@ -94,6 +94,15 @@ export const draw = {
     else ctx.lineTo(end.x, end.y);
   },
 
+  rectangle(ctx, coords, size, background) {
+    const { x, y } = coords;
+    const { width, height } = size;
+    ctx.save();
+    ctx.fillStyle = background;
+    ctx.fillRect(x, y, width, height);
+    ctx.restore();
+  },
+
   text(ctx, clipCoords, clipSize, textCoords, text, font) {
     ctx.save();
     ctx.beginPath();

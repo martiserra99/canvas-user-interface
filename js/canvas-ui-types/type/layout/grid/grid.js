@@ -23,6 +23,7 @@ export const newLayoutGrid = function () {
   grid.set("alignContent", { vertical: "middle", horizontal: "middle" });
   grid.set("alignItems", { vertical: "middle", horizontal: "middle" });
   grid.set("background", "rgba(0,0,0,0)");
+  grid.set("gapColor", "rgba(0,0,0,0)");
   grid.set("border", { color: "#000", size: 0 });
   grid.set("corner", { type: "cut", size: 0 });
 

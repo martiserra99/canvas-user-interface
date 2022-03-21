@@ -9,6 +9,10 @@ root.set("dimensions", {
   rows: [{ count: 2, unit: "px", length: 200 }],
 });
 
+root.set("gap", { horizontal: 50, vertical: 20 });
+
+root.set("gapColor", "#000");
+
 const text1 = canvasUI.view.new("text-1", "text");
 const text2 = canvasUI.view.new("text-2", "text");
 
