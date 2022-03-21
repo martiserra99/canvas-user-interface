@@ -34,4 +34,7 @@ text1.listeners.add("click", function (element, data) {
   console.log(element, data);
 });
 
+text5.get("font").color = "#ffff";
+text5.layoutParams.set("z-index", -1);
+
 ui.start(root);

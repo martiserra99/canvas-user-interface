@@ -7,6 +7,7 @@ import { onGetSize } from "./lifecycle/on-get-size.js";
 import { onLocate } from "./lifecycle/on-locate.js";
 import { onGetChildCoords } from "./lifecycle/on-get-child-coords.js";
 import { onDrawItself } from "./lifecycle/on-draw-itself.js";
+import { onSortChildsToDraw } from "./lifecycle/on-sort-childs-to-draw.js";
 
 export const newLayoutGrid = function () {
   const grid = canvasUI.layout.newType("grid");
@@ -33,6 +34,7 @@ export const newLayoutGrid = function () {
     vertical: "auto",
     horizontal: "auto",
   });
+  grid.childLayoutParams.set("z-index", 0);
   grid.childLayoutParams.set("margin", {
     top: 0,
     right: 0,
@@ -72,5 +74,9 @@ export const newLayoutGrid = function () {
 
   grid.lifecycle.set("onDrawItself", function (layout, inner, ctx) {
     onDrawItself(layout, inner, ctx);
+  });
+
+  grid.lifecycle.set("onSortChildsToDraw", function (layout, inner) {
+    return onSortChildsToDraw(layout, inner);
   });
 };
