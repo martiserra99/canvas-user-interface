@@ -6,32 +6,32 @@ export class Composite extends Element {
     this._element = this._lifecycle.get("onGetElement")();
   }
 
-  onStart() {
-    super.onStart();
+  start() {
+    super.start();
     this._lifecycle.get("onUpdateElement")(this._element);
-    this._element.onStart();
+    this._element.start();
   }
 
-  onMeasure(maxSize) {
-    super.onMeasure(maxSize);
-    this._element.onMeasure(maxSize);
+  measure(maxSize) {
+    super.measure(maxSize);
+    this._element.measure(maxSize);
     this.size = this._element.size;
   }
 
-  onLocate(coords) {
-    super.onLocate(coords);
-    this._element.onLocate(coords);
+  locate(coords) {
+    super.locate(coords);
+    this._element.locate(coords);
     this.coords = coords;
   }
 
-  onDraw(ctx) {
-    super.onDraw(ctx);
-    this._element.onDraw(ctx);
+  draw(ctx) {
+    super.draw(ctx);
+    this._element.draw(ctx);
   }
 
-  onEnd() {
-    super.onEnd();
-    this._element.onEnd();
+  end() {
+    super.end();
+    this._element.end();
   }
 
   signal(signal) {

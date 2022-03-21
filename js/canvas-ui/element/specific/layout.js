@@ -13,13 +13,13 @@ export class Layout extends Element {
       this.childLayoutParams.set(key, value);
   }
 
-  onStart() {
-    super.onStart();
-    for (const child of this.childs) child.onStart();
+  start() {
+    super.start();
+    for (const child of this.childs) child.start();
   }
 
-  onMeasure(maxSize) {
-    super.onMeasure(maxSize);
+  measure(maxSize) {
+    super.measure(maxSize);
     this._setChildsSizes(maxSize);
     this._setSize(maxSize);
   }
@@ -33,7 +33,7 @@ export class Layout extends Element {
         child,
         childsWithSizes
       );
-      child.onMeasure(childMaxSize);
+      child.measure(childMaxSize);
       childsWithSizes.push(child);
     }
   }
@@ -54,8 +54,8 @@ export class Layout extends Element {
     this.size = this._lifecycle.get("onGetSize")(maxSize);
   }
 
-  onLocate(coords) {
-    super.onLocate(coords);
+  locate(coords) {
+    super.locate(coords);
     this._setChildsCoords(coords);
     this._setCoords(coords);
   }
@@ -65,7 +65,7 @@ export class Layout extends Element {
     const childsWithCoords = [];
     for (const child of childs) {
       const childCoords = this._getChildCoords(coords, child, childsWithCoords);
-      child.onLocate(childCoords);
+      child.locate(childCoords);
       childsWithCoords.push(child);
     }
   }
@@ -86,8 +86,8 @@ export class Layout extends Element {
     this.coords = coords;
   }
 
-  onDraw(ctx) {
-    super.onDraw(ctx);
+  draw(ctx) {
+    super.draw(ctx);
     this._drawItself(ctx);
     this._drawChilds(ctx);
   }
@@ -98,16 +98,16 @@ export class Layout extends Element {
 
   _drawChilds(ctx) {
     const childs = this._sortChildsToDraw(ctx);
-    for (const child of childs) child.onDraw(ctx);
+    for (const child of childs) child.draw(ctx);
   }
 
   _sortChildsToDraw(ctx) {
     return this._lifecycle.get("onSortChildsToDraw")(ctx);
   }
 
-  onEnd() {
-    super.onEnd();
-    for (const child of this.childs) child.onEnd();
+  end() {
+    super.end();
+    for (const child of this.childs) child.end();
   }
 
   signal(signal) {

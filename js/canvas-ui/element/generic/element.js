@@ -89,23 +89,23 @@ export class Element {
     this.coords = { x: 0, y: 0 };
   }
 
-  onStart() {
+  start() {
     this._lifecycle.get("onStart")();
   }
 
-  onMeasure(maxSize) {
+  measure(maxSize) {
     this._lifecycle.get("onMeasure")(maxSize);
   }
 
-  onLocate(coords) {
+  locate(coords) {
     this._lifecycle.get("onLocate")(coords);
   }
 
-  onDraw(ctx) {
+  draw(ctx) {
     this._lifecycle.get("onDraw")(ctx);
   }
 
-  onEnd() {
+  end() {
     this._lifecycle.get("onEnd")();
   }
 

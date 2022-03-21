@@ -5,8 +5,8 @@ export class View extends Element {
     super(id, "view", type);
   }
 
-  onMeasure(maxSize) {
-    super.onMeasure(maxSize);
+  measure(maxSize) {
+    super.measure(maxSize);
     this._setSize(maxSize);
   }
 
@@ -14,8 +14,8 @@ export class View extends Element {
     this.size = this._lifecycle.get("onGetSize")(maxSize);
   }
 
-  onLocate(coords) {
-    super.onLocate(coords);
+  locate(coords) {
+    super.locate(coords);
     this._setCoords(coords);
   }
 
@@ -23,8 +23,8 @@ export class View extends Element {
     this.coords = coords;
   }
 
-  onDraw(ctx) {
-    super.onDraw(ctx);
+  draw(ctx) {
+    super.draw(ctx);
     this._drawItself(ctx);
   }
 
