@@ -37,16 +37,16 @@ const getRowHeights = function (layout, inner) {
 
 const getPositionLengths = function (positions, available, gap) {
   const lengths = [];
-  const [lengthsPx, lengthsFr] = getPositionsSplittedByUnit(positions);
-  const sumLengthsPx = addPositionLengthsPx(lengths, lengthsPx, available, gap);
+  const [lengthsPx, lengthsFr] = splitPositionsByUnitType(positions);
+  const sumLengthsPx = addPositionPxLengths(lengths, lengthsPx, available, gap);
   let remaining = available - sumLengthsPx;
   if (lengths.length > 0) remaining -= gap * lengthsPx.length;
   if (remaining < 0) remaining = 0;
-  addPositionLengthsFr(lengths, lengthsFr, remaining, gap);
+  addPositionFrLengths(lengths, lengthsFr, remaining, gap);
   return lengths;
 };
 
-const getPositionsSplittedByUnit = function (positions) {
+const splitPositionsByUnitType = function (positions) {
   const lengthsPx = [],
     lengthsFr = [];
   let index = 0;
@@ -60,7 +60,7 @@ const getPositionsSplittedByUnit = function (positions) {
   return [lengthsPx, lengthsFr];
 };
 
-const addPositionLengthsPx = function (lengths, lengthsPx, available, gap) {
+const addPositionPxLengths = function (lengths, lengthsPx, available, gap) {
   if (lengthsPx.length === 0) return 0;
   let sumPx = 0;
   for (const [index, value] of lengthsPx) {
@@ -74,7 +74,7 @@ const addPositionLengthsPx = function (lengths, lengthsPx, available, gap) {
   return sumPx;
 };
 
-const addPositionLengthsFr = function (lengths, lengthsFr, available, gap) {
+const addPositionFrLengths = function (lengths, lengthsFr, available, gap) {
   if (lengthsFr.length === 0) return;
   const sumFr = lengthsFr.reduce((acc, [_, val]) => acc + val, 0);
   const sumLengths = available - gap * (lengthsFr.length - 1);

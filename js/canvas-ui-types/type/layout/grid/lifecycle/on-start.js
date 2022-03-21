@@ -16,24 +16,24 @@ const getChildPositions = function (layout, inner) {
   const positions = new Map();
   const numColumns = inner.get("numColumns");
   const numRows = inner.get("numRows");
-  const [defined, auto] = getChildsSplittedByPosition(layout.childs);
-  addChildsPositionDefined(numColumns, numRows, positions, defined);
-  addChildsPositionAuto(numColumns, numRows, positions, auto);
+  const [defined, auto] = splitChildsByPositionType(layout.childs);
+  addChildsWithDefinedPosition(numColumns, numRows, positions, defined);
+  addChildsWithAutoPosition(numColumns, numRows, positions, auto);
   return positions;
 };
 
-const getChildsSplittedByPosition = function (childs) {
-  const positionDefined = [];
-  const positionAuto = [];
+const splitChildsByPositionType = function (childs) {
+  const defined = [];
+  const auto = [];
   for (const child of childs) {
     const position = child.layoutParams.get("position");
-    if (position !== "auto") positionDefined.push(child);
-    else positionAuto.push(child);
+    if (position !== "auto") defined.push(child);
+    else auto.push(child);
   }
-  return [positionDefined, positionAuto];
+  return [defined, auto];
 };
 
-const addChildsPositionDefined = function (
+const addChildsWithDefinedPosition = function (
   numColumns,
   numRows,
   childPositions,
@@ -50,7 +50,7 @@ const addChildsPositionDefined = function (
   }
 };
 
-const addChildsPositionAuto = function (
+const addChildsWithAutoPosition = function (
   numColumns,
   numRows,
   childPositions,
@@ -94,21 +94,21 @@ const isPositionEmpty = function (
   childPositions,
   position
 ) {
-  const edges = getEdges(position);
-  if (!areEdgesValid(numColumns, numRows, edges)) return false;
+  const edges = getPositionEdges(position);
+  if (!arePositionEdgesValid(numColumns, numRows, edges)) return false;
   return [...childPositions.values()].every((childPosition) => {
     if (childPosition === null) return true;
-    const childEdges = getEdges(childPosition);
-    return !areEdgesColliding(childEdges, edges);
+    const childEdges = getPositionEdges(childPosition);
+    return !arePositionEdgesColliding(childEdges, edges);
   });
 };
 
 const isPositionValid = function (numColumns, numRows, position) {
-  const edges = getEdges(position);
-  return areEdgesValid(numColumns, numRows, edges);
+  const edges = getPositionEdges(position);
+  return arePositionEdgesValid(numColumns, numRows, edges);
 };
 
-const getEdges = function (childPosition) {
+const getPositionEdges = function (childPosition) {
   const { position, span } = childPosition;
   const left = position.column;
   const right = position.column + span.columns - 1;
@@ -117,13 +117,13 @@ const getEdges = function (childPosition) {
   return { left, right, top, bottom };
 };
 
-const areEdgesValid = (numColumns, numRows, childEdges) =>
+const arePositionEdgesValid = (numColumns, numRows, childEdges) =>
   childEdges.left >= 0 &&
   childEdges.top >= 0 &&
   childEdges.right < numColumns &&
   childEdges.bottom < numRows;
 
-const areEdgesColliding = (firstChildEdges, secondChildEdges) =>
+const arePositionEdgesColliding = (firstChildEdges, secondChildEdges) =>
   firstChildEdges.right >= secondChildEdges.left &&
   firstChildEdges.left <= secondChildEdges.right &&
   firstChildEdges.bottom >= secondChildEdges.top &&
