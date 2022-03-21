@@ -4,7 +4,7 @@ import { onGetElement } from "./lifecycle/on-get-element.js";
 import { onUpdateElement } from "./lifecycle/on-update-element.js";
 
 export const newCompositeImageArea = function () {
-  const imageArea = canvasUI.composite.newType("image-area");
+  const imageArea = canvasUI.composite.newType("imageArea");
 
   imageArea.set("size", { width: "auto", height: "auto" });
   imageArea.set("background", "rgba(0,0,0,0)");

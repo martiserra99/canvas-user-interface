@@ -25,7 +25,7 @@ export const newLayoutRelative = function () {
     left: null,
   });
   relative.childLayoutParams.set("bias", { vertical: 50, horizontal: 50 });
-  relative.childLayoutParams.set("z-index", 0);
+  relative.childLayoutParams.set("zIndex", 0);
   relative.childLayoutParams.set("margin", {
     top: 0,
     right: 0,

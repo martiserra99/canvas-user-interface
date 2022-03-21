@@ -4,7 +4,7 @@ import { onGetElement } from "./lifecycle/on-get-element.js";
 import { onUpdateElement } from "./lifecycle/on-update-element.js";
 
 export const newCompositeTextArea = function () {
-  const textArea = canvasUI.composite.newType("text-area");
+  const textArea = canvasUI.composite.newType("textArea");
 
   textArea.set("size", { width: "auto", height: "auto" });
   textArea.set("background", "rgba(0,0,0,0)");

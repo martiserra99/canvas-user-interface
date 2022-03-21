@@ -34,7 +34,7 @@ export const newLayoutGrid = function () {
     vertical: "auto",
     horizontal: "auto",
   });
-  grid.childLayoutParams.set("z-index", 0);
+  grid.childLayoutParams.set("zIndex", 0);
   grid.childLayoutParams.set("margin", {
     top: 0,
     right: 0,
