@@ -1,4 +1,5 @@
 import { fromMapToIterator } from "../../utils/utils.js";
+import { Events } from "./events.js";
 
 export class ElementType {
   constructor(name) {
@@ -44,23 +45,5 @@ export class ElementLifecycle {
   set(name, value) {
     if (!this._lifecycle.has(name)) return;
     this._lifecycle.set(name, value);
-  }
-}
-
-class Events {
-  constructor() {
-    this._events = new Map();
-  }
-
-  [Symbol.iterator]() {
-    return fromMapToIterator(this._events);
-  }
-
-  set(name, onCheck) {
-    this._events.set(name, { onCheck, callbacks: [] });
-  }
-
-  get(name) {
-    return this._events.get(name);
   }
 }
