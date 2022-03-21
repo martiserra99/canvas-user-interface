@@ -17,8 +17,8 @@ root.insert(text2);
 
 text1.layoutParams.set("position", { row: 1, column: 1 });
 
-text1.listeners.add("click", function (element, event) {
-  console.log(element, event);
+text1.listeners.add("click", function (element, data) {
+  console.log(element, data);
 });
 
 ui.start(root);

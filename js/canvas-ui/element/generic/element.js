@@ -111,9 +111,9 @@ export class Element {
 
   signal(signal) {
     for (const [_, { onCheck, state, callbacks }] of this.events) {
-      const { check, event } = onCheck(this, signal, state);
+      const { check, data } = onCheck(this, signal, state);
       if (!check) continue;
-      for (const callback of callbacks) callback(this, event);
+      for (const callback of callbacks) callback(this, data);
     }
   }
 }
