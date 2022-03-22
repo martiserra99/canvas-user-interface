@@ -1,6 +1,6 @@
 import { clone, removeFromArray } from "../../utils/utils.js";
 
-import { Private } from "./dependencies/private.js";
+import { Inner } from "./dependencies/inner.js";
 import { Custom } from "./dependencies/custom.js";
 import { Events } from "./dependencies/events.js";
 import { Listeners } from "./dependencies/listeners.js";
@@ -20,7 +20,7 @@ export class Element {
     this._setProperties(type.properties);
     this._setFunctions(type.functions);
     this._setLifecycle(type.lifecycle);
-    this.private = new Private(this, type.private);
+    this.inner = new Inner(this, type.inner);
     this.custom = new Custom(this);
     this.events = new Events(type.events);
     this.listeners = new Listeners(this.events);

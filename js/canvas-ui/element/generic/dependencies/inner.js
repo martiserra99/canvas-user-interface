@@ -1,12 +1,12 @@
 import { clone } from "../../../utils/utils.js";
 
-export class Private {
-  constructor(element, private) {
+export class Inner {
+  constructor(element, inner) {
     this._element = element;
     this._properties = new Map();
     this._functions = new Map();
-    this._setProperties(private.properties);
-    this._setFunctions(private.functions);
+    this._setProperties(inner.properties);
+    this._setFunctions(inner.functions);
   }
 
   _setProperties(properties) {

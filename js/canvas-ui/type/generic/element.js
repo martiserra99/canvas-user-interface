@@ -1,5 +1,5 @@
 import { Events } from "./dependencies/events.js";
-import { Private } from "./dependencies/private.js";
+import { Inner } from "./dependencies/inner.js";
 
 export class ElementType {
   constructor(name) {
@@ -7,7 +7,7 @@ export class ElementType {
     this.properties = new Map();
     this.functions = new Map();
     this.lifecycle = this._getLifecycle();
-    this.private = new Private();
+    this.inner = new Inner();
     this.events = new Events();
   }
 

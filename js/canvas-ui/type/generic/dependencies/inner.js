@@ -1,4 +1,4 @@
-export class Private {
+export class Inner {
   constructor() {
     this._properties = new Map();
     this._functions = new Map();
