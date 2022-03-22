@@ -1,5 +1,5 @@
-import { Events } from "./events.js";
-import { Private } from "./private.js";
+import { Events } from "./dependencies/events.js";
+import { Private } from "./dependencies/private.js";
 
 export class ElementType {
   constructor(name) {

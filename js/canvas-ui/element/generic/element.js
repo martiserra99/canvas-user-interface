@@ -1,5 +1,11 @@
 import { clone, removeFromArray } from "../../utils/utils.js";
 
+import { Private } from "./dependencies/private.js";
+import { Custom } from "./dependencies/custom.js";
+import { Events } from "./dependencies/events.js";
+import { Listeners } from "./dependencies/listeners.js";
+import { LayoutParams } from "./dependencies/layout-params.js";
+
 export class Element {
   constructor(id, element, type) {
     this.id = id;
@@ -112,126 +118,5 @@ export class Element {
       if (!event) continue;
       for (const callback of callbacks) callback(this, data);
     }
-  }
-}
-
-class Private {
-  constructor(element, private) {
-    this._element = element;
-    this._properties = new Map();
-    this._functions = new Map();
-    this._setProperties(private.properties);
-    this._setFunctions(private.functions);
-  }
-
-  _setProperties(properties) {
-    for (const [name, value] of properties)
-      this._properties.set(name, clone(value));
-  }
-
-  _setFunctions(functions) {
-    for (const [name, value] of functions)
-      this._functions.set(name, value.bind(this._element, this._element));
-  }
-
-  set(name, value) {
-    this._properties.set(name, value);
-  }
-
-  get(name) {
-    return this._properties.get(name);
-  }
-
-  fun(name, value) {
-    this._functions.set(name, value.bind(this._element, this._element));
-  }
-
-  call(name, ...params) {
-    return this._functions.get(name)(...params);
-  }
-}
-
-class Custom {
-  constructor(element) {
-    this._element = element;
-    this._properties = new Map();
-    this._functions = new Map();
-  }
-
-  set(name, value) {
-    this._properties.set(name, value);
-  }
-
-  get(name) {
-    return this._properties.get(name);
-  }
-
-  fun(name, value) {
-    this._functions.set(name, value.bind(this._element, this._element));
-  }
-
-  call(name, ...params) {
-    return this._functions.get(name)(...params);
-  }
-}
-
-class Events {
-  constructor(events) {
-    this._events = new Map();
-    this._setEvents(events);
-  }
-
-  _setEvents(events) {
-    for (const [name, { check, callbacks }] of events)
-      this._events.set(name, {
-        check,
-        state: new Map(),
-        callbacks: [...callbacks],
-      });
-  }
-
-  [Symbol.iterator]() {
-    return this._events[Symbol.iterator]();
-  }
-
-  get(name) {
-    return this._events.get(name);
-  }
-}
-
-class Listeners {
-  constructor(events) {
-    this._events = events;
-  }
-
-  add(name, value) {
-    this._events.get(name).callbacks.push(value);
-  }
-
-  remove(name, callback) {
-    return removeFromArray(this._events.get(name).callbacks, callback);
-  }
-}
-
-class LayoutParams {
-  constructor(element) {
-    this._element = element;
-    this._layoutParent = element.layoutParent;
-    this._layoutParams = new Map();
-    this._setLayoutParams();
-  }
-
-  _setLayoutParams() {
-    for (const [name, value] of this._layoutParent.childLayoutParams)
-      this._layoutParams.set(name, clone(value));
-  }
-
-  set(name, value) {
-    if (!this._layoutParams.has(name)) return;
-    this._layoutParams.set(name, value);
-  }
-
-  get(name) {
-    return this._layoutParams.get(name);
   }
 }
