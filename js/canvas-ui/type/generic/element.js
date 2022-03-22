@@ -1,4 +1,5 @@
 import { Events } from "./events.js";
+import { Private } from "./private.js";
 
 export class ElementType {
   constructor(name) {
@@ -6,6 +7,7 @@ export class ElementType {
     this.properties = new Map();
     this.functions = new Map();
     this.lifecycle = this._getLifecycle();
+    this.private = new Private();
     this.events = new Events();
   }
 
