@@ -14,7 +14,7 @@ export class Element {
     this._setProperties(type.properties);
     this._setFunctions(type.functions);
     this._setLifecycle(type.lifecycle);
-    this.private = new Private(this);
+    this.private = new Private(this, type.private);
     this.custom = new Custom(this);
     this.events = new Events(type.events);
     this.listeners = new Listeners(this.events);
@@ -116,10 +116,22 @@ export class Element {
 }
 
 class Private {
-  constructor(element) {
+  constructor(element, private) {
     this._element = element;
     this._properties = new Map();
     this._functions = new Map();
+    this._setProperties(private);
+    this._setFunctions(private);
+  }
+
+  _setProperties(private) {
+    for (const [name, value] of private.properties)
+      this._properties.set(name, clone(value));
+  }
+
+  _setFunctions(private) {
+    for (const [name, value] of private.functions)
+      this._properties.set(name, value.bind(this._element, this._element));
   }
 
   set(name, value) {
