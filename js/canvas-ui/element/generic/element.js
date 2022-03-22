@@ -14,6 +14,7 @@ export class Element {
     this._setProperties(type);
     this._setFunctions(type);
     this._setLifecycle(type);
+    this.private = new Private(this);
     this.custom = new Custom(this);
     this.events = new Events(type.events);
     this.listeners = new Listeners(this.events);
@@ -111,6 +112,30 @@ export class Element {
       if (!event) continue;
       for (const callback of callbacks) callback(this, data);
     }
+  }
+}
+
+class Private {
+  constructor(element) {
+    this._element = element;
+    this._properties = new Map();
+    this._functions = new Map();
+  }
+
+  set(name, value) {
+    this._properties.set(name, value);
+  }
+
+  get(name) {
+    return this._properties.get(name);
+  }
+
+  fun(name, value) {
+    this._functions.set(name, value.bind(this._element, this._element));
+  }
+
+  call(name, ...params) {
+    return this._functions.get(name)(...params);
   }
 }
 
