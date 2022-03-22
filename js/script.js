@@ -37,6 +37,10 @@ text1.listeners.add("click", function (element, data) {
 text5.get("font").color = "#ffff";
 text5.layoutParams.set("zIndex", -1);
 
+root.inner.call("hola", 5);
+
+console.log(root.inner.get("color"));
+
 root.listeners.add("click", function (root, data) {
   console.log(root, data);
 });

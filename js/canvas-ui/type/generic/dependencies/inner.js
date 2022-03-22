@@ -13,7 +13,7 @@ export class Inner {
   }
 
   fun(name, value) {
-    this.functions.set(name, value.bind(this._element, this._element));
+    this.functions.set(name, value);
   }
 
   call(name, ...params) {
