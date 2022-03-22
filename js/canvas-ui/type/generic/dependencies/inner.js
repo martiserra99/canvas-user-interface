@@ -1,22 +1,22 @@
 export class Inner {
   constructor() {
-    this._properties = new Map();
-    this._functions = new Map();
+    this.properties = new Map();
+    this.functions = new Map();
   }
 
   set(name, value) {
-    this._properties.set(name, value);
+    this.properties.set(name, value);
   }
 
   get(name) {
-    return this._properties.get(name);
+    return this.properties.get(name);
   }
 
   fun(name, value) {
-    this._functions.set(name, value.bind(this._element, this._element));
+    this.functions.set(name, value.bind(this._element, this._element));
   }
 
   call(name, ...params) {
-    return this._functions.get(name)(...params);
+    return this.functions.get(name)(...params);
   }
 }
