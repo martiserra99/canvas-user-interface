@@ -11,9 +11,9 @@ export class Element {
     this._functions = new Map();
     this._lifecycle = new Map();
     this._inner = new Map();
-    this._setProperties(type);
-    this._setFunctions(type);
-    this._setLifecycle(type);
+    this._setProperties(type.properties);
+    this._setFunctions(type.functions);
+    this._setLifecycle(type.lifecycle);
     this.private = new Private(this);
     this.custom = new Custom(this);
     this.events = new Events(type.events);
@@ -21,18 +21,18 @@ export class Element {
     this._lifecycle.get("onCreate")();
   }
 
-  _setProperties(type) {
-    for (const [name, value] of type.properties)
+  _setProperties(properties) {
+    for (const [name, value] of properties)
       this._properties.set(name, clone(value));
   }
 
-  _setFunctions(type) {
-    for (const [name, value] of type.functions)
+  _setFunctions(functions) {
+    for (const [name, value] of functions)
       this._functions.set(name, value.bind(this, this, this._inner));
   }
 
-  _setLifecycle(type) {
-    for (const [name, value] of type.lifecycle)
+  _setLifecycle(lifecycle) {
+    for (const [name, value] of lifecycle)
       this._lifecycle.set(name, value.bind(this, this, this._inner));
   }
 
