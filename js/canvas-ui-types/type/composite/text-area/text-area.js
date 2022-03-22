@@ -1,8 +1,5 @@
 import { canvasUI } from "../../../../canvas-ui/canvas-ui.js";
 
-import { onGetElement } from "./lifecycle/on-get-element.js";
-import { onUpdateElement } from "./lifecycle/on-update-element.js";
-
 export const newCompositeTextArea = function () {
   const textArea = canvasUI.composite.newType("textArea");
 
@@ -28,14 +25,23 @@ export const newCompositeTextArea = function () {
     left: 0,
   });
 
-  textArea.lifecycle.set("onGetElement", function (component, inner) {
-    return onGetElement(component, inner);
+  textArea.lifecycle.set("onGetElement", function (textArea, inner) {
+    const frame = canvasUI.layout.new("frame", "frame");
+    const text = canvasUI.view.new("text", "text");
+    frame.insert(text);
+    return frame;
   });
 
-  textArea.lifecycle.set(
-    "onUpdateElement",
-    function (component, inner, element) {
-      onUpdateElement(component, inner, element);
-    }
-  );
+  textArea.lifecycle.set("onUpdateElement", function (textArea, inner, frame) {
+    frame.set("size", textArea.get("size"));
+    frame.set("background", textArea.get("background"));
+    frame.set("border", textArea.get("border"));
+    frame.set("corner", textArea.get("corner"));
+    const text = frame.find("text");
+    text.set("text", textArea.get("text"));
+    text.set("font", textArea.get("font"));
+    text.set("align", textArea.get("align"));
+    text.layoutParams.set("align", textArea.get("align"));
+    text.layoutParams.set("margin", textArea.get("margin"));
+  });
 };

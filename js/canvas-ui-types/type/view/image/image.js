@@ -9,20 +9,20 @@ export const newViewImage = function () {
   image.set("size", { width: 100, height: 100 });
   image.set("src", "");
 
-  image.lifecycle.set("onCreate", function (view, inner) {
-    inner.set("img", new Image());
+  image.lifecycle.set("onCreate", function (image, inner) {
+    image.inner.set("img", new Image());
   });
 
-  image.lifecycle.set("onStart", function (view, inner) {
-    if (inner.get("img").src !== view.get("src"))
-      inner.get("img").src = view.get("src");
+  image.lifecycle.set("onStart", function (image, inner) {
+    if (image.inner.get("img").src !== image.get("src"))
+      image.inner.get("img").src = image.get("src");
   });
 
-  image.lifecycle.set("onGetSize", function (view, inner, maxSize) {
-    return measure.size(view.get("size"), maxSize);
+  image.lifecycle.set("onGetSize", function (image, inner, maxSize) {
+    return measure.size(image.get("size"), maxSize);
   });
 
-  image.lifecycle.set("onDrawItself", function (view, inner, ctx) {
-    draw.image(ctx, view.coords, view.size, inner.get("img"));
+  image.lifecycle.set("onDrawItself", function (image, inner, ctx) {
+    draw.image(ctx, image.coords, image.size, image.inner.get("img"));
   });
 };

@@ -1,12 +1,6 @@
 import { canvasUI } from "../../../../canvas-ui/canvas-ui.js";
 
-import { onMeasure } from "./lifecycle/on-measure.js";
-import { onGetChildMaxSize } from "./lifecycle/on-get-child-max-size.js";
-import { onGetSize } from "./lifecycle/on-get-size.js";
-import { onLocate } from "./lifecycle/on-locate.js";
-import { onGetChildCoords } from "./lifecycle/on-get-child-coords.js";
-import { onDrawItself } from "./lifecycle/on-draw-itself.js";
-import { onSortChildsToDraw } from "./lifecycle/on-sort-childs-to-draw.js";
+import { setupLifecycleFunctions } from "./lifecycle/lifecycle.js";
 
 export const newLayoutFrame = function () {
   const frame = canvasUI.layout.newType("frame");
@@ -31,37 +25,5 @@ export const newLayoutFrame = function () {
     left: 0,
   });
 
-  frame.lifecycle.set("onMeasure", function (layout, inner, maxSize) {
-    onMeasure(layout, inner, maxSize);
-  });
-
-  frame.lifecycle.set(
-    "onGetChildMaxSize",
-    function (layout, inner, maxSize, child) {
-      return onGetChildMaxSize(layout, inner, maxSize, child);
-    }
-  );
-
-  frame.lifecycle.set("onGetSize", function (layout, inner, maxSize) {
-    return onGetSize(layout, inner, maxSize);
-  });
-
-  frame.lifecycle.set("onLocate", function (layout, inner, coords) {
-    onLocate(layout, inner, coords);
-  });
-
-  frame.lifecycle.set(
-    "onGetChildCoords",
-    function (layout, inner, coords, child) {
-      return onGetChildCoords(layout, inner, coords, child);
-    }
-  );
-
-  frame.lifecycle.set("onDrawItself", function (layout, inner, ctx) {
-    onDrawItself(layout, inner, ctx);
-  });
-
-  frame.lifecycle.set("onSortChildsToDraw", function (layout, inner) {
-    return onSortChildsToDraw(layout, inner);
-  });
+  setupLifecycleFunctions(frame);
 };

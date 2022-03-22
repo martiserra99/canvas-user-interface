@@ -1,12 +1,6 @@
 import { canvasUI } from "../../../../canvas-ui/canvas-ui.js";
 
-import { onStart } from "./lifecycle/on-start.js";
-import { onMeasure } from "./lifecycle/on-measure.js";
-import { onGetChildMaxSize } from "./lifecycle/on-get-child-max-size.js";
-import { onGetSize } from "./lifecycle/on-get-size.js";
-import { onLocate } from "./lifecycle/on-locate.js";
-import { onGetChildCoords } from "./lifecycle/on-get-child-coords.js";
-import { onDrawItself } from "./lifecycle/on-draw-itself.js";
+import { setupLifecycleFunctions } from "./lifecycle/lifecycle.js";
 
 export const newLayoutLinear = function () {
   const linear = canvasUI.layout.newType("linear");
@@ -32,45 +26,5 @@ export const newLayoutLinear = function () {
     left: 0,
   });
 
-  linear.lifecycle.set("onStart", function (layout, inner) {
-    onStart(layout, inner);
-  });
-
-  linear.lifecycle.set("onMeasure", function (layout, inner, maxSize) {
-    onMeasure(layout, inner, maxSize);
-  });
-
-  linear.lifecycle.set("onSortChildsToMeasure", function (layout, inner) {
-    return inner.get("sortedChilds");
-  });
-
-  linear.lifecycle.set(
-    "onGetChildMaxSize",
-    function (layout, inner, maxSize, child, childsWithSizes) {
-      return onGetChildMaxSize(layout, inner, child, childsWithSizes);
-    }
-  );
-
-  linear.lifecycle.set("onGetSize", function (layout, inner, maxSize) {
-    return onGetSize(layout, inner, maxSize);
-  });
-
-  linear.lifecycle.set("onSortChildsToLocate", function (layout, inner) {
-    return inner.get("sortedChilds");
-  });
-
-  linear.lifecycle.set("onLocate", function (layout, inner, coords) {
-    onLocate(layout, inner, coords);
-  });
-
-  linear.lifecycle.set(
-    "onGetChildCoords",
-    function (linear, inner, coords, child, childsWithCoords) {
-      return onGetChildCoords(linear, inner, coords, child, childsWithCoords);
-    }
-  );
-
-  linear.lifecycle.set("onDrawItself", function (linear, inner, ctx) {
-    onDrawItself(linear, inner, ctx);
-  });
+  setupLifecycleFunctions(linear);
 };

@@ -1,8 +1,5 @@
 import { canvasUI } from "../../../../canvas-ui/canvas-ui.js";
 
-import { onGetElement } from "./lifecycle/on-get-element.js";
-import { onUpdateElement } from "./lifecycle/on-update-element.js";
-
 export const newCompositeImageArea = function () {
   const imageArea = canvasUI.composite.newType("imageArea");
 
@@ -23,14 +20,25 @@ export const newCompositeImageArea = function () {
     left: 0,
   });
 
-  imageArea.lifecycle.set("onGetElement", function (composite, inner) {
-    return onGetElement(composite, inner);
+  imageArea.lifecycle.set("onGetElement", function (imageArea, inner) {
+    const frame = canvasUI.layout.new("frame", "frame");
+    const image = canvasUI.view.new("image", "image");
+    frame.insert(image);
+    return frame;
   });
 
   imageArea.lifecycle.set(
     "onUpdateElement",
-    function (composite, inner, element) {
-      onUpdateElement(composite, inner, element);
+    function (imageArea, inner, frame) {
+      frame.set("size", imageArea.get("size"));
+      frame.set("background", imageArea.get("background"));
+      frame.set("border", imageArea.get("border"));
+      frame.set("corner", imageArea.get("corner"));
+      const image = frame.find("image");
+      image.set("size", imageArea.get("imageSize"));
+      image.set("src", imageArea.get("imageSrc"));
+      image.layoutParams.set("align", imageArea.get("align"));
+      image.layoutParams.set("margin", imageArea.get("margin"));
     }
   );
 };
