@@ -106,9 +106,9 @@ export class Element {
   }
 
   signal(signal) {
-    for (const [_, { onCheck, state, callbacks }] of this.events) {
-      const { check, data } = onCheck(this, signal, state);
-      if (!check) continue;
+    for (const [_, { check, state, callbacks }] of this.events) {
+      const { event, data } = check(this, signal, state);
+      if (!event) continue;
       for (const callback of callbacks) callback(this, data);
     }
   }
@@ -145,9 +145,9 @@ class Events {
   }
 
   _setEvents(events) {
-    for (const [name, { onCheck, callbacks }] of events)
+    for (const [name, { check, callbacks }] of events)
       this._events.set(name, {
-        onCheck,
+        check,
         state: new Map(),
         callbacks: [...callbacks],
       });

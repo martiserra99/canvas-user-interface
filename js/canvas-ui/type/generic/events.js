@@ -8,8 +8,8 @@ export class Events {
     return this._events[Symbol.iterator]();
   }
 
-  set(name, onCheck) {
-    this._events.set(name, { onCheck, callbacks: [] });
+  set(name, check) {
+    this._events.set(name, { check, callbacks: [] });
   }
 
   get(name) {
@@ -30,26 +30,26 @@ export class Events {
   _click() {
     this.set("click", function (element, signal, state) {
       if (signal.type !== "mousedown" && signal.type !== "mouseup")
-        return { check: false };
+        return { event: false };
       const coords = signal.data.coords;
       const isIn = coordsInElement(coords, element);
       if (signal.type === "mousedown") {
         state.set("wasMouseDown", isIn);
-        return { check: false };
+        return { event: false };
       }
       const wasMouseDown = state.get("wasMouseDown") ?? false;
-      const check = isIn && wasMouseDown;
-      return { check, data: signal.data };
+      const event = isIn && wasMouseDown;
+      return { event, data: signal.data };
     });
   }
 
   _mousedown() {
     this.set("mousedown", function (element, signal, state) {
-      if (signal.type !== "mousedown") return { check: false };
+      if (signal.type !== "mousedown") return { event: false };
       const coords = signal.data.coords;
-      if (!coordsInElement(coords, element)) return { check: false };
+      if (!coordsInElement(coords, element)) return { event: false };
       return {
-        check: true,
+        event: true,
         data: signal.data,
       };
     });
@@ -57,11 +57,11 @@ export class Events {
 
   _mouseup() {
     this.set("mouseup", function (element, signal, state) {
-      if (signal.type !== "mouseup") return { check: false };
+      if (signal.type !== "mouseup") return { event: false };
       const coords = signal.data.coords;
-      if (!coordsInElement(coords, element)) return { check: false };
+      if (!coordsInElement(coords, element)) return { event: false };
       return {
-        check: true,
+        event: true,
         data: signal.data,
       };
     });
@@ -70,13 +70,13 @@ export class Events {
   _mouseenter() {
     this.set("mouseenter", function (element, signal, state) {
       if (signal.type === "mouseleave") state.set("wasOut", true);
-      if (signal.type !== "mousemove") return { check: false };
+      if (signal.type !== "mousemove") return { event: false };
       const coords = signal.data.coords;
       const isIn = coordsInElement(coords, element);
       const wasOut = state.get("wasOut") ?? true;
-      const check = isIn && wasOut;
+      const event = isIn && wasOut;
       state.set("wasOut", !isIn);
-      return { check, data: signal.data };
+      return { event, data: signal.data };
     });
   }
 
@@ -85,27 +85,27 @@ export class Events {
       if (signal.type === "mouseleave") {
         state.set("wasIn", false);
         return {
-          check: true,
+          event: true,
           data: signal.data,
         };
       }
-      if (signal.type !== "mousemove") return { check: false };
+      if (signal.type !== "mousemove") return { event: false };
       const coords = signal.data.coords;
       const isOut = !coordsInElement(coords, element);
       const wasIn = state.get("wasIn") ?? false;
-      const check = isOut && wasIn;
+      const event = isOut && wasIn;
       state.set("wasIn", !isOut);
-      return { check, data: signal.data };
+      return { event, data: signal.data };
     });
   }
 
   _mousemove() {
     this.set("mousemove", function (element, signal, state) {
-      if (signal.type !== "mousemove") return { check: false };
+      if (signal.type !== "mousemove") return { event: false };
       const coords = signal.data.coords;
-      if (!coordsInElement(coords, element)) return { check: false };
+      if (!coordsInElement(coords, element)) return { event: false };
       return {
-        check: true,
+        event: true,
         data: signal.data,
       };
     });
@@ -113,15 +113,15 @@ export class Events {
 
   _keydown() {
     this.set("keydown", function (element, signal, state) {
-      if (signal.type !== "keydown") return { check: false };
-      return { check: true, data: signal.data };
+      if (signal.type !== "keydown") return { event: false };
+      return { event: true, data: signal.data };
     });
   }
 
   _keyup() {
     this.set("keyup", function (element, signal, state) {
-      if (signal.type !== "keyup") return { check: false };
-      return { check: true, data: signal.data };
+      if (signal.type !== "keyup") return { event: false };
+      return { event: true, data: signal.data };
     });
   }
 }
