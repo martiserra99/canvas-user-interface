@@ -120,18 +120,18 @@ class Private {
     this._element = element;
     this._properties = new Map();
     this._functions = new Map();
-    this._setProperties(private);
-    this._setFunctions(private);
+    this._setProperties(private.properties);
+    this._setFunctions(private.functions);
   }
 
-  _setProperties(private) {
-    for (const [name, value] of private.properties)
+  _setProperties(properties) {
+    for (const [name, value] of properties)
       this._properties.set(name, clone(value));
   }
 
-  _setFunctions(private) {
-    for (const [name, value] of private.functions)
-      this._properties.set(name, value.bind(this._element, this._element));
+  _setFunctions(functions) {
+    for (const [name, value] of functions)
+      this._functions.set(name, value.bind(this._element, this._element));
   }
 
   set(name, value) {
