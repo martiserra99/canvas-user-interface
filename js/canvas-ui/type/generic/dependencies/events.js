@@ -31,7 +31,7 @@ export class Events {
     this.set("click", function (element, signal, state) {
       if (signal.type !== "mousedown" && signal.type !== "mouseup")
         return { event: false };
-      const coords = signal.data.coords;
+      const coords = signal.data;
       const isIn = coordsInElement(coords, element);
       if (signal.type === "mousedown") {
         state.set("wasMouseDown", isIn);
@@ -46,7 +46,7 @@ export class Events {
   _mousedown() {
     this.set("mousedown", function (element, signal, state) {
       if (signal.type !== "mousedown") return { event: false };
-      const coords = signal.data.coords;
+      const coords = signal.data;
       if (!coordsInElement(coords, element)) return { event: false };
       return {
         event: true,
@@ -58,7 +58,7 @@ export class Events {
   _mouseup() {
     this.set("mouseup", function (element, signal, state) {
       if (signal.type !== "mouseup") return { event: false };
-      const coords = signal.data.coords;
+      const coords = signal.data;
       if (!coordsInElement(coords, element)) return { event: false };
       return {
         event: true,
@@ -71,7 +71,7 @@ export class Events {
     this.set("mouseenter", function (element, signal, state) {
       if (signal.type === "mouseleave") state.set("wasOut", true);
       if (signal.type !== "mousemove") return { event: false };
-      const coords = signal.data.coords;
+      const coords = signal.data;
       const isIn = coordsInElement(coords, element);
       const wasOut = state.get("wasOut") ?? true;
       const event = isIn && wasOut;
@@ -90,7 +90,7 @@ export class Events {
         };
       }
       if (signal.type !== "mousemove") return { event: false };
-      const coords = signal.data.coords;
+      const coords = signal.data;
       const isOut = !coordsInElement(coords, element);
       const wasIn = state.get("wasIn") ?? false;
       const event = isOut && wasIn;
@@ -102,7 +102,7 @@ export class Events {
   _mousemove() {
     this.set("mousemove", function (element, signal, state) {
       if (signal.type !== "mousemove") return { event: false };
-      const coords = signal.data.coords;
+      const coords = signal.data;
       if (!coordsInElement(coords, element)) return { event: false };
       return {
         event: true,
