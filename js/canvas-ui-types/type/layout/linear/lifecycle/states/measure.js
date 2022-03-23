@@ -61,10 +61,10 @@ export const setupMeasureLifecycleFunctions = function (linear) {
         return childMaxWidth;
       }
 
-      const availableHeight = availableContentSize.height;
-      let childMaxHeight = availableHeight - margin.top - margin.bottom;
-      if (childMaxHeight < 0) childMaxHeight = 0;
-      return childMaxHeight;
+      const availableWidth = availableContentSize.width;
+      let childMaxWidth = availableWidth - margin.left - margin.right;
+      if (childMaxWidth < 0) childMaxWidth = 0;
+      return childMaxWidth;
     }
   );
 
