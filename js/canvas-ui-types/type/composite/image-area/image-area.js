@@ -20,25 +20,22 @@ export const newCompositeImageArea = function () {
     left: 0,
   });
 
-  imageArea.lifecycle.set("onGetElement", function (imageArea, inner) {
+  imageArea.lifecycle.set("onGetElement", function (imageArea) {
     const frame = canvasUI.layout.new("frame", "frame");
     const image = canvasUI.view.new("image", "image");
     frame.insert(image);
     return frame;
   });
 
-  imageArea.lifecycle.set(
-    "onUpdateElement",
-    function (imageArea, inner, frame) {
-      frame.set("size", imageArea.get("size"));
-      frame.set("background", imageArea.get("background"));
-      frame.set("border", imageArea.get("border"));
-      frame.set("corner", imageArea.get("corner"));
-      const image = frame.find("image");
-      image.set("size", imageArea.get("imageSize"));
-      image.set("src", imageArea.get("imageSrc"));
-      image.layoutParams.set("align", imageArea.get("align"));
-      image.layoutParams.set("margin", imageArea.get("margin"));
-    }
-  );
+  imageArea.lifecycle.set("onUpdateElement", function (imageArea, frame) {
+    frame.set("size", imageArea.get("size"));
+    frame.set("background", imageArea.get("background"));
+    frame.set("border", imageArea.get("border"));
+    frame.set("corner", imageArea.get("corner"));
+    const image = frame.find("image");
+    image.set("size", imageArea.get("imageSize"));
+    image.set("src", imageArea.get("imageSrc"));
+    image.layoutParams.set("align", imageArea.get("align"));
+    image.layoutParams.set("margin", imageArea.get("margin"));
+  });
 };

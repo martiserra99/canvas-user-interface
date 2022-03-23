@@ -1,5 +1,5 @@
 export const setupStartLifecycleFunctions = function (relative) {
-  relative.lifecycle.set("onStart", function (relative, inner) {
+  relative.lifecycle.set("onStart", function (relative) {
     const sortedPositionedChilds = relative.inner.call(
       "getSortedPositionedChilds"
     );

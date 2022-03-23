@@ -19,16 +19,16 @@ export const newViewText = function () {
     horizontal: "left",
   });
 
-  text.lifecycle.set("onMeasure", function (text, inner) {
+  text.lifecycle.set("onMeasure", function (text) {
     const textSize = measure.textSize(text.get("text"), text.get("font"));
     text.inner.set("textSize", textSize);
   });
 
-  text.lifecycle.set("onGetSize", function (text, inner, maxSize) {
+  text.lifecycle.set("onGetSize", function (text, maxSize) {
     return measure.size(text.inner.get("textSize"), maxSize);
   });
 
-  text.lifecycle.set("onLocate", function (text, inner, coords) {
+  text.lifecycle.set("onLocate", function (text, coords) {
     const textCoords = text.inner.call("getTextCoords", coords);
     text.inner.set("textCoords", textCoords);
   });
@@ -70,7 +70,7 @@ export const newViewText = function () {
     else return locate.alignEnd(textCoords, textLength);
   });
 
-  text.lifecycle.set("onDrawItself", function (text, inner, ctx) {
+  text.lifecycle.set("onDrawItself", function (text, ctx) {
     draw.text(
       ctx,
       text.coords,

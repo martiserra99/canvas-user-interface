@@ -1,7 +1,7 @@
 import { draw } from "../../../../../utils/draw.js";
 
 export const setupDrawLifecycleFunctions = function (linear) {
-  linear.lifecycle.set("onDrawItself", function (linear, inner, ctx) {
+  linear.lifecycle.set("onDrawItself", function (linear, ctx) {
     const coords = linear.coords;
     const size = linear.size;
     const background = linear.get("background");

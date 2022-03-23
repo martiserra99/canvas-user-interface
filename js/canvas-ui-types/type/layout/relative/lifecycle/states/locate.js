@@ -5,7 +5,7 @@ export const setupLocateLifecycleFunctions = function (relative) {
 
   relative.lifecycle.set(
     "onGetChildCoords",
-    function (relative, inner, coords, child) {
+    function (relative, coords, child) {
       const notPositionedChilds = relative.inner.get("notPositionedChilds");
       if (notPositionedChilds.includes(child)) return { x: 0, y: 0 };
       return {

@@ -18,7 +18,7 @@ class LayoutLifecycle extends ElementLifecycle {
     this._lifecycle.set("onGetChildMaxSize", () => ({ width: 0, height: 0 }));
     this._lifecycle.set("onGetSize", () => ({ width: 0, height: 0 }));
     this._lifecycle.set("onSortChildsToLocate", (layout) => layout.childs);
-    this._lifecycle.set("onGetChildCoords", (layout, inner, coords) => coords);
+    this._lifecycle.set("onGetChildCoords", (layout, coords) => coords);
     this._lifecycle.set("onDrawItself", () => {});
     this._lifecycle.set("onSortChildsToDraw", (layout) => layout.childs);
   }

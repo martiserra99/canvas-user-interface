@@ -1,7 +1,7 @@
 import { measure } from "../../../../../utils/measure.js";
 
 export const setupMeasureLifecycleFunctions = function (linear) {
-  linear.lifecycle.set("onMeasure", function (linear, inner, maxSize) {
+  linear.lifecycle.set("onMeasure", function (linear, maxSize) {
     const desiredSize = measure.desiredSize(linear.get("size"), maxSize);
     const availableSize = measure.availableSize(desiredSize, maxSize);
     const availableContentSize = {
@@ -20,7 +20,7 @@ export const setupMeasureLifecycleFunctions = function (linear) {
 
   linear.lifecycle.set(
     "onGetChildMaxSize",
-    function (linear, inner, maxSize, child, childsWithSizes) {
+    function (linear, maxSize, child, childsWithSizes) {
       const width = linear.inner.call(
         "getChildMaxWidth",
         maxSize,
@@ -97,7 +97,7 @@ export const setupMeasureLifecycleFunctions = function (linear) {
     }
   );
 
-  linear.lifecycle.set("onGetSize", function (linear, inner, maxSize) {
+  linear.lifecycle.set("onGetSize", function (linear, maxSize) {
     const childsSize = linear.inner.call("getChildsSize");
     const size = measure.size(linear.inner.get("desiredSize"), maxSize, {
       width: () => childsSize.width + linear.get("border").size * 2,

@@ -1,7 +1,7 @@
 import { locate } from "../../../../../utils/locate.js";
 
 export const setupLocateLifecycleFunctions = function (linear) {
-  linear.lifecycle.set("onLocate", function (linear, inner, coords) {
+  linear.lifecycle.set("onLocate", function (linear, coords) {
     const contentCoords = {
       x: coords.x + linear.get("border").size,
       y: coords.y + linear.get("border").size,
@@ -49,7 +49,7 @@ export const setupLocateLifecycleFunctions = function (linear) {
 
   linear.lifecycle.set(
     "onGetChildCoords",
-    function (linear, inner, coords, child, childsWithCoords) {
+    function (linear, coords, child, childsWithCoords) {
       const x = linear.inner.call("getChildX", child, childsWithCoords);
       const y = linear.inner.call("getChildY", child, childsWithCoords);
       return { x, y };

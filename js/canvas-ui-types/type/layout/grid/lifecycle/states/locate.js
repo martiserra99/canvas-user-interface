@@ -1,7 +1,7 @@
 import { locate } from "../../../../../utils/locate.js";
 
 export const setupLocateLifecycleFunctions = function (grid) {
-  grid.lifecycle.set("onLocate", function (grid, inner, coords) {
+  grid.lifecycle.set("onLocate", function (grid, coords) {
     const contentCoords = {
       x: coords.x + grid.get("border").size,
       y: coords.y + grid.get("border").size,
@@ -97,7 +97,7 @@ export const setupLocateLifecycleFunctions = function (grid) {
 
   grid.lifecycle.set(
     "onGetChildCoords",
-    function (grid, inner, coords, child, childsWithCoords) {
+    function (grid, coords, child, childsWithCoords) {
       const valid = grid.inner.call("areChildCellsValid", child);
       if (!valid) return { x: 0, y: 0 };
       const x = grid.inner.call("getChildX", child);

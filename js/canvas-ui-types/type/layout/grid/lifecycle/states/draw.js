@@ -1,7 +1,7 @@
 import { draw } from "../../../../../utils/draw.js";
 
 export const setupDrawLifecycleFunctions = function (grid) {
-  grid.lifecycle.set("onDrawItself", function (grid, inner, ctx) {
+  grid.lifecycle.set("onDrawItself", function (grid, ctx) {
     grid.inner.call("drawArea", ctx);
     grid.inner.call("drawGaps", ctx);
   });

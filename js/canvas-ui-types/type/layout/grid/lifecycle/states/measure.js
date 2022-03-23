@@ -1,7 +1,7 @@
 import { measure } from "../../../../../utils/measure.js";
 
 export const setupMeasureLifecycleFunctions = function (grid) {
-  grid.lifecycle.set("onMeasure", function (grid, inner, maxSize) {
+  grid.lifecycle.set("onMeasure", function (grid, maxSize) {
     const desiredSize = measure.desiredSize(grid.get("size"), maxSize);
     grid.inner.set("desiredSize", desiredSize);
 
@@ -100,38 +100,35 @@ export const setupMeasureLifecycleFunctions = function (grid) {
     return { width, height };
   });
 
-  grid.lifecycle.set(
-    "onGetChildMaxSize",
-    function (grid, inner, maxSize, child) {
-      const gap = grid.get("gap").size;
-      const columnsWidths = grid.inner.get("columnsWidths");
-      const rowsHeights = grid.inner.get("rowsHeights");
-      const position = child.layoutParams.get("position");
-      const span = child.layoutParams.get("span");
-      const margin = child.layoutParams.get("margin");
+  grid.lifecycle.set("onGetChildMaxSize", function (grid, maxSize, child) {
+    const gap = grid.get("gap").size;
+    const columnsWidths = grid.inner.get("columnsWidths");
+    const rowsHeights = grid.inner.get("rowsHeights");
+    const position = child.layoutParams.get("position");
+    const span = child.layoutParams.get("span");
+    const margin = child.layoutParams.get("margin");
 
-      const valid = grid.inner.call("areChildCellsValid", child);
-      if (!valid) return { width: 0, height: 0 };
+    const valid = grid.inner.call("areChildCellsValid", child);
+    if (!valid) return { width: 0, height: 0 };
 
-      const width =
-        columnsWidths
-          .slice(position.column, position.column + span.columns)
-          .reduce((acc, val) => acc + val + gap.horizontal, 0) -
-        gap.horizontal -
-        (margin.left + margin.right);
+    const width =
+      columnsWidths
+        .slice(position.column, position.column + span.columns)
+        .reduce((acc, val) => acc + val + gap.horizontal, 0) -
+      gap.horizontal -
+      (margin.left + margin.right);
 
-      const height =
-        rowsHeights
-          .slice(position.row, position.row + span.rows)
-          .reduce((acc, val) => acc + val + gap.vertical, 0) -
-        gap.vertical -
-        (margin.top + margin.bottom);
+    const height =
+      rowsHeights
+        .slice(position.row, position.row + span.rows)
+        .reduce((acc, val) => acc + val + gap.vertical, 0) -
+      gap.vertical -
+      (margin.top + margin.bottom);
 
-      return { width, height };
-    }
-  );
+    return { width, height };
+  });
 
-  grid.lifecycle.set("onGetSize", function (grid, inner, maxSize) {
+  grid.lifecycle.set("onGetSize", function (grid, maxSize) {
     const size = measure.size(grid.inner.get("desiredSize"), maxSize, {
       width: () =>
         grid.inner.get("gridSize").width + grid.get("border").size * 2,

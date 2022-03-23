@@ -1,22 +1,19 @@
 import { locate } from "../../../../../utils/locate.js";
 
 export const setupLocateLifecycleFunctions = function (frame) {
-  frame.lifecycle.set("onLocate", function (frame, inner, coords) {
+  frame.lifecycle.set("onLocate", function (frame, coords) {
     frame.inner.set("contentCoords", {
       x: coords.x + frame.get("border").size,
       y: coords.y + frame.get("border").size,
     });
   });
 
-  frame.lifecycle.set(
-    "onGetChildCoords",
-    function (frame, inner, coords, child) {
-      return {
-        x: frame.inner.call("getChildX", child),
-        y: frame.inner.call("getChildY", child),
-      };
-    }
-  );
+  frame.lifecycle.set("onGetChildCoords", function (frame, coords, child) {
+    return {
+      x: frame.inner.call("getChildX", child),
+      y: frame.inner.call("getChildY", child),
+    };
+  });
 
   frame.inner.fun("getChildX", function (frame, child) {
     const start = frame.inner.get("contentCoords").x;

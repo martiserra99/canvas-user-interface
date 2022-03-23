@@ -1,7 +1,7 @@
 import { measure } from "../../../../../utils/measure.js";
 
 export const setupMeasureLifecycleFunctions = function (frame) {
-  frame.lifecycle.set("onMeasure", function (frame, inner, maxSize) {
+  frame.lifecycle.set("onMeasure", function (frame, maxSize) {
     const desiredSize = measure.desiredSize(frame.get("size"), maxSize);
     const availableSize = measure.availableSize(desiredSize, maxSize);
     const availableContentSize = {
@@ -13,20 +13,17 @@ export const setupMeasureLifecycleFunctions = function (frame) {
     frame.inner.set("availableContentSize", availableContentSize);
   });
 
-  frame.lifecycle.set(
-    "onGetChildMaxSize",
-    function (frame, inner, maxSize, child) {
-      const availableContentSize = frame.inner.get("availableContentSize");
-      const margin = child.layoutParams.get("margin");
-      let width = availableContentSize.width - margin.left - margin.right;
-      if (width < 0) width = 0;
-      let height = availableContentSize.height - margin.top - margin.bottom;
-      if (height < 0) height = 0;
-      return { width, height };
-    }
-  );
+  frame.lifecycle.set("onGetChildMaxSize", function (frame, maxSize, child) {
+    const availableContentSize = frame.inner.get("availableContentSize");
+    const margin = child.layoutParams.get("margin");
+    let width = availableContentSize.width - margin.left - margin.right;
+    if (width < 0) width = 0;
+    let height = availableContentSize.height - margin.top - margin.bottom;
+    if (height < 0) height = 0;
+    return { width, height };
+  });
 
-  frame.lifecycle.set("onGetSize", function (frame, inner, maxSize) {
+  frame.lifecycle.set("onGetSize", function (frame, maxSize) {
     const size = measure.size(frame.inner.get("desiredSize"), maxSize, {
       width: () => frame.inner.call("getAutoWidth"),
       height: () => frame.inner.call("getAutoHeight"),

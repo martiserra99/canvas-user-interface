@@ -1,7 +1,7 @@
 import { measure } from "../../../../../utils/measure.js";
 
 export const setupMeasureLifecycleFunctions = function (relative) {
-  relative.lifecycle.set("onMeasure", function (relative, inner, maxSize) {
+  relative.lifecycle.set("onMeasure", function (relative, maxSize) {
     const desiredSize = measure.desiredSize(relative.get("size"), maxSize);
     const size = measure.availableSize(desiredSize, maxSize);
     relative.inner.set("desiredSize", desiredSize);
@@ -14,7 +14,7 @@ export const setupMeasureLifecycleFunctions = function (relative) {
 
   relative.lifecycle.set(
     "onGetChildMaxSize",
-    function (relative, inner, maxSize, child) {
+    function (relative, maxSize, child) {
       const notPositionedChilds = relative.inner.get("notPositionedChilds");
       if (notPositionedChilds.includes(child)) return { width: 0, height: 0 };
 

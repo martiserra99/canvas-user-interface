@@ -16,7 +16,6 @@ export class Element {
     this._properties = new Map();
     this._functions = new Map();
     this._lifecycle = new Map();
-    this._inner = new Map();
     this._setProperties(type.properties);
     this._setFunctions(type.functions);
     this._setLifecycle(type.lifecycle);
@@ -34,12 +33,12 @@ export class Element {
 
   _setFunctions(functions) {
     for (const [name, value] of functions)
-      this._functions.set(name, value.bind(this, this, this._inner));
+      this._functions.set(name, value.bind(this, this));
   }
 
   _setLifecycle(lifecycle) {
     for (const [name, value] of lifecycle)
-      this._lifecycle.set(name, value.bind(this, this, this._inner));
+      this._lifecycle.set(name, value.bind(this, this));
   }
 
   set(name, value) {
@@ -52,7 +51,7 @@ export class Element {
   }
 
   fun(name, value) {
-    this._functions.set(name, value.bind(this, this, this._inner));
+    this._functions.set(name, value.bind(this, this));
   }
 
   call(name, ...params) {
