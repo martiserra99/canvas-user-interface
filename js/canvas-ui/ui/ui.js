@@ -87,10 +87,7 @@ export class UI {
   }
 
   _getMouseSignalData(event) {
-    const x = event.clientX;
-    const y = event.clientY;
-    const coords = { x, y };
-    return { coords };
+    return { x: event.clientX, y: event.clientY };
   }
 
   _setupKeySignals() {
@@ -113,8 +110,7 @@ export class UI {
   }
 
   _getKeySignalData(event) {
-    const key = event.key;
-    return { key };
+    return event.key;
   }
 
   end() {
