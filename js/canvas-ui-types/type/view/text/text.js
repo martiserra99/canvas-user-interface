@@ -8,16 +8,9 @@ export const newViewText = function () {
   const text = canvasUI.view.newType("text");
 
   text.set("text", "Text");
-  text.set("font", {
-    size: 16,
-    family: "Courier New",
-    weight: 400,
-    color: "#000",
-  });
-  text.set("align", {
-    vertical: "middle",
-    horizontal: "left",
-  });
+  text.set("font", { size: 16, family: "Courier New", weight: 400 });
+  text.set("color", "#000");
+  text.set("align", { vertical: "middle", horizontal: "left" });
 
   text.lifecycle.set("onMeasure", function (text) {
     const textSize = measure.textSize(text.get("text"), text.get("font"));
@@ -77,7 +70,8 @@ export const newViewText = function () {
       text.size,
       text.inner.get("textCoords"),
       text.get("text"),
-      text.get("font")
+      text.get("font"),
+      text.get("color")
     );
   });
 };

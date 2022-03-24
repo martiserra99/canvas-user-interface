@@ -103,13 +103,13 @@ export const draw = {
     ctx.restore();
   },
 
-  text(ctx, clipCoords, clipSize, textCoords, text, font) {
+  text(ctx, clipCoords, clipSize, textCoords, text, font, color) {
     ctx.save();
     ctx.beginPath();
     ctx.rect(clipCoords.x, clipCoords.y, clipSize.width, clipSize.height);
     ctx.clip();
     ctx.font = `${font.weight} ${font.size}px ${font.family}`;
-    ctx.fillStyle = font.color;
+    ctx.fillStyle = color;
     ctx.textBaseline = "top";
     ctx.fillText(text, textCoords.x, textCoords.y);
     ctx.restore();

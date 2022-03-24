@@ -9,16 +9,8 @@ export const newCompositeImageArea = function () {
   imageArea.set("corner", { type: "cut", size: 0 });
   imageArea.set("imageSize", { width: 100, height: 100 });
   imageArea.set("imageSrc", "");
-  imageArea.set("align", {
-    vertical: "middle",
-    horizontal: "middle",
-  });
-  imageArea.set("margin", {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  });
+  imageArea.set("align", { vertical: "middle", horizontal: "middle" });
+  imageArea.set("margin", { top: 0, right: 0, bottom: 0, left: 0 });
 
   imageArea.lifecycle.set("onGetElement", function (imageArea) {
     const frame = canvasUI.layout.new("frame", "frame");
