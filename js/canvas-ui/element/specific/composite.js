@@ -36,6 +36,6 @@ export class Composite extends Element {
 
   signal(signal) {
     super.signal(signal);
-    if (signal.propagate) this._element.signal(signal);
+    this._element.signal(signal);
   }
 }

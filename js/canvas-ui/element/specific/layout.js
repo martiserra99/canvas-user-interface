@@ -112,7 +112,7 @@ export class Layout extends Element {
 
   signal(signal) {
     super.signal(signal);
-    if (signal.propagate) for (const child of this.childs) child.signal(signal);
+    for (const child of this.childs) child.signal(signal);
   }
 
   insert(child) {
