@@ -25,7 +25,7 @@ export class Layout extends Element {
   }
 
   _setChildsSizes(maxSize) {
-    const childs = this._sortChildsToMeasures(maxSize);
+    const childs = this._sortChildsToMeasure(maxSize);
     const childsWithSizes = [];
     for (const child of childs) {
       const childMaxSize = this._getChildMaxSize(
@@ -38,7 +38,7 @@ export class Layout extends Element {
     }
   }
 
-  _sortChildsToMeasures(maxSize) {
+  _sortChildsToMeasure(maxSize) {
     return this._lifecycle.get("onSortChildsToMeasure")(maxSize);
   }
 
