@@ -23,19 +23,11 @@ export const newLayoutGrid = function () {
   grid.set("border", { color: "#000", size: 0 });
   grid.set("corner", { type: "cut", size: 0 });
 
-  grid.childLayoutParams.set("position", { column: 0, row: 0 });
-  grid.childLayoutParams.set("span", { columns: 1, rows: 1 });
-  grid.childLayoutParams.set("alignSelf", {
-    vertical: "auto",
-    horizontal: "auto",
-  });
-  grid.childLayoutParams.set("zIndex", 0);
-  grid.childLayoutParams.set("margin", {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  });
+  grid.layoutParams.set("position", { column: 0, row: 0 });
+  grid.layoutParams.set("span", { columns: 1, rows: 1 });
+  grid.layoutParams.set("alignSelf", { vertical: "auto", horizontal: "auto" });
+  grid.layoutParams.set("zIndex", 0);
+  grid.layoutParams.set("margin", { top: 0, right: 0, bottom: 0, left: 0 });
 
   setupLifecycleFunctions(grid);
 };

@@ -3,7 +3,7 @@ import { ElementType, ElementLifecycle } from "../generic/element.js";
 export class LayoutType extends ElementType {
   constructor(data) {
     super(data);
-    this.childLayoutParams = new ChildLayoutParams();
+    this.layoutParams = new LayoutParams();
   }
 
   _getLifecycle() {
@@ -24,16 +24,16 @@ class LayoutLifecycle extends ElementLifecycle {
   }
 }
 
-class ChildLayoutParams {
+class LayoutParams {
   constructor() {
-    this._childLayoutParams = new Map();
+    this._layoutParams = new Map();
   }
 
   [Symbol.iterator]() {
-    return this._childLayoutParams[Symbol.iterator]();
+    return this._layoutParams[Symbol.iterator]();
   }
 
   set(name, value) {
-    this._childLayoutParams.set(name, value);
+    this._layoutParams.set(name, value);
   }
 }

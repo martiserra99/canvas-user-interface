@@ -17,14 +17,9 @@ export const newLayoutLinear = function () {
   linear.set("border", { color: "#000", size: 0 });
   linear.set("corner", { type: "cut", size: 0 });
 
-  linear.childLayoutParams.set("position", 0);
-  linear.childLayoutParams.set("alignSelf", "auto");
-  linear.childLayoutParams.set("margin", {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  });
+  linear.layoutParams.set("position", 0);
+  linear.layoutParams.set("alignSelf", "auto");
+  linear.layoutParams.set("margin", { top: 0, right: 0, bottom: 0, left: 0 });
 
   setupLifecycleFunctions(linear);
 };

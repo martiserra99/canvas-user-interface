@@ -9,7 +9,7 @@ export class Layout extends Element {
   }
 
   _setChildLayoutParams(type) {
-    for (const [key, value] of type.childLayoutParams)
+    for (const [key, value] of type.layoutParams)
       this.childLayoutParams.set(key, value);
   }
 
