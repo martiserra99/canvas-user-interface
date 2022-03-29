@@ -37,7 +37,7 @@ export class Events {
         state.set("wasMouseDown", isIn);
         return { event: false };
       }
-      const wasMouseDown = state.get("wasMouseDown") ?? false;
+      const wasMouseDown = state.get("wasMouseDown", false);
       const event = isIn && wasMouseDown;
       return { event, data: signal.data };
     });
@@ -73,7 +73,7 @@ export class Events {
       if (signal.type !== "mousemove") return { event: false };
       const coords = signal.data;
       const isIn = coordsInElement(coords, element);
-      const wasOut = state.get("wasOut") ?? true;
+      const wasOut = state.get("wasOut", true);
       const event = isIn && wasOut;
       state.set("wasOut", !isIn);
       return { event, data: signal.data };
@@ -92,7 +92,7 @@ export class Events {
       if (signal.type !== "mousemove") return { event: false };
       const coords = signal.data;
       const isOut = !coordsInElement(coords, element);
-      const wasIn = state.get("wasIn") ?? false;
+      const wasIn = state.get("wasIn", false);
       const event = isOut && wasIn;
       state.set("wasIn", !isOut);
       return { event, data: signal.data };
