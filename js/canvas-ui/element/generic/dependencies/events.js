@@ -23,7 +23,7 @@ export class Events {
 }
 
 class State {
-  constructor(element) {
+  constructor() {
     this._keys = new Map();
   }
 
