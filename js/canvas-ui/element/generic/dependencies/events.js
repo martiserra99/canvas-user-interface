@@ -24,15 +24,23 @@ export class Events {
 
 class State {
   constructor(element) {
-    this._properties = new Map();
+    this._keys = new Map();
   }
 
   set(name, value) {
-    this._properties.set(name, value);
+    this._keys.set(name, value);
   }
 
   get(name, value) {
-    if (!this._properties.has(name)) return value;
-    return this._properties.get(name);
+    if (!this.has(name)) return value;
+    return this._keys.get(name);
+  }
+
+  del(name) {
+    this._keys.delete(name);
+  }
+
+  has(name) {
+    return this._keys.has(name);
   }
 }
