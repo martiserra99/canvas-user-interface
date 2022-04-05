@@ -3,7 +3,7 @@ import { Element } from "../generic/element.js";
 export class Layout extends Element {
   constructor(id, type) {
     super(id, "layout", type);
-    this.childs = [];
+    this.children = [];
     this.childLayoutParams = new Map();
     this._setChildLayoutParams(type);
   }
@@ -15,70 +15,74 @@ export class Layout extends Element {
 
   start() {
     super.start();
-    for (const child of this.childs) child.start();
+    for (const child of this.children) child.start();
   }
 
   measure(maxSize) {
     super.measure(maxSize);
-    this._setChildsSizes(maxSize);
+    this._setchildrenSizes(maxSize);
     this._setSize(maxSize);
   }
 
-  _setChildsSizes(maxSize) {
-    const childs = this._sortChildsToMeasure(maxSize);
-    const childsWithSizes = [];
-    for (const child of childs) {
+  _setchildrenSizes(maxSize) {
+    const children = this._sortchildrenToMeasure(maxSize);
+    const childrenWithSizes = [];
+    for (const child of children) {
       const childMaxSize = this._getChildMaxSize(
         maxSize,
         child,
-        childsWithSizes
+        childrenWithSizes
       );
       child.measure(childMaxSize);
-      childsWithSizes.push(child);
+      childrenWithSizes.push(child);
     }
   }
 
-  _sortChildsToMeasure(maxSize) {
-    return this._lifecycle.get("onSortChildsToMeasure")(maxSize);
+  _sortchildrenToMeasure(maxSize) {
+    return this._lifecycle.get("sortchildrenToMeasure")(maxSize);
   }
 
-  _getChildMaxSize(maxSize, child, childsWithSizes) {
-    return this._lifecycle.get("onGetChildMaxSize")(
+  _getChildMaxSize(maxSize, child, childrenWithSizes) {
+    return this._lifecycle.get("getChildMaxSize")(
       maxSize,
       child,
-      childsWithSizes
+      childrenWithSizes
     );
   }
 
   _setSize(maxSize) {
-    this.size = this._lifecycle.get("onGetSize")(maxSize);
+    this.size = this._lifecycle.get("getSize")(maxSize);
   }
 
   locate(coords) {
     super.locate(coords);
-    this._setChildsCoords(coords);
+    this._setchildrenCoords(coords);
     this._setCoords(coords);
   }
 
-  _setChildsCoords(coords) {
-    const childs = this._sortChildsToLocate(coords);
-    const childsWithCoords = [];
-    for (const child of childs) {
-      const childCoords = this._getChildCoords(coords, child, childsWithCoords);
+  _setchildrenCoords(coords) {
+    const children = this._sortchildrenToLocate(coords);
+    const childrenWithCoords = [];
+    for (const child of children) {
+      const childCoords = this._getChildCoords(
+        coords,
+        child,
+        childrenWithCoords
+      );
       child.locate(childCoords);
-      childsWithCoords.push(child);
+      childrenWithCoords.push(child);
     }
   }
 
-  _sortChildsToLocate(coords) {
-    return this._lifecycle.get("onSortChildsToLocate")(coords);
+  _sortchildrenToLocate(coords) {
+    return this._lifecycle.get("sortchildrenToLocate")(coords);
   }
 
-  _getChildCoords(coords, child, childsWithCoords) {
-    return this._lifecycle.get("onGetChildCoords")(
+  _getChildCoords(coords, child, childrenWithCoords) {
+    return this._lifecycle.get("getChildCoords")(
       coords,
       child,
-      childsWithCoords
+      childrenWithCoords
     );
   }
 
@@ -89,30 +93,30 @@ export class Layout extends Element {
   draw(ctx) {
     super.draw(ctx);
     this._drawItself(ctx);
-    this._drawChilds(ctx);
+    this._drawchildren(ctx);
   }
 
   _drawItself(ctx) {
-    this._lifecycle.get("onDrawItself")(ctx);
+    this._lifecycle.get("drawItself")(ctx);
   }
 
-  _drawChilds(ctx) {
-    const childs = this._sortChildsToDraw(ctx);
-    for (const child of childs) child.draw(ctx);
+  _drawchildren(ctx) {
+    const children = this._sortchildrenToDraw(ctx);
+    for (const child of children) child.draw(ctx);
   }
 
-  _sortChildsToDraw(ctx) {
-    return this._lifecycle.get("onSortChildsToDraw")(ctx);
+  _sortchildrenToDraw(ctx) {
+    return this._lifecycle.get("sortchildrenToDraw")(ctx);
   }
 
   end() {
     super.end();
-    for (const child of this.childs) child.end();
+    for (const child of this.children) child.end();
   }
 
   signal(signal) {
     super.signal(signal);
-    for (const child of this.childs) child.signal(signal);
+    for (const child of this.children) child.signal(signal);
   }
 
   insert(child) {
@@ -120,16 +124,17 @@ export class Layout extends Element {
   }
 
   remove(child) {
-    if (!this.childs.includes(child)) return;
+    if (!this.children.includes(child)) return;
     child.removeFromLayout();
   }
 
   find(id, direct = false) {
-    const childs = [...this.childs];
-    while (childs.length > 0) {
-      const child = childs.shift();
+    const children = [...this.children];
+    while (children.length > 0) {
+      const child = children.shift();
       if (child.id === id) return child;
-      if (child.element === "layout" && !direct) childs.push(...child.childs);
+      if (child.element === "layout" && !direct)
+        children.push(...child.children);
     }
     return null;
   }

@@ -14,13 +14,13 @@ export class LayoutType extends ElementType {
 class LayoutLifecycle extends ElementLifecycle {
   _setFunctions() {
     super._setFunctions();
-    this._lifecycle.set("onSortChildsToMeasure", (layout) => layout.childs);
-    this._lifecycle.set("onGetChildMaxSize", () => ({ width: 0, height: 0 }));
-    this._lifecycle.set("onGetSize", () => ({ width: 0, height: 0 }));
-    this._lifecycle.set("onSortChildsToLocate", (layout) => layout.childs);
-    this._lifecycle.set("onGetChildCoords", (layout, coords) => coords);
-    this._lifecycle.set("onDrawItself", () => {});
-    this._lifecycle.set("onSortChildsToDraw", (layout) => layout.childs);
+    this._lifecycle.set("sortchildrenToMeasure", (layout) => layout.children);
+    this._lifecycle.set("getChildMaxSize", () => ({ width: 0, height: 0 }));
+    this._lifecycle.set("getSize", () => ({ width: 0, height: 0 }));
+    this._lifecycle.set("sortchildrenToLocate", (layout) => layout.children);
+    this._lifecycle.set("getChildCoords", (layout, coords) => coords);
+    this._lifecycle.set("drawItself", () => {});
+    this._lifecycle.set("sortchildrenToDraw", (layout) => layout.children);
   }
 }
 

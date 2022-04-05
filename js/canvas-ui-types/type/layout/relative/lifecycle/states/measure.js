@@ -8,15 +8,15 @@ export const setupMeasureLifecycleFunctions = function (relative) {
     relative.inner.set("size", size);
   });
 
-  relative.lifecycle.set("onSortChildsToMeasure", function (relative) {
-    return relative.inner.get("sortedChilds");
+  relative.lifecycle.set("sortchildrenToMeasure", function (relative) {
+    return relative.inner.get("sortedchildren");
   });
 
   relative.lifecycle.set(
-    "onGetChildMaxSize",
+    "getChildMaxSize",
     function (relative, maxSize, child) {
-      const notPositionedChilds = relative.inner.get("notPositionedChilds");
-      if (notPositionedChilds.includes(child)) return { width: 0, height: 0 };
+      const notPositionedchildren = relative.inner.get("notPositionedchildren");
+      if (notPositionedchildren.includes(child)) return { width: 0, height: 0 };
 
       const margin = child.layoutParams.get("margin");
 
@@ -38,7 +38,7 @@ export const setupMeasureLifecycleFunctions = function (relative) {
     }
   );
 
-  relative.lifecycle.set("onGetSize", function (relative) {
+  relative.lifecycle.set("getSize", function (relative) {
     return relative.inner.get("size");
   });
 };

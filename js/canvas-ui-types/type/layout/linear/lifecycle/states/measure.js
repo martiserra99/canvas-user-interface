@@ -14,25 +14,25 @@ export const setupMeasureLifecycleFunctions = function (linear) {
     linear.inner.set("availableContentSize", availableContentSize);
   });
 
-  linear.lifecycle.set("onSortChildsToMeasure", function (linear) {
-    return linear.inner.get("sortedChilds");
+  linear.lifecycle.set("sortchildrenToMeasure", function (linear) {
+    return linear.inner.get("sortedchildren");
   });
 
   linear.lifecycle.set(
-    "onGetChildMaxSize",
-    function (linear, maxSize, child, childsWithSizes) {
+    "getChildMaxSize",
+    function (linear, maxSize, child, childrenWithSizes) {
       const width = linear.inner.call(
         "getChildMaxWidth",
         maxSize,
         child,
-        childsWithSizes
+        childrenWithSizes
       );
 
       const height = linear.inner.call(
         "getChildMaxHeight",
         maxSize,
         child,
-        childsWithSizes
+        childrenWithSizes
       );
 
       return { width, height };
@@ -41,7 +41,7 @@ export const setupMeasureLifecycleFunctions = function (linear) {
 
   linear.inner.fun(
     "getChildMaxWidth",
-    function (linear, maxSize, child, childsWithSizes) {
+    function (linear, maxSize, child, childrenWithSizes) {
       const horizontal = linear.inner.get("horizontal");
       const availableContentSize = linear.inner.get("availableContentSize");
 
@@ -49,7 +49,7 @@ export const setupMeasureLifecycleFunctions = function (linear) {
       const margin = child.layoutParams.get("margin");
 
       if (horizontal) {
-        const usedWidth = childsWithSizes.reduce((acc, child) => {
+        const usedWidth = childrenWithSizes.reduce((acc, child) => {
           const width = child.size.width;
           const margin = child.layoutParams.get("margin");
           return acc + width + margin.left + margin.right + gap;
@@ -70,7 +70,7 @@ export const setupMeasureLifecycleFunctions = function (linear) {
 
   linear.inner.fun(
     "getChildMaxHeight",
-    function (linear, maxSize, child, childsWithSizes) {
+    function (linear, maxSize, child, childrenWithSizes) {
       const horizontal = linear.inner.get("horizontal");
       const availableContentSize = linear.inner.get("availableContentSize");
 
@@ -78,7 +78,7 @@ export const setupMeasureLifecycleFunctions = function (linear) {
       const margin = child.layoutParams.get("margin");
 
       if (!horizontal) {
-        const usedHeight = childsWithSizes.reduce((acc, child) => {
+        const usedHeight = childrenWithSizes.reduce((acc, child) => {
           const height = child.size.height;
           const margin = child.layoutParams.get("margin");
           return acc + height + margin.top + margin.bottom + gap;
@@ -97,35 +97,35 @@ export const setupMeasureLifecycleFunctions = function (linear) {
     }
   );
 
-  linear.lifecycle.set("onGetSize", function (linear, maxSize) {
-    const childsSize = linear.inner.call("getChildsSize");
+  linear.lifecycle.set("getSize", function (linear, maxSize) {
+    const childrenSize = linear.inner.call("getchildrenSize");
     const size = measure.size(linear.inner.get("desiredSize"), maxSize, {
-      width: () => childsSize.width + linear.get("border").size * 2,
-      height: () => childsSize.height + linear.get("border").size * 2,
+      width: () => childrenSize.width + linear.get("border").size * 2,
+      height: () => childrenSize.height + linear.get("border").size * 2,
     });
     const contentSize = {
       width: size.width - linear.get("border").size * 2,
       height: size.height - linear.get("border").size * 2,
     };
 
-    linear.inner.set("childsSize", childsSize);
+    linear.inner.set("childrenSize", childrenSize);
     linear.inner.set("contentSize", contentSize);
 
     return size;
   });
 
-  linear.inner.fun("getChildsSize", function (linear) {
-    const width = linear.inner.call("getChildsWidth");
-    const height = linear.inner.call("getChildsHeight");
+  linear.inner.fun("getchildrenSize", function (linear) {
+    const width = linear.inner.call("getchildrenWidth");
+    const height = linear.inner.call("getchildrenHeight");
     return { width, height };
   });
 
-  linear.inner.fun("getChildsWidth", function (linear) {
+  linear.inner.fun("getchildrenWidth", function (linear) {
     const horizontal = linear.inner.get("horizontal");
 
     if (horizontal) {
       const gap = linear.get("gap");
-      return linear.childs.reduce((acc, child, idx) => {
+      return linear.children.reduce((acc, child, idx) => {
         const margin = child.layoutParams.get("margin");
         const width = child.size.width;
         if (idx === 0) return acc + width + margin.left + margin.right;
@@ -133,7 +133,7 @@ export const setupMeasureLifecycleFunctions = function (linear) {
       }, 0);
     }
 
-    return linear.childs.reduce((acc, child) => {
+    return linear.children.reduce((acc, child) => {
       const margin = child.layoutParams.get("margin");
       const width = child.size.width;
       const length = width + margin.left + margin.right;
@@ -141,12 +141,12 @@ export const setupMeasureLifecycleFunctions = function (linear) {
     }, 0);
   });
 
-  linear.inner.fun("getChildsHeight", function (linear) {
+  linear.inner.fun("getchildrenHeight", function (linear) {
     const horizontal = linear.inner.get("horizontal");
 
     if (!horizontal) {
       const gap = linear.get("gap");
-      return linear.childs.reduce((acc, child, idx) => {
+      return linear.children.reduce((acc, child, idx) => {
         const margin = child.layoutParams.get("margin");
         const height = child.size.height;
         if (idx === 0) return acc + height + margin.top + margin.bottom;
@@ -154,7 +154,7 @@ export const setupMeasureLifecycleFunctions = function (linear) {
       }, 0);
     }
 
-    return linear.childs.reduce((acc, child) => {
+    return linear.children.reduce((acc, child) => {
       const margin = child.layoutParams.get("margin");
       const height = child.size.height;
       const length = height + margin.top + margin.bottom;

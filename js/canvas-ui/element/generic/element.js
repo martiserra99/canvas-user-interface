@@ -74,13 +74,13 @@ export class Element {
   insertToLayout(layoutParent) {
     this.removeFromUI();
     this.removeFromLayout();
-    layoutParent.childs.push(this);
+    layoutParent.children.push(this);
     this.layoutParent = layoutParent;
     this.layoutParams = new LayoutParams(this);
   }
 
   removeFromLayout() {
-    if (this.layoutParent) removeFromArray(this.layoutParent.childs, this);
+    if (this.layoutParent) removeFromArray(this.layoutParent.children, this);
     delete this.layoutParent;
     delete this.layoutParams;
     this._resetPlacementData();

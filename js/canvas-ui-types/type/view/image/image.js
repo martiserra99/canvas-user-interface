@@ -18,11 +18,11 @@ export const newViewImage = function () {
       image.inner.get("img").src = image.get("src");
   });
 
-  image.lifecycle.set("onGetSize", function (image, maxSize) {
+  image.lifecycle.set("getSize", function (image, maxSize) {
     return measure.size(image.get("size"), maxSize);
   });
 
-  image.lifecycle.set("onDrawItself", function (image, ctx) {
+  image.lifecycle.set("drawItself", function (image, ctx) {
     draw.image(ctx, image.coords, image.size, image.inner.get("img"));
   });
 };

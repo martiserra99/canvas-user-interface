@@ -13,7 +13,7 @@ export const setupMeasureLifecycleFunctions = function (frame) {
     frame.inner.set("availableContentSize", availableContentSize);
   });
 
-  frame.lifecycle.set("onGetChildMaxSize", function (frame, maxSize, child) {
+  frame.lifecycle.set("getChildMaxSize", function (frame, maxSize, child) {
     const availableContentSize = frame.inner.get("availableContentSize");
     const margin = child.layoutParams.get("margin");
     let width = availableContentSize.width - margin.left - margin.right;
@@ -23,7 +23,7 @@ export const setupMeasureLifecycleFunctions = function (frame) {
     return { width, height };
   });
 
-  frame.lifecycle.set("onGetSize", function (frame, maxSize) {
+  frame.lifecycle.set("getSize", function (frame, maxSize) {
     const size = measure.size(frame.inner.get("desiredSize"), maxSize, {
       width: () => frame.inner.call("getAutoWidth"),
       height: () => frame.inner.call("getAutoHeight"),
@@ -39,7 +39,7 @@ export const setupMeasureLifecycleFunctions = function (frame) {
 
   frame.inner.fun("getAutoWidth", function (frame) {
     return (
-      frame.childs.reduce((acc, child) => {
+      frame.children.reduce((acc, child) => {
         const margin = child.layoutParams.get("margin");
         const length = child.size.width + margin.left + margin.right;
         return acc > length ? acc : length;
@@ -50,7 +50,7 @@ export const setupMeasureLifecycleFunctions = function (frame) {
 
   frame.inner.fun("getAutoHeight", function (frame) {
     return (
-      frame.childs.reduce((acc, child) => {
+      frame.children.reduce((acc, child) => {
         const margin = child.layoutParams.get("margin");
         const length = child.size.height + margin.top + margin.bottom;
         return acc > length ? acc : length;

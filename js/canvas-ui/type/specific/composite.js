@@ -9,7 +9,7 @@ export class CompositeType extends ElementType {
 class CompositeLifecycle extends ElementLifecycle {
   _setFunctions() {
     super._setFunctions();
-    this._lifecycle.set("onGetElement", () => {});
-    this._lifecycle.set("onUpdateElement", () => {});
+    this._lifecycle.set("getElement", () => {});
+    this._lifecycle.set("updateElement", () => {});
   }
 }

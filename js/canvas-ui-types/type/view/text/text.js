@@ -17,7 +17,7 @@ export const newViewText = function () {
     text.inner.set("textSize", textSize);
   });
 
-  text.lifecycle.set("onGetSize", function (text, maxSize) {
+  text.lifecycle.set("getSize", function (text, maxSize) {
     return measure.size(text.inner.get("textSize"), maxSize);
   });
 
@@ -63,7 +63,7 @@ export const newViewText = function () {
     else return locate.alignEnd(textCoords, textLength);
   });
 
-  text.lifecycle.set("onDrawItself", function (text, ctx) {
+  text.lifecycle.set("drawItself", function (text, ctx) {
     draw.text(
       ctx,
       text.coords,

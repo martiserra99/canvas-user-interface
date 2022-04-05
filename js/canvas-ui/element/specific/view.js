@@ -11,7 +11,7 @@ export class View extends Element {
   }
 
   _setSize(maxSize) {
-    this.size = this._lifecycle.get("onGetSize")(maxSize);
+    this.size = this._lifecycle.get("getSize")(maxSize);
   }
 
   locate(coords) {
@@ -29,6 +29,6 @@ export class View extends Element {
   }
 
   _drawItself(ctx) {
-    this._lifecycle.get("onDrawItself")(ctx);
+    this._lifecycle.get("drawItself")(ctx);
   }
 }

@@ -100,7 +100,7 @@ export const setupMeasureLifecycleFunctions = function (grid) {
     return { width, height };
   });
 
-  grid.lifecycle.set("onGetChildMaxSize", function (grid, maxSize, child) {
+  grid.lifecycle.set("getChildMaxSize", function (grid, maxSize, child) {
     const gap = grid.get("gap").size;
     const columnsWidths = grid.inner.get("columnsWidths");
     const rowsHeights = grid.inner.get("rowsHeights");
@@ -128,7 +128,7 @@ export const setupMeasureLifecycleFunctions = function (grid) {
     return { width, height };
   });
 
-  grid.lifecycle.set("onGetSize", function (grid, maxSize) {
+  grid.lifecycle.set("getSize", function (grid, maxSize) {
     const size = measure.size(grid.inner.get("desiredSize"), maxSize, {
       width: () =>
         grid.inner.get("gridSize").width + grid.get("border").size * 2,

@@ -6,20 +6,20 @@ export const setupLocateLifecycleFunctions = function (linear) {
       x: coords.x + linear.get("border").size,
       y: coords.y + linear.get("border").size,
     };
-    const childsCoord = linear.inner.call("getChildsCoord", contentCoords);
+    const childrenCoord = linear.inner.call("getchildrenCoord", contentCoords);
 
     linear.inner.set("contentCoords", contentCoords);
-    linear.inner.set("childsCoord", childsCoord);
+    linear.inner.set("childrenCoord", childrenCoord);
   });
 
-  linear.inner.fun("getChildsCoord", function (linear, contentCoords) {
+  linear.inner.fun("getchildrenCoord", function (linear, contentCoords) {
     const horizontal = linear.inner.get("horizontal");
     const contentSize = linear.inner.get("contentSize");
-    const childsSize = linear.inner.get("childsSize");
+    const childrenSize = linear.inner.get("childrenSize");
     const alignContent = linear.get("alignContent");
 
     if (horizontal) {
-      const length = childsSize.width;
+      const length = childrenSize.width;
       const coords = {
         start: contentCoords.x,
         end: contentCoords.x + contentSize.width,
@@ -31,7 +31,7 @@ export const setupLocateLifecycleFunctions = function (linear) {
       else return locate.alignEnd(coords, length);
     }
 
-    const length = childsSize.height;
+    const length = childrenSize.height;
     const coords = {
       start: contentCoords.y,
       end: contentCoords.y + contentSize.height,
@@ -43,31 +43,31 @@ export const setupLocateLifecycleFunctions = function (linear) {
     else return locate.alignEnd(coords, length);
   });
 
-  linear.lifecycle.set("onSortChildsToLocate", function (linear) {
-    return linear.inner.get("sortedChilds");
+  linear.lifecycle.set("sortchildrenToLocate", function (linear) {
+    return linear.inner.get("sortedchildren");
   });
 
   linear.lifecycle.set(
-    "onGetChildCoords",
-    function (linear, coords, child, childsWithCoords) {
-      const x = linear.inner.call("getChildX", child, childsWithCoords);
-      const y = linear.inner.call("getChildY", child, childsWithCoords);
+    "getChildCoords",
+    function (linear, coords, child, childrenWithCoords) {
+      const x = linear.inner.call("getChildX", child, childrenWithCoords);
+      const y = linear.inner.call("getChildY", child, childrenWithCoords);
       return { x, y };
     }
   );
 
-  linear.inner.fun("getChildX", function (linear, child, childsWithCoords) {
+  linear.inner.fun("getChildX", function (linear, child, childrenWithCoords) {
     const horizontal = linear.inner.get("horizontal");
     if (horizontal) {
-      const isFirst = childsWithCoords.length === 0;
+      const isFirst = childrenWithCoords.length === 0;
       const margin = child.layoutParams.get("margin");
 
       if (isFirst) {
-        const childsCoord = linear.inner.get("childsCoord");
-        return childsCoord + margin.left;
+        const childrenCoord = linear.inner.get("childrenCoord");
+        return childrenCoord + margin.left;
       }
 
-      const last = childsWithCoords[childsWithCoords.length - 1];
+      const last = childrenWithCoords[childrenWithCoords.length - 1];
       const gap = linear.get("gap");
       return (
         last.coords.x +
@@ -102,18 +102,18 @@ export const setupLocateLifecycleFunctions = function (linear) {
     else return locate.alignEnd(coords, length, margin);
   });
 
-  linear.inner.fun("getChildY", function (linear, child, childsWithCoords) {
+  linear.inner.fun("getChildY", function (linear, child, childrenWithCoords) {
     const horizontal = linear.inner.get("horizontal");
     if (!horizontal) {
-      const isFirst = childsWithCoords.length === 0;
+      const isFirst = childrenWithCoords.length === 0;
       const margin = child.layoutParams.get("margin");
 
       if (isFirst) {
-        const childsCoord = linear.inner.get("childsCoord");
-        return childsCoord + margin.top;
+        const childrenCoord = linear.inner.get("childrenCoord");
+        return childrenCoord + margin.top;
       }
 
-      const last = childsWithCoords[childsWithCoords.length - 1];
+      const last = childrenWithCoords[childrenWithCoords.length - 1];
       const gap = linear.get("gap");
       return (
         last.coords.y +

@@ -3,12 +3,12 @@ import { Element } from "../generic/element.js";
 export class Composite extends Element {
   constructor(id, type) {
     super(id, "composite", type);
-    this._element = this._lifecycle.get("onGetElement")();
+    this._element = this._lifecycle.get("getElement")();
   }
 
   start() {
     super.start();
-    this._lifecycle.get("onUpdateElement")(this._element);
+    this._lifecycle.get("updateElement")(this._element);
     this._element.start();
   }
 

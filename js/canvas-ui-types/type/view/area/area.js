@@ -14,12 +14,12 @@ export const newViewArea = function () {
   area.set("border", { color: "#000", size: 0 });
   area.set("corner", { type: "cut", size: 0 });
 
-  area.lifecycle.set("onGetSize", function (area, maxSize) {
+  area.lifecycle.set("getSize", function (area, maxSize) {
     const desiredSize = measure.desiredSize(area.get("size"), maxSize);
     return measure.size(desiredSize, maxSize);
   });
 
-  area.lifecycle.set("onDrawItself", function (area, ctx) {
+  area.lifecycle.set("drawItself", function (area, ctx) {
     const coords = area.coords;
     const size = area.size;
     const background = area.get("background");

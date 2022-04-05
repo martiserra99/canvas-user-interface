@@ -8,7 +8,7 @@ export const setupLocateLifecycleFunctions = function (frame) {
     });
   });
 
-  frame.lifecycle.set("onGetChildCoords", function (frame, coords, child) {
+  frame.lifecycle.set("getChildCoords", function (frame, coords, child) {
     return {
       x: frame.inner.call("getChildX", child),
       y: frame.inner.call("getChildY", child),

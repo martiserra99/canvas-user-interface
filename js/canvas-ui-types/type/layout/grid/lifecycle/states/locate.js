@@ -96,8 +96,8 @@ export const setupLocateLifecycleFunctions = function (grid) {
   );
 
   grid.lifecycle.set(
-    "onGetChildCoords",
-    function (grid, coords, child, childsWithCoords) {
+    "getChildCoords",
+    function (grid, coords, child, childrenWithCoords) {
       const valid = grid.inner.call("areChildCellsValid", child);
       if (!valid) return { x: 0, y: 0 };
       const x = grid.inner.call("getChildX", child);

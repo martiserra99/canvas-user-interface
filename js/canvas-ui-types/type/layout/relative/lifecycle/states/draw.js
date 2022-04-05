@@ -1,7 +1,7 @@
 import { draw } from "../../../../../utils/draw.js";
 
 export const setupDrawLifecycleFunctions = function (relative) {
-  relative.lifecycle.set("onDrawItself", function (relative, ctx) {
+  relative.lifecycle.set("drawItself", function (relative, ctx) {
     const coords = relative.coords;
     const size = relative.size;
     const background = relative.get("background");
@@ -10,8 +10,8 @@ export const setupDrawLifecycleFunctions = function (relative) {
     draw.area(ctx, coords, size, background, border, corner);
   });
 
-  relative.lifecycle.set("onSortChildsToDraw", function (relative) {
-    return [...relative.childs].sort(
+  relative.lifecycle.set("sortchildrenToDraw", function (relative) {
+    return [...relative.children].sort(
       (first, second) =>
         first.layoutParams.get("zIndex") - second.layoutParams.get("zIndex")
     );

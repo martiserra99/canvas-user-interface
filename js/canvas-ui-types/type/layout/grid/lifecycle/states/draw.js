@@ -1,7 +1,7 @@
 import { draw } from "../../../../../utils/draw.js";
 
 export const setupDrawLifecycleFunctions = function (grid) {
-  grid.lifecycle.set("onDrawItself", function (grid, ctx) {
+  grid.lifecycle.set("drawItself", function (grid, ctx) {
     grid.inner.call("drawArea", ctx);
     grid.inner.call("drawGaps", ctx);
   });
@@ -60,8 +60,8 @@ export const setupDrawLifecycleFunctions = function (grid) {
     }
   });
 
-  grid.lifecycle.set("onSortChildsToDraw", function (grid) {
-    return [...grid.childs].sort(
+  grid.lifecycle.set("sortchildrenToDraw", function (grid) {
+    return [...grid.children].sort(
       (first, second) =>
         first.layoutParams.get("zIndex") - second.layoutParams.get("zIndex")
     );

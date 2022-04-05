@@ -8,14 +8,14 @@ export const setupStartLifecycleFunctions = function (linear) {
       linear.get("direction") === "reverse-horizontal" ||
       linear.get("direction") === "reverse-vertical";
 
-    const sortedChilds = [...linear.childs].sort(
+    const sortedchildren = [...linear.children].sort(
       (first, second) =>
         first.layoutParams.get("position") - second.layoutParams.get("position")
     );
-    if (reverse) sortedChilds.reverse();
+    if (reverse) sortedchildren.reverse();
 
     linear.inner.set("horizontal", horizontal);
     linear.inner.set("reverse", reverse);
-    linear.inner.set("sortedChilds", sortedChilds);
+    linear.inner.set("sortedchildren", sortedchildren);
   });
 };
