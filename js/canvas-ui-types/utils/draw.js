@@ -11,6 +11,7 @@ export const draw = {
     let cornerSize = corner.size;
     if (corner.size > width / 2) cornerSize = width / 2;
     if (corner.size > height / 2) cornerSize = height / 2;
+    if (cornerSize < 0) cornerSize = 0;
     const rectangleCorner = { type: corner.type, size: cornerSize };
 
     ctx.save();
