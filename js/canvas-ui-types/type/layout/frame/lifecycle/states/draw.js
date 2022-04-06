@@ -10,7 +10,7 @@ export const setupDrawLifecycleFunctions = function (frame) {
     draw.area(ctx, coords, size, background, border, corner);
   });
 
-  frame.lifecycle.set("sortchildrenToDraw", function (frame) {
+  frame.lifecycle.set("sortChildrenToDraw", function (frame) {
     return [...frame.children].sort(
       (first, second) =>
         first.layoutParams.get("zIndex") - second.layoutParams.get("zIndex")

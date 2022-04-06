@@ -8,15 +8,15 @@ export const setupMeasureLifecycleFunctions = function (relative) {
     relative.inner.set("size", size);
   });
 
-  relative.lifecycle.set("sortchildrenToMeasure", function (relative) {
-    return relative.inner.get("sortedchildren");
+  relative.lifecycle.set("sortChildrenToMeasure", function (relative) {
+    return relative.inner.get("sortedChildren");
   });
 
   relative.lifecycle.set(
     "getChildMaxSize",
     function (relative, maxSize, child) {
-      const notPositionedchildren = relative.inner.get("notPositionedchildren");
-      if (notPositionedchildren.includes(child)) return { width: 0, height: 0 };
+      const notPositionedChildren = relative.inner.get("notPositionedChildren");
+      if (notPositionedChildren.includes(child)) return { width: 0, height: 0 };
 
       const margin = child.layoutParams.get("margin");
 

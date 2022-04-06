@@ -1,28 +1,28 @@
 export const setupStartLifecycleFunctions = function (relative) {
   relative.lifecycle.set("onStart", function (relative) {
-    const sortedPositionedchildren = relative.inner.call(
-      "getSortedPositionedchildren"
+    const sortedPositionedChildren = relative.inner.call(
+      "getSortedPositionedChildren"
     );
-    const notPositionedchildren = relative.children.filter(
-      (child) => !sortedPositionedchildren.includes(child)
+    const notPositionedChildren = relative.children.filter(
+      (child) => !sortedPositionedChildren.includes(child)
     );
-    const sortedchildren = [
-      ...sortedPositionedchildren,
-      ...notPositionedchildren,
+    const sortedChildren = [
+      ...sortedPositionedChildren,
+      ...notPositionedChildren,
     ];
-    relative.inner.set("sortedchildren", sortedchildren);
-    relative.inner.set("notPositionedchildren", notPositionedchildren);
+    relative.inner.set("sortedChildren", sortedChildren);
+    relative.inner.set("notPositionedChildren", notPositionedChildren);
   });
 
-  relative.inner.fun("getSortedPositionedchildren", function (relative) {
-    const sortedchildren = [];
+  relative.inner.fun("getSortedPositionedChildren", function (relative) {
+    const sortedChildren = [];
     const children = [...relative.children];
     while (children.length > 0) {
       let inserted = false;
       for (let i = 0; i < children.length; i++) {
         const child = children[i];
-        if (relative.inner.call("canPositionChild", sortedchildren, child)) {
-          sortedchildren.push(child);
+        if (relative.inner.call("canPositionChild", sortedChildren, child)) {
+          sortedChildren.push(child);
           children.splice(i, 1);
           i--;
           inserted = true;
@@ -30,7 +30,7 @@ export const setupStartLifecycleFunctions = function (relative) {
       }
       if (!inserted) break;
     }
-    return sortedchildren;
+    return sortedChildren;
   });
 
   relative.inner.fun("canPositionChild", function (relative, children, child) {

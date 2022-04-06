@@ -10,7 +10,7 @@ export const setupDrawLifecycleFunctions = function (relative) {
     draw.area(ctx, coords, size, background, border, corner);
   });
 
-  relative.lifecycle.set("sortchildrenToDraw", function (relative) {
+  relative.lifecycle.set("sortChildrenToDraw", function (relative) {
     return [...relative.children].sort(
       (first, second) =>
         first.layoutParams.get("zIndex") - second.layoutParams.get("zIndex")

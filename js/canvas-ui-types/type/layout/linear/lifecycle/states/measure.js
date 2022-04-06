@@ -14,8 +14,8 @@ export const setupMeasureLifecycleFunctions = function (linear) {
     linear.inner.set("availableContentSize", availableContentSize);
   });
 
-  linear.lifecycle.set("sortchildrenToMeasure", function (linear) {
-    return linear.inner.get("sortedchildren");
+  linear.lifecycle.set("sortChildrenToMeasure", function (linear) {
+    return linear.inner.get("sortedChildren");
   });
 
   linear.lifecycle.set(
@@ -98,7 +98,7 @@ export const setupMeasureLifecycleFunctions = function (linear) {
   );
 
   linear.lifecycle.set("getSize", function (linear, maxSize) {
-    const childrenSize = linear.inner.call("getchildrenSize");
+    const childrenSize = linear.inner.call("getChildrenSize");
     const size = measure.size(linear.inner.get("desiredSize"), maxSize, {
       width: () => childrenSize.width + linear.get("border").size * 2,
       height: () => childrenSize.height + linear.get("border").size * 2,
@@ -114,13 +114,13 @@ export const setupMeasureLifecycleFunctions = function (linear) {
     return size;
   });
 
-  linear.inner.fun("getchildrenSize", function (linear) {
-    const width = linear.inner.call("getchildrenWidth");
-    const height = linear.inner.call("getchildrenHeight");
+  linear.inner.fun("getChildrenSize", function (linear) {
+    const width = linear.inner.call("getChildrenWidth");
+    const height = linear.inner.call("getChildrenHeight");
     return { width, height };
   });
 
-  linear.inner.fun("getchildrenWidth", function (linear) {
+  linear.inner.fun("getChildrenWidth", function (linear) {
     const horizontal = linear.inner.get("horizontal");
 
     if (horizontal) {
@@ -141,7 +141,7 @@ export const setupMeasureLifecycleFunctions = function (linear) {
     }, 0);
   });
 
-  linear.inner.fun("getchildrenHeight", function (linear) {
+  linear.inner.fun("getChildrenHeight", function (linear) {
     const horizontal = linear.inner.get("horizontal");
 
     if (!horizontal) {

@@ -60,7 +60,7 @@ export const setupDrawLifecycleFunctions = function (grid) {
     }
   });
 
-  grid.lifecycle.set("sortchildrenToDraw", function (grid) {
+  grid.lifecycle.set("sortChildrenToDraw", function (grid) {
     return [...grid.children].sort(
       (first, second) =>
         first.layoutParams.get("zIndex") - second.layoutParams.get("zIndex")

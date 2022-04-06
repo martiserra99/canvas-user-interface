@@ -6,13 +6,13 @@ export const setupLocateLifecycleFunctions = function (linear) {
       x: coords.x + linear.get("border").size,
       y: coords.y + linear.get("border").size,
     };
-    const childrenCoord = linear.inner.call("getchildrenCoord", contentCoords);
+    const childrenCoord = linear.inner.call("getChildrenCoord", contentCoords);
 
     linear.inner.set("contentCoords", contentCoords);
     linear.inner.set("childrenCoord", childrenCoord);
   });
 
-  linear.inner.fun("getchildrenCoord", function (linear, contentCoords) {
+  linear.inner.fun("getChildrenCoord", function (linear, contentCoords) {
     const horizontal = linear.inner.get("horizontal");
     const contentSize = linear.inner.get("contentSize");
     const childrenSize = linear.inner.get("childrenSize");
@@ -43,8 +43,8 @@ export const setupLocateLifecycleFunctions = function (linear) {
     else return locate.alignEnd(coords, length);
   });
 
-  linear.lifecycle.set("sortchildrenToLocate", function (linear) {
-    return linear.inner.get("sortedchildren");
+  linear.lifecycle.set("sortChildrenToLocate", function (linear) {
+    return linear.inner.get("sortedChildren");
   });
 
   linear.lifecycle.set(

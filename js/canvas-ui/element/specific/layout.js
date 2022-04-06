@@ -20,12 +20,12 @@ export class Layout extends Element {
 
   measure(maxSize) {
     super.measure(maxSize);
-    this._setchildrenSizes(maxSize);
+    this._setChildrenSizes(maxSize);
     this._setSize(maxSize);
   }
 
-  _setchildrenSizes(maxSize) {
-    const children = this._sortchildrenToMeasure(maxSize);
+  _setChildrenSizes(maxSize) {
+    const children = this._sortChildrenToMeasure(maxSize);
     const childrenWithSizes = [];
     for (const child of children) {
       const childMaxSize = this._getChildMaxSize(
@@ -38,8 +38,8 @@ export class Layout extends Element {
     }
   }
 
-  _sortchildrenToMeasure(maxSize) {
-    return this._lifecycle.get("sortchildrenToMeasure")(maxSize);
+  _sortChildrenToMeasure(maxSize) {
+    return this._lifecycle.get("sortChildrenToMeasure")(maxSize);
   }
 
   _getChildMaxSize(maxSize, child, childrenWithSizes) {
@@ -56,12 +56,12 @@ export class Layout extends Element {
 
   locate(coords) {
     super.locate(coords);
-    this._setchildrenCoords(coords);
+    this._setChildrenCoords(coords);
     this._setCoords(coords);
   }
 
-  _setchildrenCoords(coords) {
-    const children = this._sortchildrenToLocate(coords);
+  _setChildrenCoords(coords) {
+    const children = this._sortChildrenToLocate(coords);
     const childrenWithCoords = [];
     for (const child of children) {
       const childCoords = this._getChildCoords(
@@ -74,8 +74,8 @@ export class Layout extends Element {
     }
   }
 
-  _sortchildrenToLocate(coords) {
-    return this._lifecycle.get("sortchildrenToLocate")(coords);
+  _sortChildrenToLocate(coords) {
+    return this._lifecycle.get("sortChildrenToLocate")(coords);
   }
 
   _getChildCoords(coords, child, childrenWithCoords) {
@@ -93,20 +93,20 @@ export class Layout extends Element {
   draw(ctx) {
     super.draw(ctx);
     this._drawItself(ctx);
-    this._drawchildren(ctx);
+    this._drawChildren(ctx);
   }
 
   _drawItself(ctx) {
     this._lifecycle.get("drawItself")(ctx);
   }
 
-  _drawchildren(ctx) {
-    const children = this._sortchildrenToDraw(ctx);
+  _drawChildren(ctx) {
+    const children = this._sortChildrenToDraw(ctx);
     for (const child of children) child.draw(ctx);
   }
 
-  _sortchildrenToDraw(ctx) {
-    return this._lifecycle.get("sortchildrenToDraw")(ctx);
+  _sortChildrenToDraw(ctx) {
+    return this._lifecycle.get("sortChildrenToDraw")(ctx);
   }
 
   end() {
