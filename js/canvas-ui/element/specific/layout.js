@@ -128,6 +128,10 @@ export class Layout extends Element {
     child.removeFromLayout();
   }
 
+  removeAll() {
+    for (const child of [...this.children]) child.removeFromLayout();
+  }
+
   find(id, direct = false) {
     const children = [...this.children];
     while (children.length > 0) {
