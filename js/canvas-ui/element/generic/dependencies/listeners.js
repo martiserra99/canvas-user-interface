@@ -12,4 +12,9 @@ export class Listeners {
   remove(name, callback) {
     return removeFromArray(this._events.get(name).callbacks, callback);
   }
+
+  removeAll(name) {
+    const callbacks = this._events.get(name).callbacks;
+    callbacks.splice(0, callbacks.length);
+  }
 }
