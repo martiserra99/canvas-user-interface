@@ -9,13 +9,15 @@ export const newViewImage = function () {
   image.set("size", { width: 100, height: 100 });
   image.set("src", "");
 
+  image.inner.set("lastSrc", "");
+
   image.lifecycle.set("onCreate", function (image) {
     image.inner.set("img", new Image());
   });
 
   image.lifecycle.set("onStart", function (image) {
-    if (image.inner.get("img").src !== image.get("src"))
-      image.inner.get("img").src = image.get("src");
+    if (image.get("src") === image.inner.get("lastSrc")) return;
+    image.inner.get("img").src = image.get("src");
   });
 
   image.lifecycle.set("getSize", function (image, maxSize) {
@@ -24,5 +26,9 @@ export const newViewImage = function () {
 
   image.lifecycle.set("drawItself", function (image, ctx) {
     draw.image(ctx, image.coords, image.size, image.inner.get("img"));
+  });
+
+  image.lifecycle.set("onEnd", function (image) {
+    image.inner.set("lastSrc", image.get("src"));
   });
 };
