@@ -1,7 +1,7 @@
-import canvasUI from "../../../../canvas-ui.js";
+import { canvasUI } from "../../../../canvas-ui.js";
 
-import { measure } from "../../../utils/measure.js";
-import { draw } from "../../../utils/draw.js";
+import { measure } from "../../../utils/measure.js.js";
+import { draw } from "../../../utils/draw.js.js";
 
 export const newViewImage = function () {
   const image = canvasUI.view.newType("image");
