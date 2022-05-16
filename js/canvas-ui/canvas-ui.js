@@ -13,7 +13,7 @@ import { Composite } from "./element/specific/composite.js";
 
 import { newTypes } from "./types/types.js";
 
-export const canvasUI = {
+const canvasUI = {
   ui: {
     new(selector) {
       return new UI(selector);
@@ -65,5 +65,7 @@ export const canvasUI = {
     },
   },
 };
+
+export default canvasUI;
 
 newTypes();

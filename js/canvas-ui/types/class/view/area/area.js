@@ -1,4 +1,4 @@
-import { canvasUI } from "../../../../canvas-ui.js";
+import canvasUI from "../../../../canvas-ui.js";
 
 import { measure } from "../../../utils/measure.js";
 import { draw } from "../../../utils/draw.js";
