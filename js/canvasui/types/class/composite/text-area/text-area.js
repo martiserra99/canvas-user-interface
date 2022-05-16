@@ -1,4 +1,4 @@
-import canvasUI from "../../../../canvasui.js.js";
+import canvasUI from "../../../../canvasui.js";
 
 export const newCompositeTextArea = function () {
   const textArea = canvasUI.composite.newType("textArea");

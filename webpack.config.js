@@ -6,7 +6,7 @@ module.exports = {
     outputModule: true,
   },
   output: {
-    filename: "canvasui.js",
+    filename: "canvasui-js.js",
     path: path.resolve(__dirname, "js"),
     library: { type: "module" },
   },

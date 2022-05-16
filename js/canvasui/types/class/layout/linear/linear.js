@@ -1,4 +1,4 @@
-import canvasUI from "../../../../canvasui.js.js";
+import canvasUI from "../../../../canvasui.js";
 
 import { setupLifecycleFunctions } from "./lifecycle/lifecycle.js";
 
