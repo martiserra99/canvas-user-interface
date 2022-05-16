@@ -11,6 +11,8 @@ import { View } from "./element/specific/view.js";
 import { Layout } from "./element/specific/layout.js";
 import { Composite } from "./element/specific/composite.js";
 
+import { newTypes } from "./types/types.js";
+
 export const canvasUI = {
   ui: {
     new(selector) {
@@ -63,3 +65,5 @@ export const canvasUI = {
     },
   },
 };
+
+newTypes();
