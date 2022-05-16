@@ -1,0 +1,15 @@
+{
+  "name": "canvas-ui",
+  "version": "1.0.0",
+  "description": "This is a JavaScript library to build user interfaces using canvas",
+  "main": "js/canvas-ui.js",
+  "scripts": {
+    "build": "webpack --mode production"
+  },
+  "author": "Martí Serra Molina",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  }
+}
