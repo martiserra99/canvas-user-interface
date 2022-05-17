@@ -1,4 +1,4 @@
-# canvasui
+# canvasui-js.js
 
 **Canvas UI** is a JavaScript library used to build user interfaces using the canvas html element. It aims to manage all the complexities of using the canvas to let you develop anything you want as easy as possible.
 
