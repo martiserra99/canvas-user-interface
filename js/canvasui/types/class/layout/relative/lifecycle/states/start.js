@@ -39,7 +39,7 @@ export const setupStartLifecycleFunctions = function (relative) {
       if (
         direction !== null &&
         direction !== "parent" &&
-        !children.includes(direction.child)
+        !children.includes(relative.find(direction.child))
       ) {
         return false;
       }

@@ -3,7 +3,8 @@ export const setupUtilsFunctions = function (relative) {
     const attachToLeft = child.layoutParams.get("attachTo").left;
     if (attachToLeft === null || attachToLeft === "parent")
       return relative.get("border").size;
-    const { side, child: childLeft } = attachToLeft;
+    const { side, child: childLeftId } = attachToLeft;
+    const childLeft = relative.find(childLeftId);
     if (side === "left") return relative.inner.call("getChildLeft", childLeft);
     return relative.inner.call("getChildRight", childLeft);
   });
@@ -12,7 +13,8 @@ export const setupUtilsFunctions = function (relative) {
     const attachToRight = child.layoutParams.get("attachTo").right;
     if (attachToRight === null || attachToRight === "parent")
       return relative.inner.get("size").width - relative.get("border").size;
-    const { side, child: childRight } = attachToRight;
+    const { side, child: childRightId } = attachToRight;
+    const childRight = relative.find(childRightId);
     if (side === "left") return relative.inner.call("getChildLeft", childRight);
     return relative.inner.call("getChildRight", childRight);
   });
@@ -21,7 +23,8 @@ export const setupUtilsFunctions = function (relative) {
     const attachToTop = child.layoutParams.get("attachTo").top;
     if (attachToTop === null || attachToTop === "parent")
       return relative.get("border").size;
-    const { side, child: childTop } = attachToTop;
+    const { side, child: childTopId } = attachToTop;
+    const childTop = relative.find(childTopId);
     if (side === "top") return relative.inner.call("getChildTop", childTop);
     return relative.inner.call("getChildBottom", childTop);
   });
@@ -30,7 +33,8 @@ export const setupUtilsFunctions = function (relative) {
     const attachToBottom = child.layoutParams.get("attachTo").bottom;
     if (attachToBottom === null || attachToBottom === "parent")
       return relative.inner.get("size").height - relative.get("border").size;
-    const { side, child: childBottom } = attachToBottom;
+    const { side, child: childBottomId } = attachToBottom;
+    const childBottom = relative.find(childBottomId);
     if (side === "top") return relative.inner.call("getChildTop", childBottom);
     return relative.inner.call("getChildBottom", childBottom);
   });
