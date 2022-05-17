@@ -3,38 +3,36 @@ export const setupUtilsFunctions = function (relative) {
     const attachToLeft = child.layoutParams.get("attachTo").left;
     if (attachToLeft === null || attachToLeft === "parent")
       return relative.get("border").size;
-    const width = attachToLeft.size.width;
-    const marginRight = attachToLeft.layoutParams.get("margin").right;
-    const childLeft = relative.inner.call("getChildLeft", attachToLeft);
-    return childLeft + width + marginRight;
+    const { side, child: childLeft } = attachToLeft;
+    if (side === "left") return relative.inner.call("getChildLeft", childLeft);
+    return relative.inner.call("getChildRight", childLeft);
   });
 
   relative.inner.fun("getChildMaxRight", function (relative, child) {
     const attachToRight = child.layoutParams.get("attachTo").right;
     if (attachToRight === null || attachToRight === "parent")
       return relative.inner.get("size").width - relative.get("border").size;
-    const marginLeft = attachToRight.layoutParams.get("margin").left;
-    const childLeft = relative.inner.call("getChildLeft", attachToRight);
-    return childLeft - marginLeft;
+    const { side, child: childRight } = attachToRight;
+    if (side === "left") return relative.inner.call("getChildLeft", childRight);
+    return relative.inner.call("getChildRight", childRight);
   });
 
   relative.inner.fun("getChildMaxTop", function (relative, child) {
     const attachToTop = child.layoutParams.get("attachTo").top;
     if (attachToTop === null || attachToTop === "parent")
       return relative.get("border").size;
-    const height = attachToTop.size.height;
-    const marginBottom = attachToTop.layoutParams.get("margin").bottom;
-    const childTop = relative.inner.call("getChildTop", attachToTop);
-    return childTop + height + marginBottom;
+    const { side, child: childTop } = attachToTop;
+    if (side === "top") return relative.inner.call("getChildTop", childTop);
+    return relative.inner.call("getChildBottom", childTop);
   });
 
   relative.inner.fun("getChildMaxBottom", function (relative, child) {
     const attachToBottom = child.layoutParams.get("attachTo").bottom;
     if (attachToBottom === null || attachToBottom === "parent")
       return relative.inner.get("size").height - relative.get("border").size;
-    const marginTop = attachToBottom.layoutParams.get("margin").top;
-    const childTop = relative.inner.call("getChildTop", attachToBottom);
-    return childTop - marginTop;
+    const { side, child: childBottom } = attachToBottom;
+    if (side === "top") return relative.inner.call("getChildTop", childBottom);
+    return relative.inner.call("getChildBottom", childBottom);
   });
 
   relative.inner.fun("getChildLeft", function (relative, child) {
@@ -58,6 +56,12 @@ export const setupUtilsFunctions = function (relative) {
     });
   });
 
+  relative.inner.fun("getChildRight", function (relative, child) {
+    const childLeft = relative.inner.call("getChildLeft", child);
+    const childWidth = child.size.width;
+    return childLeft + childWidth;
+  });
+
   relative.inner.fun("getChildTop", function (relative, child) {
     const attachTo = child.layoutParams.get("attachTo");
     const margin = child.layoutParams.get("margin");
@@ -77,6 +81,12 @@ export const setupUtilsFunctions = function (relative) {
       start: margin.top,
       end: margin.bottom,
     });
+  });
+
+  relative.inner.fun("getChildBottom", function (relative, child) {
+    const childTop = relative.inner.call("getChildTop", child);
+    const childHeight = child.size.height;
+    return childTop + childHeight;
   });
 
   relative.inner.fun(

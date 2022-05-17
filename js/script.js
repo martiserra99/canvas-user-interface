@@ -2,25 +2,26 @@ import canvasUI from "./canvasui-js.js";
 
 const ui = canvasUI.ui.new("#ui");
 
-const root = canvasUI.layout.new("root", "frame");
+const root = canvasUI.layout.new("root", "relative");
 
 const area = canvasUI.view.new("area", "area");
-
-area.set("background", "#767");
-
-area.set("border", { size: 5, color: "#000" });
-
-area.set("corner", { type: "round", size: 10 });
+const area1 = canvasUI.view.new("area", "area");
 
 root.insert(area);
+root.insert(area1);
 
-area.layoutParams.set("align", {
-  horizontal: "middle",
-  vertical: "middle",
+area.layoutParams.set("attachTo", {
+  top: "parent",
+  right: "parent",
+  bottom: "parent",
+  left: "parent",
 });
 
-area.listeners.add("click", function (area) {
-  area.set("background", "#a768");
-});
+area1.get("size").height = { unit: "px", value: 50 };
+
+area1.layoutParams.get("attachTo").right = { side: "left", child: area };
+area1.layoutParams.get("attachTo").top = { side: "top", child: area };
+area1.layoutParams.get("attachTo").bottom = { side: "bottom", child: area };
+area1.layoutParams.get("margin").right = 10;
 
 ui.start(root);
