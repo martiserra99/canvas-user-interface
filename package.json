@@ -1,13 +1,22 @@
 {
   "name": "canvasui-js",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "This is a JavaScript library to build user interfaces using canvas",
-  "main": "js/canvasui-js.js",
+  "main": "dist/canvasui-js.js",
   "scripts": {
     "build": "webpack --mode production"
   },
   "author": "Martí Serra Molina",
   "license": "MIT",
+  "keywords": [
+    "javascript",
+    "canvas",
+    "user interface",
+    "element",
+    "graphic",
+    "layout",
+    "ui"
+  ],
   "devDependencies": {
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2"
