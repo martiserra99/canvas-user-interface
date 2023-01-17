@@ -1,4 +1,4 @@
-import canvasUI from "../dist/canvasui-js.js";
+import canvasUI from "../dist/canvas-user-interface.js";
 
 const ui = canvasUI.ui.new("#ui");
 

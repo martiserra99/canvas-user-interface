@@ -2,7 +2,7 @@
   "name": "canvasui-js",
   "version": "1.0.5",
   "description": "This is a JavaScript library to build user interfaces using canvas",
-  "main": "dist/canvasui-js.js",
+  "main": "dist/canvas-user-interface.js",
   "scripts": {
     "build": "webpack --mode production"
   },
@@ -11,11 +11,12 @@
   "keywords": [
     "javascript",
     "canvas",
+    "ui",
     "user interface",
     "element",
     "graphic",
-    "layout",
-    "ui"
+    "view",
+    "layout"
   ],
   "devDependencies": {
     "webpack": "^5.72.1",
