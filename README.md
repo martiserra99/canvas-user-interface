@@ -6,4 +6,4 @@ The way it works is by providing you a way to build elements (ex: image), place 
 
 ## Documentation
 
-See https://canvasui-js.com/
+See https://canvasuserinterface.com/
