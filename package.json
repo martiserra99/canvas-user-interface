@@ -1,6 +1,6 @@
 {
   "name": "canvas-user-interface",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is a JavaScript library to build user interfaces using canvas",
   "main": "dist/canvas-user-interface.js",
   "scripts": {
@@ -18,6 +18,11 @@
     "view",
     "layout"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martiserra99/react-animate-screen-on-scroll"
+  },
+  "homepage": "https://www.canvasuserinterface.com/",
   "devDependencies": {
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2"
