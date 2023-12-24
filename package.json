@@ -1,13 +1,13 @@
 {
-  "name": "canvas-user-interface",
-  "version": "1.0.6",
-  "description": "This is a JavaScript library to build user interfaces using canvas",
+  "version": "1.0.7",
+  "license": "MIT",
   "main": "dist/canvas-user-interface.js",
   "scripts": {
     "build": "webpack --mode production"
   },
-  "author": "Martí Serra Molina",
-  "license": "MIT",
+  "name": "canvas-user-interface",
+  "description": "The JavaScript library to build canvas user interfaces.",
+  "author": "Marti Serra",
   "keywords": [
     "javascript",
     "canvas",
@@ -20,9 +20,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/martiserra99/react-animate-screen-on-scroll"
+    "url": "https://github.com/martiserra99/canvas-user-interface"
   },
-  "homepage": "https://www.canvasuserinterface.com/",
+  "homepage": "https://canvas-user-interface-docs.vercel.app",
   "devDependencies": {
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2"
