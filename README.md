@@ -18,7 +18,7 @@ npm install canvas-user-interface
 
 ## Documentation
 
-Check out the documentation [here](https://canvas-user-interface-docs.vercel.app).
+Check out the documentation [here](https://martiserra.me/canvas-user-interface).
 
 ## License
 

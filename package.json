@@ -1,13 +1,49 @@
 {
-  "version": "1.0.7",
+  "version": "2.0.0",
   "license": "MIT",
-  "main": "dist/canvas-user-interface.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
-    "build": "webpack --mode production"
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "name": "canvas-user-interface",
   "description": "The JavaScript library to build canvas user interfaces.",
   "author": "Marti Serra",
+  "module": "dist/canvas-user-interface.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/canvas-user-interface.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/canvas-user-interface.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "keywords": [
     "javascript",
     "canvas",
@@ -22,9 +58,13 @@
     "type": "git",
     "url": "https://github.com/martiserra99/canvas-user-interface"
   },
-  "homepage": "https://canvas-user-interface-docs.vercel.app",
+  "homepage": "https://martiserra.me/canvas-user-interface",
   "devDependencies": {
-    "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2"
+    "@size-limit/preset-small-lib": "^11.0.1",
+    "husky": "^8.0.3",
+    "size-limit": "^11.0.1",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
   }
 }
