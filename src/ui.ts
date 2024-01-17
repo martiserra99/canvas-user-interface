@@ -24,14 +24,18 @@ class UI {
 
   element: Element | null = null;
 
-  constructor(selector: string) {
-    this.setCanvas(selector);
+  constructor(canvas: string | HTMLCanvasElement) {
+    this.setCanvas(canvas);
     this.setCanvasSize();
     this.setCanvasSizeOnResize();
   }
 
-  private setCanvas(selector: string) {
-    this.canvas = document.querySelector(selector) as HTMLCanvasElement;
+  private setCanvas(canvas: string | HTMLCanvasElement) {
+    if (typeof canvas === 'string') {
+      this.canvas = document.querySelector(canvas) as HTMLCanvasElement;
+    } else {
+      this.canvas = canvas;
+    }
     this.ctx = this.canvas.getContext('2d')!;
   }
 
