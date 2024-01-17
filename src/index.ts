@@ -28,7 +28,7 @@ const compositeTypes: Map<string, CompositeType> = new Map();
 
 type CanvasUI = {
   ui: {
-    new: (selector: string) => UI;
+    new: (selector: string | HTMLCanvasElement) => UI;
   };
   view: {
     newType: (name: string) => ViewType;
@@ -46,7 +46,7 @@ type CanvasUI = {
 
 const canvasUI: CanvasUI = {
   ui: {
-    new(selector: string) {
+    new(selector: string | HTMLCanvasElement) {
       return new UI(selector);
     },
   },
