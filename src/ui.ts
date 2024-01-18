@@ -112,7 +112,7 @@ class UI {
   }
 
   private getMouseSignalData(event: MouseEvent) {
-    return { x: event.clientX, y: event.clientY };
+    return { x: event.offsetX, y: event.offsetY };
   }
 
   setupKeySignals() {
