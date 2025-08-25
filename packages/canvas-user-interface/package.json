@@ -1,0 +1,30 @@
+{
+  "name": "canvas-user-interface",
+  "version": "2.0.5",
+  "license": "MIT",
+  "private": false,
+  "description": "The JavaScript library to build canvas user interfaces.",
+  "keywords": [
+    "canvas",
+    "user interface",
+    "ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martiserra99/canvas-user-interface"
+  },
+  "homepage": "https://martiserra.me/canvas-user-interface",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "source": "src/index.ts",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint",
+    "test": "vitest --run --passWithNoTests",
+    "build": "rollup --config rollup.config.mjs",
+    "dev": "rollup --config rollup.config.mjs --watch"
+  }
+}

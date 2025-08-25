@@ -1,70 +1,47 @@
 {
-  "version": "2.0.4",
+  "name": "@canvas-user-interface/monorepo",
+  "private": true,
+  "version": "0.0.0",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
   ],
-  "engines": {
-    "node": ">=10"
-  },
-  "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
-  },
-  "peerDependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "name": "canvas-user-interface",
   "description": "The JavaScript library to build canvas user interfaces.",
-  "author": "Marti Serra",
-  "module": "dist/canvas-user-interface.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/canvas-user-interface.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/canvas-user-interface.esm.js",
-      "limit": "10 KB"
-    }
-  ],
-  "keywords": [
-    "javascript",
-    "canvas",
-    "ui",
-    "user interface",
-    "element",
-    "graphic",
-    "view",
-    "layout"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/martiserra99/canvas-user-interface"
   },
   "homepage": "https://martiserra.me/canvas-user-interface",
+  "scripts": {
+    "preinstall": "only-allow npm",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "npm -r --parallel exec rimraf dist .turbo node_modules"
+  },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^11.0.1",
-    "husky": "^8.0.3",
-    "size-limit": "^11.0.1",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.6.2",
-    "typescript": "^5.3.3"
-  }
+    "@eslint/js": "^9.13.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "@swc/core": "^1.10.3",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react": "^7.37.1",
+    "globals": "^15.11.0",
+    "only-allow": "^1.2.1",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.24.0",
+    "tslib": "^2.8.0",
+    "turbo": "^2.3.3",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.11.0",
+    "vitest": "^2.1.8"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.29.1"
+  },
+  "packageManager": "npm@10.8.2"
 }
